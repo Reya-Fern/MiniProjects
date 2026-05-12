@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Calculator View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="CalculatorVC" id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="MiniProjects" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRH-Lt-HpH" userLabel="Container View">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ANq-mO-c1O" userLabel="Main Stack View">
+                                        <rect key="frame" x="24" y="24" width="345" height="618"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olp-Qo-gDu" userLabel="Display View">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="148"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HZ-1Q-osC" userLabel="Display Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="148"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="3HZ-1Q-osC" secondAttribute="bottom" id="2R5-Bs-BI4"/>
+                                                    <constraint firstItem="3HZ-1Q-osC" firstAttribute="leading" secondItem="Olp-Qo-gDu" secondAttribute="leading" id="DYd-Zh-9Eh"/>
+                                                    <constraint firstItem="3HZ-1Q-osC" firstAttribute="top" secondItem="Olp-Qo-gDu" secondAttribute="top" id="oyP-Gb-MLz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3HZ-1Q-osC" secondAttribute="trailing" id="r9e-de-5lh"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="euD-fl-WiW" userLabel="RowStack1">
+                                                <rect key="frame" x="0.0" y="168" width="345" height="74"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPW-cR-AjF" userLabel="Delete Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="delete"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="delete.left" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ucK-cP-HDz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-e1-Wgf" userLabel="AC Button">
+                                                        <rect key="frame" x="91.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="AC"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="clu-8h-I5E"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvd-GI-hOb" userLabel="Pct Button">
+                                                        <rect key="frame" x="182.66666666666666" y="0.0" width="71" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="percent"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="percent" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="guv-f2-nib"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BqF-52-meT" userLabel="Divide Button">
+                                                        <rect key="frame" x="273.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="divide"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="divide" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TU3-3D-Ytx"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="74" id="sOV-FR-JZd"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ODF-Ld-4lr" userLabel="RowStack2">
+                                                <rect key="frame" x="0.0" y="262" width="345" height="74"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KJ-SS-ALD" userLabel="Seven Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="7"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9hB-AR-ldq"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC3-vG-aW1" userLabel="Eight Button">
+                                                        <rect key="frame" x="91.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="8"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="non-gm-rda"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9e-7I-ZKE" userLabel="Nine Button">
+                                                        <rect key="frame" x="182.66666666666666" y="0.0" width="71" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="9"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vkm-44-5aV"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU9-cF-z5U" userLabel="Multiply Button">
+                                                        <rect key="frame" x="273.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="multiply"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="multiply" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tTx-kk-K2D"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="74" id="C5L-xM-eU7"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ubg-s0-w3N" userLabel="RowStack3">
+                                                <rect key="frame" x="0.0" y="356" width="345" height="74"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Go8-LW-KhX" userLabel="Four Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="4"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pJg-Yi-89j"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ars-l5-Jah" userLabel="Five Button">
+                                                        <rect key="frame" x="91.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="5"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wFk-H7-JAK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4b-F8-rfu" userLabel="Six Button">
+                                                        <rect key="frame" x="182.66666666666666" y="0.0" width="71" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="6"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jh8-Dc-BGv"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78g-yx-xIw" userLabel="Minus Button">
+                                                        <rect key="frame" x="273.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="minus"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="minus" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Kq-vD-Uth"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="74" id="ETk-CK-bCb"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-7L-uBr" userLabel="RowStack4">
+                                                <rect key="frame" x="0.0" y="450" width="345" height="74"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5r-rZ-Tk9" userLabel="One Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="1"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yuA-6s-Y2B"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLt-no-s5E" userLabel="Two Button">
+                                                        <rect key="frame" x="91.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="2"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bOG-nm-zkh"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z21-I4-SDa" userLabel="Three Button">
+                                                        <rect key="frame" x="182.66666666666666" y="0.0" width="71" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="3"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H0k-jt-ech"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUT-Aj-20g" userLabel="Plus Button">
+                                                        <rect key="frame" x="273.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="plus"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IL1-j4-smn"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="74" id="PST-m1-WfH"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sR3-tl-ISq" userLabel="RowStack5">
+                                                <rect key="frame" x="0.0" y="544" width="345" height="74"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncn-G1-uQl" userLabel="Plus Minus Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="plusMinus"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="plusminus" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="foX-7m-CQP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5R-SQ-lmH" userLabel="Zero Button">
+                                                        <rect key="frame" x="91.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="0"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Xw-Sq-MjA"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvM-qw-sdH" userLabel="Point Button">
+                                                        <rect key="frame" x="182.66666666666666" y="0.0" width="71" height="74"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="."/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WQM-JW-cLf"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sqc-PK-jQP" userLabel="Equal Button">
+                                                        <rect key="frame" x="273.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="equal"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="equal" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="calculatorButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OSK-Ht-5O3"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="74" id="pe1-eA-m4x"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ANq-mO-c1O" firstAttribute="leading" secondItem="KRH-Lt-HpH" secondAttribute="leading" constant="24" id="IdZ-7H-iko"/>
+                                    <constraint firstItem="ANq-mO-c1O" firstAttribute="top" secondItem="KRH-Lt-HpH" secondAttribute="top" constant="24" id="Txn-HG-GKv"/>
+                                    <constraint firstAttribute="bottom" secondItem="ANq-mO-c1O" secondAttribute="bottom" constant="24" id="dxA-Vp-5L5"/>
+                                    <constraint firstAttribute="trailing" secondItem="ANq-mO-c1O" secondAttribute="trailing" constant="24" id="kfU-xX-rAD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KRH-Lt-HpH" secondAttribute="trailing" id="5A6-M3-Ep3"/>
+                            <constraint firstItem="KRH-Lt-HpH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="85T-lj-Glz"/>
+                            <constraint firstItem="KRH-Lt-HpH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gnN-hR-L6Q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KRH-Lt-HpH" secondAttribute="bottom" id="hg7-21-AdZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="KRH-Lt-HpH" id="s0P-bY-dAu"/>
+                        <outlet property="displayLabel" destination="3HZ-1Q-osC" id="sMZ-mu-3fW"/>
+                        <outlet property="displayView" destination="Olp-Qo-gDu" id="5dQ-ks-HkW"/>
+                        <outletCollection property="allButtons" destination="TPW-cR-AjF" collectionClass="NSMutableArray" id="EZa-VK-iHs"/>
+                        <outletCollection property="allButtons" destination="JBU-e1-Wgf" collectionClass="NSMutableArray" id="2Gi-F9-eYh"/>
+                        <outletCollection property="allButtons" destination="Qvd-GI-hOb" collectionClass="NSMutableArray" id="EOR-Hm-K92"/>
+                        <outletCollection property="allButtons" destination="BqF-52-meT" collectionClass="NSMutableArray" id="cen-Sm-YE4"/>
+                        <outletCollection property="allButtons" destination="5KJ-SS-ALD" collectionClass="NSMutableArray" id="hde-mY-6qt"/>
+                        <outletCollection property="allButtons" destination="XC3-vG-aW1" collectionClass="NSMutableArray" id="eU5-zj-1qP"/>
+                        <outletCollection property="allButtons" destination="q9e-7I-ZKE" collectionClass="NSMutableArray" id="RSN-o0-2JC"/>
+                        <outletCollection property="allButtons" destination="YU9-cF-z5U" collectionClass="NSMutableArray" id="424-XX-TI7"/>
+                        <outletCollection property="allButtons" destination="Go8-LW-KhX" collectionClass="NSMutableArray" id="rKg-4s-RJT"/>
+                        <outletCollection property="allButtons" destination="Ars-l5-Jah" collectionClass="NSMutableArray" id="zW2-Pa-ibU"/>
+                        <outletCollection property="allButtons" destination="m4b-F8-rfu" collectionClass="NSMutableArray" id="d2b-WV-le0"/>
+                        <outletCollection property="allButtons" destination="78g-yx-xIw" collectionClass="NSMutableArray" id="l0b-zm-DTm"/>
+                        <outletCollection property="allButtons" destination="P5r-rZ-Tk9" collectionClass="NSMutableArray" id="Oaf-PV-XPz"/>
+                        <outletCollection property="allButtons" destination="zLt-no-s5E" collectionClass="NSMutableArray" id="8Xe-y4-LFc"/>
+                        <outletCollection property="allButtons" destination="Z21-I4-SDa" collectionClass="NSMutableArray" id="Knr-If-hNi"/>
+                        <outletCollection property="allButtons" destination="yUT-Aj-20g" collectionClass="NSMutableArray" id="Cbf-mL-BCJ"/>
+                        <outletCollection property="allButtons" destination="ncn-G1-uQl" collectionClass="NSMutableArray" id="5hG-GM-djc"/>
+                        <outletCollection property="allButtons" destination="G5R-SQ-lmH" collectionClass="NSMutableArray" id="qvY-g3-uft"/>
+                        <outletCollection property="allButtons" destination="rvM-qw-sdH" collectionClass="NSMutableArray" id="j7m-pL-UuE"/>
+                        <outletCollection property="allButtons" destination="Sqc-PK-jQP" collectionClass="NSMutableArray" id="Gfw-GP-HMq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="280" y="-29"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="delete.left" catalog="system" width="128" height="102"/>
+        <image name="divide" catalog="system" width="128" height="101"/>
+        <image name="equal" catalog="system" width="128" height="73"/>
+        <image name="minus" catalog="system" width="128" height="26"/>
+        <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="percent" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plusminus" catalog="system" width="114" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
