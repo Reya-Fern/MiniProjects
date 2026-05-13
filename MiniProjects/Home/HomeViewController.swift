@@ -43,19 +43,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let project = projects[indexPath.row]
-        let storyboard = UIStoryboard(
-            name: project.storyboardName,
-            bundle: nil
-        )
 
-        let vc = storyboard.instantiateViewController(
-            identifier: project.viewControllerID
-        )
-
-        navigationController?.pushViewController(
-            vc,
-            animated: true
-        )
+        AppRouter.open(project,from: navigationController)
     }
 }
 
