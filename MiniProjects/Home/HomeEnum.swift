@@ -8,14 +8,14 @@
 enum ProjectType: CaseIterable {
 
     case calculator
-    case favResturant
+    case favPlace
 
     var title: String {
         switch self {
         case .calculator:
             "Cute Calculator"
-        case .favResturant:
-            "My Favorite Resturant"
+        case .favPlace:
+            "My Favorite Place"
         }
     }
 
@@ -23,17 +23,17 @@ enum ProjectType: CaseIterable {
         switch self {
         case .calculator:
             "Calculator"
-        case .favResturant:
-            "FavoriteResturant"
+        case .favPlace:
+            "MyFavoritePlace"
         }
     }
 
-    var viewControllerID: String {
+    var storyboardID: String {
         switch self {
         case .calculator:
             "CalculatorVC"
-        case .favResturant:
-            "FavResturantVC"
+        case .favPlace:
+            "FavPlaceVC"
         }
     }
 }

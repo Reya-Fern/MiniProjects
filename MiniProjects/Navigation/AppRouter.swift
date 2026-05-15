@@ -16,7 +16,7 @@ enum AppRouter {
         )
 
         let viewController = storyboard.instantiateViewController(
-            identifier: project.viewControllerID
+            identifier: project.storyboardID
         )
 
         navigationController?.pushViewController(
