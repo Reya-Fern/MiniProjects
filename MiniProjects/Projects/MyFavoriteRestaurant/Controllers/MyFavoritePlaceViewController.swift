@@ -28,10 +28,19 @@ extension MyFavoritePlaceViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView)
         {collectionView, indexPath, item in
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
-            cell.configure(with: item)
+            let section = Section.allCases[indexPath.section]
 
-            return cell
+            switch section {
+            case .hero:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell",for: indexPath) as! FoodCell
+                cell.configure(with: item)
+                return cell
+
+            case .categories:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell",for: indexPath) as! CategoryCell
+                cell.configure(with: item)
+                return cell
+            }
         }
     }
 

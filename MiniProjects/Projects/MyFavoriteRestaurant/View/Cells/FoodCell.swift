@@ -27,7 +27,7 @@ extension FoodCell {
         foodImage.image = UIImage(named: item.imageName)
     }
 
-    func style() {
+    private func style() {
         contentView.backgroundColor = .calculatorPink
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true

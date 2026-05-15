@@ -71,6 +71,49 @@
                                             <outlet property="priceLabel" destination="9oC-sg-fdx" id="yT8-Ki-aAS"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CategoryCell" id="rjx-rO-9OJ" userLabel="CategoryCell" customClass="CategoryCell" customModule="MiniProjects" customModuleProvider="target">
+                                        <rect key="frame" x="126" y="42.333333333333336" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mrs-UW-aSb">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="o6u-W2-DeH">
+                                                    <rect key="frame" x="9" y="-36.333333333333371" width="70" height="98.333333333333329"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fx-2U-2Br" userLabel="Category Image Content View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="so4-EX-KMA" userLabel="Category Image">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="so4-EX-KMA" secondAttribute="bottom" id="AQx-WY-sXE"/>
+                                                                <constraint firstAttribute="trailing" secondItem="so4-EX-KMA" secondAttribute="trailing" id="JmZ-9l-J6B"/>
+                                                                <constraint firstItem="so4-EX-KMA" firstAttribute="top" secondItem="7fx-2U-2Br" secondAttribute="top" id="Xpe-JE-veu"/>
+                                                                <constraint firstAttribute="height" constant="70" id="bJg-Hp-wpX"/>
+                                                                <constraint firstItem="so4-EX-KMA" firstAttribute="leading" secondItem="7fx-2U-2Br" secondAttribute="leading" id="nGY-SZ-Hdk"/>
+                                                                <constraint firstAttribute="width" constant="70" id="z8B-JD-Rzi"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scr-0I-Nn9" userLabel="Category Name Label">
+                                                            <rect key="frame" x="0.0" y="78" width="70" height="20.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="categoryImage" destination="so4-EX-KMA" id="qi5-a8-vJo"/>
+                                            <outlet property="categoryImageContentView" destination="7fx-2U-2Br" id="2ST-AA-yq9"/>
+                                            <outlet property="categoryName" destination="Scr-0I-Nn9" id="5BP-Au-m8p"/>
+                                        </connections>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
