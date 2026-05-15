@@ -26,7 +26,7 @@ extension MyFavoritePlaceViewController {
 
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView)
-        { collectionView, indexPath, item in
+        {collectionView, indexPath, item in
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell", for: indexPath) as! FoodCell
             cell.configure(with: item)
@@ -44,10 +44,35 @@ extension MyFavoritePlaceViewController {
     }
 
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 180, height: 220)
-        layout.scrollDirection = .vertical
+        UICollectionViewCompositionalLayout {sectionIndex, environment in
 
-        return layout
+            return self.createHeroSection()
+        }
+    }
+
+    func createHeroSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.9),
+            heightDimension: .absolute(220)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+
+        return section
     }
 }

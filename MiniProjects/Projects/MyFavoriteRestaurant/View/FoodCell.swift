@@ -13,9 +13,11 @@ class FoodCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
 
     override func awakeFromNib() {
-
         super.awakeFromNib()
 
+        contentView.backgroundColor = .calculatorPink
+        contentView.layer.cornerRadius = 20
+        contentView.clipsToBounds = true
     }
 
     func configure(with item: FoodItem) {
