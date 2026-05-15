@@ -15,14 +15,21 @@ class FoodCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        contentView.backgroundColor = .calculatorPink
-        contentView.layer.cornerRadius = 20
-        contentView.clipsToBounds = true
+        style()
     }
+}
 
+//MARK: - Methods
+extension FoodCell {
     func configure(with item: FoodItem) {
         nameLabel.text = item.title
         priceLabel.text = item.price + " บาท"
         foodImage.image = UIImage(named: item.imageName)
+    }
+
+    func style() {
+        contentView.backgroundColor = .calculatorPink
+        contentView.layer.cornerRadius = 20
+        contentView.clipsToBounds = true
     }
 }

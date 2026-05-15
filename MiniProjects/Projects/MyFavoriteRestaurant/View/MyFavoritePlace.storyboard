@@ -28,29 +28,29 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FoodCell" id="r0Z-Zm-HRT" customClass="FoodCell" customModule="MiniProjects" customModuleProvider="target">
-                                        <rect key="frame" x="68.666666666666671" y="0.0" width="256" height="212.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="212.66666666666666"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DHK-f4-Obe">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="212.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="116" height="212.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fju-HY-LZV">
-                                                    <rect key="frame" x="8" y="8" width="240" height="196.66666666666666"/>
+                                                    <rect key="frame" x="8" y="8" width="100" height="196.66666666666666"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Gx-Mr-9dh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="140"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="140" id="3RD-WC-2P8"/>
+                                                                <constraint firstAttribute="height" constant="140" id="C1L-7k-YYi"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZ5-qS-wpy" userLabel="Name Label">
-                                                            <rect key="frame" x="0.0" y="148" width="240" height="20.333333333333343"/>
+                                                            <rect key="frame" x="0.0" y="148" width="100" height="20.333333333333343"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oC-sg-fdx" userLabel="Price Label">
-                                                            <rect key="frame" x="0.0" y="176.33333333333334" width="240" height="20.333333333333343"/>
+                                                            <rect key="frame" x="0.0" y="176.33333333333334" width="100" height="20.333333333333343"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>

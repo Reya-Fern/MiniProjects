@@ -13,7 +13,10 @@ var heroItems: [FoodItem] = [
     FoodItem(title: "เบอร์เกอร์", price: "120", imageName: "burger")
 ]
 
-var catagoryItems: [FoodItem] = [
+var categoryItems: [FoodItem] = [
     FoodItem(title: "ก๋วยเตี๋ยว", price: "", imageName: "noodles"),
-    FoodItem(title: "ข้าว", price: "", imageName: "rice")
+    FoodItem(title: "ข้าว", price: "", imageName: "rice"),
+    FoodItem(title: "ของหวาน", price: "", imageName: "cake"),
+    FoodItem(title: "เครื่องดื่ม", price: "", imageName: "bubble_tea"),
+    FoodItem(title: "ของทอด", price: "", imageName: "fries")
 ]

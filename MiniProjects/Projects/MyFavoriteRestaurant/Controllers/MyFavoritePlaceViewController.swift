@@ -37,8 +37,9 @@ extension MyFavoritePlaceViewController {
 
     func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, FoodItem>()
-        snapshot.appendSections([.hero])
-        snapshot.appendItems(heroItems)
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems(heroItems, toSection: .hero)
+        snapshot.appendItems(categoryItems, toSection: .categories)
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -46,7 +47,14 @@ extension MyFavoritePlaceViewController {
     func createLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout {sectionIndex, environment in
 
-            return self.createHeroSection()
+            let section = Section.allCases[sectionIndex]
+
+            switch section {
+            case .hero:
+                return self.createHeroSection()
+            case .categories:
+                return self.createCategorySection()
+            }
         }
     }
 
@@ -72,6 +80,31 @@ extension MyFavoritePlaceViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
+
+        return section
+    }
+
+    func createCategorySection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(100),
+            heightDimension: .absolute(120)
+        )
+
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
 
         return section
     }
