@@ -7,34 +7,24 @@
 
 import UIKit
 
-class RecommendedCell: UICollectionViewCell {
+final class RecommendedCell: UICollectionViewCell, FoodPricable {
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var foodImageContentView: UIView!
+    @IBOutlet weak var imageContentView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         style()
     }
 }
 
-//MARK: - Methods
+//MARK: - UI
 extension RecommendedCell {
-    func configure(with item: FoodItem) {
-        nameLabel.text = item.title
-        priceLabel.text = item.price + " บาท"
-        foodImage.image = UIImage(named: item.imageName)
-    }
-
     private func style() {
         contentView.backgroundColor = .clear
-        contentView.layer.cornerRadius = 20
-        contentView.clipsToBounds = true
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.systemGray4.cgColor
-
-        foodImageContentView.backgroundColor = .calculatorPurple
+        contentView.makeRounded(cornerRadius: 20)
+        contentView.addBorder()
+        imageContentView.backgroundColor = .calculatorPurple
     }
 }

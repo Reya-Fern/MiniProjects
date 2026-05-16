@@ -96,7 +96,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="o6u-W2-DeH">
                                                     <rect key="frame" x="9" y="-36.333333333333371" width="70" height="98.333333333333329"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fx-2U-2Br" userLabel="Category Image Content View">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fx-2U-2Br" userLabel="Food Image Container">
                                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="so4-EX-KMA" userLabel="Category Image">
@@ -124,9 +124,9 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="categoryImage" destination="so4-EX-KMA" id="qi5-a8-vJo"/>
-                                            <outlet property="categoryImageContentView" destination="7fx-2U-2Br" id="2ST-AA-yq9"/>
-                                            <outlet property="categoryName" destination="Scr-0I-Nn9" id="5BP-Au-m8p"/>
+                                            <outlet property="foodImage" destination="so4-EX-KMA" id="qi5-a8-vJo"/>
+                                            <outlet property="imageContainer" destination="7fx-2U-2Br" id="2ST-AA-yq9"/>
+                                            <outlet property="nameLabel" destination="Scr-0I-Nn9" id="5BP-Au-m8p"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendedCell" id="veL-Lu-knl" userLabel="RecommendedCell" customClass="RecommendedCell" customModule="MiniProjects" customModuleProvider="target">
@@ -139,7 +139,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ONr-mo-Tqz">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="276"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alc-oY-r26" userLabel="imageContainer">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alc-oY-r26" userLabel="Food Image Container">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="140"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVe-XR-6Ff">
@@ -196,7 +196,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="foodImage" destination="kVe-XR-6Ff" id="Zav-PE-9ge"/>
-                                            <outlet property="foodImageContentView" destination="Alc-oY-r26" id="AhD-9W-xqn"/>
+                                            <outlet property="imageContentView" destination="Alc-oY-r26" id="AhD-9W-xqn"/>
                                             <outlet property="nameLabel" destination="zAp-I6-rD8" id="fsH-zF-Ywe"/>
                                             <outlet property="priceLabel" destination="YjD-Qp-7ae" id="zgw-Kz-3BK"/>
                                         </connections>
@@ -230,13 +230,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-U4-g6E">
                                                             <rect key="frame" x="96" y="0.0" width="41.333333333333343" height="100"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJr-B8-l4p" userLabel="Name Label">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJr-B8-l4p" userLabel="Name Label">
                                                                     <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nr-Vs-c9I" userLabel="Price Label">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nr-Vs-c9I" userLabel="Price Label">
                                                                     <rect key="frame" x="0.0" y="24.333333333333336" width="41.333333333333336" height="75.666666666666657"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -256,7 +256,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="foodImage" destination="QTC-gZ-YSB" id="0Dx-Ie-TUD"/>
-                                            <outlet property="foodImageContainer" destination="RtI-fi-Tzn" id="H5R-gN-rqp"/>
+                                            <outlet property="imageContainer" destination="RtI-fi-Tzn" id="H5R-gN-rqp"/>
                                             <outlet property="nameLabel" destination="QJr-B8-l4p" id="8ph-Sk-a20"/>
                                             <outlet property="priceLabel" destination="0nr-Vs-c9I" id="4iv-lM-xX7"/>
                                         </connections>

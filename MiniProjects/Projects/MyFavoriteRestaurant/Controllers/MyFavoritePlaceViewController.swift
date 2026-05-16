@@ -7,228 +7,90 @@
 
 import UIKit
 
-class MyFavoritePlaceViewController: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
+final class MyFavoritePlaceViewController: UIViewController {
 
-    var dataSource: UICollectionViewDiffableDataSource<Section, FoodItem>!
+    @IBOutlet private weak var collectionView: UICollectionView!
+
+    private var dataSource: UICollectionViewDiffableDataSource<Section, FoodItem>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemGray5
-        collectionView.backgroundColor = .clear
-
-        collectionView.collectionViewLayout = createLayout()
+        configureUI()
         configureDataSource()
         applySnapshot()
     }
 }
 
-//MARK: - Methods
+// MARK: - UI
 extension MyFavoritePlaceViewController {
+    private func configureUI() {
+        view.backgroundColor = .systemGray5
+        collectionView.backgroundColor = .clear
+        collectionView.collectionViewLayout = FoodLayoutBuilder.createLayout()
+    }
+}
 
-    func configureDataSource() {
+// MARK: - Collection View
+extension MyFavoritePlaceViewController {
+    // Data Source
+    private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView)
-        {collectionView, indexPath, item in
+        { collectionView, indexPath, item in
 
-            let section = Section.allCases[indexPath.section]
+            let section = self.section(at: indexPath)
 
             switch section {
             case .hero:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroCell",for: indexPath) as! HeroCell
-                cell.configure(with: item)
+                let cell: HeroCell = collectionView.dequeueCell(for: indexPath)
+                cell.configureFood(with: item)
                 return cell
 
             case .categories:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell",for: indexPath) as! CategoryCell
+                let cell: CategoryCell = collectionView.dequeueCell(for: indexPath)
                 cell.configure(with: item)
                 return cell
 
             case .recommended:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedCell",for: indexPath) as! RecommendedCell
-                cell.configure(with: item)
+                let cell: RecommendedCell = collectionView.dequeueCell(for: indexPath)
+                cell.configureFood(with: item)
                 return cell
 
             case .all:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AllCell",for: indexPath) as! AllCell
-                cell.configure(with: item)
+                let cell: AllCell = collectionView.dequeueCell(for: indexPath)
+                cell.configureFood(with: item)
                 return cell
             }
         }
 
-        dataSource.supplementaryViewProvider = {collectionView, kind, indexPath in
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else {
                 return nil
             }
 
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as! SectionHeaderView
+            let header: SectionHeaderView = collectionView.dequeueSupplementaryView(ofKind: kind, for: indexPath)
 
-            let section = Section.allCases[indexPath.section]
+            let section = self.section(at: indexPath)
             header.titleLabel.text = section.title
 
             return header
         }
     }
 
-    func applySnapshot() {
+    // Snapshot
+    private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, FoodItem>()
-        snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(heroItems, toSection: .hero)
-        snapshot.appendItems(categoryItems, toSection: .categories)
-        snapshot.appendItems(recommendedItems, toSection: .recommended)
-        snapshot.appendItems(allItems, toSection: .all)
 
+        snapshot.appendSections(Section.allCases)
+
+        Section.allCases.forEach { section in
+            snapshot.appendItems(section.items, toSection: section)
+        }
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    func createLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout {sectionIndex, environment in
-
-            let section = Section.allCases[sectionIndex]
-
-            switch section {
-            case .hero:
-                return self.createHeroSection()
-            case .categories:
-                return self.createCategorySection()
-            case .recommended:
-                return self.createRecommendedSection()
-            case .all:
-                return self.createAllSection()
-            }
-        }
-    }
-
-    func createHeroSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .absolute(220)
-        )
-
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-
-        section.boundarySupplementaryItems = [
-            createSectionHeader()
-        ]
-
-        return section
-    }
-
-    func createCategorySection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(100),
-            heightDimension: .absolute(120)
-        )
-
-        let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-
-        section.boundarySupplementaryItems = [
-            createSectionHeader()
-        ]
-
-        return section
-    }
-
-    func createRecommendedSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8,leading: 8,bottom: 8,trailing: 8)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(180),
-            heightDimension: .absolute(240)
-        )
-
-        let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
-
-        section.orthogonalScrollingBehavior = .continuous
-
-        section.boundarySupplementaryItems = [
-            createSectionHeader()
-        ]
-
-        return section
-    }
-
-    func createAllSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(1.0)
-        )
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8,leading: 8,bottom: 8,trailing: 8)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(120)
-        )
-
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            repeatingSubitem: item,
-            count: 2
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
-
-        section.boundarySupplementaryItems = [
-            createSectionHeader()
-        ]
-
-        return section
-    }
-
-    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(50)
-        )
-
-        return NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
+    // Helper
+    private func section(at indexPath: IndexPath) -> Section {
+        Section.allCases[indexPath.section]
     }
 }

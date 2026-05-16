@@ -7,33 +7,29 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+final class CategoryCell: UICollectionViewCell {
 
-    @IBOutlet weak var categoryImageContentView: UIView!
-    @IBOutlet weak var categoryImage: UIImageView!
-    @IBOutlet weak var categoryName: UILabel!
+    @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var foodImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         style()
     }
 }
 
-//MARK: - Methods
+//MARK: - UI
 extension CategoryCell {
     func configure(with item: FoodItem) {
-        categoryName.text = item.title
-        categoryImage.image = UIImage(named: item.imageName)
+        nameLabel.text = item.title
+        foodImage.image = UIImage(named: item.imageName)
     }
 
     private func style() {
         contentView.backgroundColor = .clear
-
-        categoryImage.layer.cornerRadius = categoryImage.bounds.width / 2
-        categoryImage.clipsToBounds = true
-
-        categoryImageContentView.backgroundColor = .calculatorBlue
-        categoryImageContentView.layer.cornerRadius = categoryImageContentView.bounds.width / 2
+        foodImage.makeRounded(cornerRadius: foodImage.bounds.width / 2)
+        imageContainer.backgroundColor = .calculatorBlue
+        imageContainer.makeRounded(cornerRadius: imageContainer.bounds.width / 2)
     }
 }
