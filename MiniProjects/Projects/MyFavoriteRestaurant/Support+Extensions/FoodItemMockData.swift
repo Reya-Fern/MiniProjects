@@ -10,7 +10,7 @@ import Foundation
 var heroItems: [FoodItem] = [
     FoodItem(title: "สลัดผัก", price: "80", imageName: "salad"),
     FoodItem(title: "ผัดไทย", price: "100", imageName: "pad_thai"),
-    FoodItem(title: "เบอร์เกอร์", price: "120", imageName: "burger")
+    FoodItem(title: "เบอร์เกอร์", price: "180", imageName: "burger")
 ]
 
 var categoryItems: [FoodItem] = [
