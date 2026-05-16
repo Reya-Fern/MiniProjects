@@ -17,7 +17,7 @@ class MyFavoritePlaceViewController: UIViewController {
 
         view.backgroundColor = .systemGray5
         collectionView.backgroundColor = .clear
-        
+
         collectionView.collectionViewLayout = createLayout()
         configureDataSource()
         applySnapshot()
@@ -54,6 +54,19 @@ extension MyFavoritePlaceViewController {
                 cell.configure(with: item)
                 return cell
             }
+        }
+
+        dataSource.supplementaryViewProvider = {collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else {
+                return nil
+            }
+
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as! SectionHeaderView
+
+            let section = Section.allCases[indexPath.section]
+            header.titleLabel.text = section.title
+
+            return header
         }
     }
 
@@ -109,6 +122,10 @@ extension MyFavoritePlaceViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
 
+        section.boundarySupplementaryItems = [
+            createSectionHeader()
+        ]
+
         return section
     }
 
@@ -133,6 +150,10 @@ extension MyFavoritePlaceViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+
+        section.boundarySupplementaryItems = [
+            createSectionHeader()
+        ]
 
         return section
     }
@@ -161,11 +182,14 @@ extension MyFavoritePlaceViewController {
 
         section.orthogonalScrollingBehavior = .continuous
 
+        section.boundarySupplementaryItems = [
+            createSectionHeader()
+        ]
+
         return section
     }
 
     func createAllSection() -> NSCollectionLayoutSection {
-
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
             heightDimension: .fractionalHeight(1.0)
@@ -188,6 +212,23 @@ extension MyFavoritePlaceViewController {
 
         let section = NSCollectionLayoutSection(group: group)
 
+        section.boundarySupplementaryItems = [
+            createSectionHeader()
+        ]
+
         return section
+    }
+
+    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(50)
+        )
+
+        return NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
     }
 }

@@ -22,13 +22,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HjC-OT-gG1">
                                     <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeroCell" id="r0Z-Zm-HRT" userLabel="HeroCell" customClass="HeroCell" customModule="MiniProjects" customModuleProvider="target">
-                                        <rect key="frame" x="68.666666666666671" y="0.0" width="256" height="292"/>
+                                        <rect key="frame" x="68.666666666666671" y="50" width="256" height="292"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DHK-f4-Obe">
                                             <rect key="frame" x="0.0" y="0.0" width="256" height="292"/>
@@ -87,7 +87,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CategoryCell" id="rjx-rO-9OJ" userLabel="CategoryCell" customClass="CategoryCell" customModule="MiniProjects" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="376" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="426" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mrs-UW-aSb">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -130,7 +130,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendedCell" id="veL-Lu-knl" userLabel="RecommendedCell" customClass="RecommendedCell" customModule="MiniProjects" customModuleProvider="target">
-                                        <rect key="frame" x="153" y="302" width="240" height="276"/>
+                                        <rect key="frame" x="153" y="352" width="240" height="276"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Py-VP-Yuj">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="276"/>
@@ -202,7 +202,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AllCell" id="cuP-S7-85V" userLabel="AllCell" customClass="AllCell" customModule="MiniProjects" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="588" width="153.33333333333334" height="116"/>
+                                        <rect key="frame" x="0.0" y="638" width="153.33333333333334" height="116"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yeO-27-e1t">
                                             <rect key="frame" x="0.0" y="0.0" width="153.33333333333334" height="116"/>
@@ -262,6 +262,26 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionHeaderView" id="PDM-zq-eGi" userLabel="SectionHeaderView" customClass="SectionHeaderView" customModule="MiniProjects" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9c-Qa-mUH" userLabel="Title Label">
+                                            <rect key="frame" x="24.000000000000004" y="14" width="41.333333333333343" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="D9c-Qa-mUH" firstAttribute="top" secondItem="PDM-zq-eGi" secondAttribute="topMargin" constant="6" id="Rn9-pz-RF7"/>
+                                        <constraint firstItem="D9c-Qa-mUH" firstAttribute="leading" secondItem="PDM-zq-eGi" secondAttribute="leadingMargin" constant="16" id="ekU-bF-xKn"/>
+                                        <constraint firstItem="D9c-Qa-mUH" firstAttribute="centerY" secondItem="PDM-zq-eGi" secondAttribute="centerY" id="zpg-1H-VXd"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="D9c-Qa-mUH" id="nY5-ms-oSi"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
