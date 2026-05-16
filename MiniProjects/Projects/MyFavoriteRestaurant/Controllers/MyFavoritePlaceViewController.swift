@@ -48,6 +48,11 @@ extension MyFavoritePlaceViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedCell",for: indexPath) as! RecommendedCell
                 cell.configure(with: item)
                 return cell
+
+            case .all:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AllCell",for: indexPath) as! AllCell
+                cell.configure(with: item)
+                return cell
             }
         }
     }
@@ -58,6 +63,7 @@ extension MyFavoritePlaceViewController {
         snapshot.appendItems(heroItems, toSection: .hero)
         snapshot.appendItems(categoryItems, toSection: .categories)
         snapshot.appendItems(recommendedItems, toSection: .recommended)
+        snapshot.appendItems(allItems, toSection: .all)
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -74,6 +80,8 @@ extension MyFavoritePlaceViewController {
                 return self.createCategorySection()
             case .recommended:
                 return self.createRecommendedSection()
+            case .all:
+                return self.createAllSection()
             }
         }
     }
@@ -152,6 +160,33 @@ extension MyFavoritePlaceViewController {
         let section = NSCollectionLayoutSection(group: group)
 
         section.orthogonalScrollingBehavior = .continuous
+
+        return section
+    }
+
+    func createAllSection() -> NSCollectionLayoutSection {
+
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1.0)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8,leading: 8,bottom: 8,trailing: 8)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(120)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            repeatingSubitem: item,
+            count: 2
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
 
         return section
     }
