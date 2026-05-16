@@ -1,17 +1,18 @@
 //
-//  FoodCell.swift
+//  RecommendedCell.swift
 //  MiniProjects
 //
-//  Created by Wannipa Reya on 15/5/2569 BE.
+//  Created by Wannipa Reya on 16/5/2569 BE.
 //
 
 import UIKit
 
-class FoodCell: UICollectionViewCell {
+class RecommendedCell: UICollectionViewCell {
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-
+    @IBOutlet weak var foodImageContentView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -20,7 +21,7 @@ class FoodCell: UICollectionViewCell {
 }
 
 //MARK: - Methods
-extension FoodCell {
+extension RecommendedCell {
     func configure(with item: FoodItem) {
         nameLabel.text = item.title
         priceLabel.text = item.price + " บาท"
@@ -28,8 +29,12 @@ extension FoodCell {
     }
 
     private func style() {
-        contentView.backgroundColor = .calculatorPink
+        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.systemGray4.cgColor
+
+        foodImageContentView.backgroundColor = .calculatorPurple
     }
 }
