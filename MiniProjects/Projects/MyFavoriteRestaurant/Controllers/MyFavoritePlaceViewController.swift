@@ -15,6 +15,9 @@ class MyFavoritePlaceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .systemGray5
+        collectionView.backgroundColor = .clear
+        
         collectionView.collectionViewLayout = createLayout()
         configureDataSource()
         applySnapshot()
@@ -32,12 +35,17 @@ extension MyFavoritePlaceViewController {
 
             switch section {
             case .hero:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCell",for: indexPath) as! FoodCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroCell",for: indexPath) as! HeroCell
                 cell.configure(with: item)
                 return cell
 
             case .categories:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell",for: indexPath) as! CategoryCell
+                cell.configure(with: item)
+                return cell
+
+            case .recommended:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedCell",for: indexPath) as! RecommendedCell
                 cell.configure(with: item)
                 return cell
             }
@@ -49,6 +57,7 @@ extension MyFavoritePlaceViewController {
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(heroItems, toSection: .hero)
         snapshot.appendItems(categoryItems, toSection: .categories)
+        snapshot.appendItems(recommendedItems, toSection: .recommended)
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -63,6 +72,8 @@ extension MyFavoritePlaceViewController {
                 return self.createHeroSection()
             case .categories:
                 return self.createCategorySection()
+            case .recommended:
+                return self.createRecommendedSection()
             }
         }
     }
@@ -113,6 +124,33 @@ extension MyFavoritePlaceViewController {
         )
 
         let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+
+        return section
+    }
+
+    func createRecommendedSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8,leading: 8,bottom: 8,trailing: 8)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(180),
+            heightDimension: .absolute(240)
+        )
+
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+
         section.orthogonalScrollingBehavior = .continuous
 
         return section

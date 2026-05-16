@@ -20,3 +20,10 @@ var categoryItems: [FoodItem] = [
     FoodItem(title: "เครื่องดื่ม", price: "", imageName: "bubble_tea"),
     FoodItem(title: "ของทอด", price: "", imageName: "fries")
 ]
+
+var recommendedItems: [FoodItem] = [
+    FoodItem(title: "พิซซ่า", price: "250", imageName: "pizza"),
+    FoodItem(title: "เบอร์เกอร์", price: "180", imageName: "burger"),
+    FoodItem(title: "ราเมน", price: "150", imageName: "ramen"),
+    FoodItem(title: "ซูชิ", price: "390", imageName: "sushi")
+]
