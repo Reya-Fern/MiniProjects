@@ -9,6 +9,7 @@ enum ProjectType: CaseIterable {
 
     case calculator
     case favPlace
+    case foodApp
 
     var title: String {
         switch self {
@@ -16,6 +17,8 @@ enum ProjectType: CaseIterable {
             "Cute Calculator"
         case .favPlace:
             "My Favorite Place"
+        case .foodApp:
+            "Food App"
         }
     }
 
@@ -25,6 +28,8 @@ enum ProjectType: CaseIterable {
             "Calculator"
         case .favPlace:
             "MyFavoritePlace"
+        case .foodApp:
+            "FoodApp"
         }
     }
 
@@ -34,6 +39,8 @@ enum ProjectType: CaseIterable {
             "CalculatorVC"
         case .favPlace:
             "FavPlaceVC"
+        case .foodApp:
+            "FoodAppVC"
         }
     }
 }

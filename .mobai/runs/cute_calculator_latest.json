@@ -1,0 +1,578 @@
+{
+  "caseId": "cute_calculator.mob",
+  "caseName": "Cute Calculator",
+  "deviceId": "BBEC8A15-79FC-4EDF-B57C-8B14E45AF935",
+  "deviceName": "iPhone 17",
+  "startedAt": "2026-05-18T17:32:00.488248+07:00",
+  "finishedAt": "2026-05-18T17:32:31.945132+07:00",
+  "passed": true,
+  "stepResults": [
+    {
+      "index": 0,
+      "lineNumber": 5,
+      "lineText": "app \"com.reya.MiniProjects\" fresh",
+      "passed": true,
+      "durationMs": 351
+    },
+    {
+      "index": 1,
+      "lineNumber": 6,
+      "lineText": "wait_for ~\"Cute Calculator\"",
+      "passed": true,
+      "durationMs": 914
+    },
+    {
+      "index": 2,
+      "lineNumber": 7,
+      "lineText": "tap ~\"Cute Calculator\"",
+      "passed": true,
+      "durationMs": 442
+    },
+    {
+      "index": 3,
+      "lineNumber": 8,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 307
+    },
+    {
+      "index": 4,
+      "lineNumber": 9,
+      "lineText": "assert_exists \"0\" type:text",
+      "passed": true,
+      "durationMs": 145
+    },
+    {
+      "index": 5,
+      "lineNumber": 12,
+      "lineText": "tap \"5\"",
+      "passed": true,
+      "durationMs": 480
+    },
+    {
+      "index": 6,
+      "lineNumber": 13,
+      "lineText": "tap \"add\"",
+      "passed": true,
+      "durationMs": 472
+    },
+    {
+      "index": 7,
+      "lineNumber": 14,
+      "lineText": "tap \"3\"",
+      "passed": true,
+      "durationMs": 476
+    },
+    {
+      "index": 8,
+      "lineNumber": 15,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 471
+    },
+    {
+      "index": 9,
+      "lineNumber": 16,
+      "lineText": "wait_for \"8\" type:text",
+      "passed": true,
+      "durationMs": 139
+    },
+    {
+      "index": 10,
+      "lineNumber": 17,
+      "lineText": "assert_exists \"8\" type:text",
+      "passed": true,
+      "durationMs": 124
+    },
+    {
+      "index": 11,
+      "lineNumber": 20,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 461
+    },
+    {
+      "index": 12,
+      "lineNumber": 21,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 142
+    },
+    {
+      "index": 13,
+      "lineNumber": 22,
+      "lineText": "assert_exists \"0\" type:text",
+      "passed": true,
+      "durationMs": 127
+    },
+    {
+      "index": 14,
+      "lineNumber": 25,
+      "lineText": "tap \"9\"",
+      "passed": true,
+      "durationMs": 469
+    },
+    {
+      "index": 15,
+      "lineNumber": 26,
+      "lineText": "tap \"remove\"",
+      "passed": true,
+      "durationMs": 486
+    },
+    {
+      "index": 16,
+      "lineNumber": 27,
+      "lineText": "tap \"4\"",
+      "passed": true,
+      "durationMs": 584
+    },
+    {
+      "index": 17,
+      "lineNumber": 28,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 468
+    },
+    {
+      "index": 18,
+      "lineNumber": 29,
+      "lineText": "wait_for \"5\" type:text",
+      "passed": true,
+      "durationMs": 137
+    },
+    {
+      "index": 19,
+      "lineNumber": 30,
+      "lineText": "assert_exists \"5\" type:text",
+      "passed": true,
+      "durationMs": 122
+    },
+    {
+      "index": 20,
+      "lineNumber": 33,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 461
+    },
+    {
+      "index": 21,
+      "lineNumber": 34,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 141
+    },
+    {
+      "index": 22,
+      "lineNumber": 37,
+      "lineText": "tap \"6\"",
+      "passed": true,
+      "durationMs": 456
+    },
+    {
+      "index": 23,
+      "lineNumber": 38,
+      "lineText": "tap \"multiply\"",
+      "passed": true,
+      "durationMs": 582
+    },
+    {
+      "index": 24,
+      "lineNumber": 39,
+      "lineText": "tap \"7\"",
+      "passed": true,
+      "durationMs": 456
+    },
+    {
+      "index": 25,
+      "lineNumber": 40,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 465
+    },
+    {
+      "index": 26,
+      "lineNumber": 41,
+      "lineText": "wait_for \"42\" type:text",
+      "passed": true,
+      "durationMs": 144
+    },
+    {
+      "index": 27,
+      "lineNumber": 42,
+      "lineText": "assert_exists \"42\" type:text",
+      "passed": true,
+      "durationMs": 123
+    },
+    {
+      "index": 28,
+      "lineNumber": 45,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 459
+    },
+    {
+      "index": 29,
+      "lineNumber": 46,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 141
+    },
+    {
+      "index": 30,
+      "lineNumber": 49,
+      "lineText": "tap \"8\"",
+      "passed": true,
+      "durationMs": 450
+    },
+    {
+      "index": 31,
+      "lineNumber": 50,
+      "lineText": "tap \"divide\"",
+      "passed": true,
+      "durationMs": 471
+    },
+    {
+      "index": 32,
+      "lineNumber": 51,
+      "lineText": "tap \"2\"",
+      "passed": true,
+      "durationMs": 471
+    },
+    {
+      "index": 33,
+      "lineNumber": 52,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 473
+    },
+    {
+      "index": 34,
+      "lineNumber": 53,
+      "lineText": "wait_for \"4\" type:text",
+      "passed": true,
+      "durationMs": 143
+    },
+    {
+      "index": 35,
+      "lineNumber": 54,
+      "lineText": "assert_exists \"4\" type:text",
+      "passed": true,
+      "durationMs": 122
+    },
+    {
+      "index": 36,
+      "lineNumber": 57,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 456
+    },
+    {
+      "index": 37,
+      "lineNumber": 58,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 137
+    },
+    {
+      "index": 38,
+      "lineNumber": 61,
+      "lineText": "tap \"1\"",
+      "passed": true,
+      "durationMs": 453
+    },
+    {
+      "index": 39,
+      "lineNumber": 62,
+      "lineText": "tap \"2\"",
+      "passed": true,
+      "durationMs": 470
+    },
+    {
+      "index": 40,
+      "lineNumber": 63,
+      "lineText": "tap \"3\"",
+      "passed": true,
+      "durationMs": 470
+    },
+    {
+      "index": 41,
+      "lineNumber": 64,
+      "lineText": "wait_for \"123\" type:text",
+      "passed": true,
+      "durationMs": 138
+    },
+    {
+      "index": 42,
+      "lineNumber": 65,
+      "lineText": "tap \"backspace\"",
+      "passed": true,
+      "durationMs": 455
+    },
+    {
+      "index": 43,
+      "lineNumber": 66,
+      "lineText": "wait_for \"12\" type:text",
+      "passed": true,
+      "durationMs": 136
+    },
+    {
+      "index": 44,
+      "lineNumber": 67,
+      "lineText": "assert_exists \"12\" type:text",
+      "passed": true,
+      "durationMs": 122
+    },
+    {
+      "index": 45,
+      "lineNumber": 70,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 451
+    },
+    {
+      "index": 46,
+      "lineNumber": 71,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 136
+    },
+    {
+      "index": 47,
+      "lineNumber": 74,
+      "lineText": "tap \"5\"",
+      "passed": true,
+      "durationMs": 452
+    },
+    {
+      "index": 48,
+      "lineNumber": 75,
+      "lineText": "tap \"0\" type:button",
+      "passed": true,
+      "durationMs": 470
+    },
+    {
+      "index": 49,
+      "lineNumber": 76,
+      "lineText": "wait_for \"50\" type:text",
+      "passed": true,
+      "durationMs": 137
+    },
+    {
+      "index": 50,
+      "lineNumber": 77,
+      "lineText": "tap \"percent\"",
+      "passed": true,
+      "durationMs": 457
+    },
+    {
+      "index": 51,
+      "lineNumber": 78,
+      "lineText": "wait_for \"0.5\" type:text",
+      "passed": true,
+      "durationMs": 139
+    },
+    {
+      "index": 52,
+      "lineNumber": 79,
+      "lineText": "assert_exists \"0.5\" type:text",
+      "passed": true,
+      "durationMs": 122
+    },
+    {
+      "index": 53,
+      "lineNumber": 82,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 463
+    },
+    {
+      "index": 54,
+      "lineNumber": 83,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 125
+    },
+    {
+      "index": 55,
+      "lineNumber": 86,
+      "lineText": "tap \"7\"",
+      "passed": true,
+      "durationMs": 460
+    },
+    {
+      "index": 56,
+      "lineNumber": 87,
+      "lineText": "wait_for \"7\" type:text",
+      "passed": true,
+      "durationMs": 141
+    },
+    {
+      "index": 57,
+      "lineNumber": 88,
+      "lineText": "tap \"Plus or minus\"",
+      "passed": true,
+      "durationMs": 458
+    },
+    {
+      "index": 58,
+      "lineNumber": 89,
+      "lineText": "wait_for \"-7\" type:text",
+      "passed": true,
+      "durationMs": 141
+    },
+    {
+      "index": 59,
+      "lineNumber": 90,
+      "lineText": "assert_exists \"-7\" type:text",
+      "passed": true,
+      "durationMs": 126
+    },
+    {
+      "index": 60,
+      "lineNumber": 93,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 455
+    },
+    {
+      "index": 61,
+      "lineNumber": 94,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 131
+    },
+    {
+      "index": 62,
+      "lineNumber": 97,
+      "lineText": "tap \"1\"",
+      "passed": true,
+      "durationMs": 575
+    },
+    {
+      "index": 63,
+      "lineNumber": 98,
+      "lineText": "tap \".\"",
+      "passed": true,
+      "durationMs": 472
+    },
+    {
+      "index": 64,
+      "lineNumber": 99,
+      "lineText": "tap \"5\"",
+      "passed": true,
+      "durationMs": 472
+    },
+    {
+      "index": 65,
+      "lineNumber": 100,
+      "lineText": "wait_for \"1.5\" type:text",
+      "passed": true,
+      "durationMs": 135
+    },
+    {
+      "index": 66,
+      "lineNumber": 101,
+      "lineText": "tap \"add\"",
+      "passed": true,
+      "durationMs": 453
+    },
+    {
+      "index": 67,
+      "lineNumber": 102,
+      "lineText": "tap \"2\"",
+      "passed": true,
+      "durationMs": 469
+    },
+    {
+      "index": 68,
+      "lineNumber": 103,
+      "lineText": "tap \".\"",
+      "passed": true,
+      "durationMs": 474
+    },
+    {
+      "index": 69,
+      "lineNumber": 104,
+      "lineText": "tap \"5\"",
+      "passed": true,
+      "durationMs": 474
+    },
+    {
+      "index": 70,
+      "lineNumber": 105,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 466
+    },
+    {
+      "index": 71,
+      "lineNumber": 106,
+      "lineText": "wait_for \"4\" type:text",
+      "passed": true,
+      "durationMs": 137
+    },
+    {
+      "index": 72,
+      "lineNumber": 107,
+      "lineText": "assert_exists \"4\" type:text",
+      "passed": true,
+      "durationMs": 122
+    },
+    {
+      "index": 73,
+      "lineNumber": 110,
+      "lineText": "tap \"AC\"",
+      "passed": true,
+      "durationMs": 462
+    },
+    {
+      "index": 74,
+      "lineNumber": 111,
+      "lineText": "wait_for \"0\" type:text",
+      "passed": true,
+      "durationMs": 139
+    },
+    {
+      "index": 75,
+      "lineNumber": 112,
+      "lineText": "tap \"5\"",
+      "passed": true,
+      "durationMs": 452
+    },
+    {
+      "index": 76,
+      "lineNumber": 113,
+      "lineText": "tap \"divide\"",
+      "passed": true,
+      "durationMs": 481
+    },
+    {
+      "index": 77,
+      "lineNumber": 114,
+      "lineText": "tap \"0\" type:button",
+      "passed": true,
+      "durationMs": 466
+    },
+    {
+      "index": 78,
+      "lineNumber": 115,
+      "lineText": "tap \"equal\"",
+      "passed": true,
+      "durationMs": 470
+    },
+    {
+      "index": 79,
+      "lineNumber": 116,
+      "lineText": "wait_for \"Undefined\" type:text",
+      "passed": true,
+      "durationMs": 127
+    },
+    {
+      "index": 80,
+      "lineNumber": 117,
+      "lineText": "assert_exists \"Undefined\" type:text",
+      "passed": true,
+      "durationMs": 123
+    }
+  ]
+}

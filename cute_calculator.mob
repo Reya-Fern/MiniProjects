@@ -1,0 +1,117 @@
+# Cute Calculator
+# Tags: smoke, calculator
+
+# ── Launch ──────────────────────────────────────────────
+app "com.reya.MiniProjects" fresh
+wait_for ~"Cute Calculator"
+tap ~"Cute Calculator"
+wait_for "0" type:text
+assert_exists "0" type:text
+
+# ── Addition: 5 + 3 = 8 ─────────────────────────────────
+tap "5"
+tap "add"
+tap "3"
+tap "equal"
+wait_for "8" type:text
+assert_exists "8" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+assert_exists "0" type:text
+
+# ── Subtraction: 9 - 4 = 5 ──────────────────────────────
+tap "9"
+tap "remove"
+tap "4"
+tap "equal"
+wait_for "5" type:text
+assert_exists "5" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Multiplication: 6 × 7 = 42 ──────────────────────────
+tap "6"
+tap "multiply"
+tap "7"
+tap "equal"
+wait_for "42" type:text
+assert_exists "42" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Division: 8 ÷ 2 = 4 ─────────────────────────────────
+tap "8"
+tap "divide"
+tap "2"
+tap "equal"
+wait_for "4" type:text
+assert_exists "4" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Backspace: 123 → 12 ─────────────────────────────────
+tap "1"
+tap "2"
+tap "3"
+wait_for "123" type:text
+tap "backspace"
+wait_for "12" type:text
+assert_exists "12" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Percent: 50% = 0.5 ──────────────────────────────────
+tap "5"
+tap "0" type:button
+wait_for "50" type:text
+tap "percent"
+wait_for "0.5" type:text
+assert_exists "0.5" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Plus/minus: 7 → −7 ──────────────────────────────────
+tap "7"
+wait_for "7" type:text
+tap "Plus or minus"
+wait_for "-7" type:text
+assert_exists "-7" type:text
+
+# ── AC resets to 0 ──────────────────────────────────────
+tap "AC"
+wait_for "0" type:text
+
+# ── Decimal: 1.5 + 2.5 = 4 ──────────────────────────────
+tap "1"
+tap "."
+tap "5"
+wait_for "1.5" type:text
+tap "add"
+tap "2"
+tap "."
+tap "5"
+tap "equal"
+wait_for "4" type:text
+assert_exists "4" type:text
+
+# ── Division by zero: 5 ÷ 0 = Undefined ─────────────────
+tap "AC"
+wait_for "0" type:text
+tap "5"
+tap "divide"
+tap "0" type:button
+tap "equal"
+wait_for "Undefined" type:text
+assert_exists "Undefined" type:text
