@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FoodList: Hashable {
+struct FoodList: Codable, Hashable {
     let title: String
     let price: String
     let imageName: String

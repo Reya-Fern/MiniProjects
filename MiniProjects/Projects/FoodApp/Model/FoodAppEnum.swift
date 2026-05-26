@@ -26,19 +26,4 @@ enum FoodSection: Int, CaseIterable {
             return "เมนูทั้งหมด"
         }
     }
-
-    var items: [FoodList] {
-
-        switch self {
-        case .hero:
-            return MockFoodListData.heroItems
-        case .categories:
-            return MockFoodListData.categoryItems
-        case .recommended:
-            return MockFoodListData.recommendedItems
-        case .all:
-            return MockFoodListData.allItems
-
-        }
-    }
 }

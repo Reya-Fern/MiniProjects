@@ -11,6 +11,8 @@ final class FoodAppViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
+    let data = MockFoodService.shared.fetchFoodData()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,12 +50,15 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MockFoodListData.heroItems.count
+        return data?.heroItems.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodHeroCell", for: indexPath) as! FoodHeroCell
-        let item = MockFoodListData.heroItems[indexPath.item]
+        guard let item = data?.heroItems[indexPath.item] else {
+            return cell
+        }
+
         cell.configure(with: item)
         return cell
     }
