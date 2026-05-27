@@ -10,7 +10,7 @@ import Foundation
 enum FoodSection: Int, CaseIterable {
     case hero
     case categories
-//    case recommended
+    case recommended
 //    case all
 
 //    var title: String {

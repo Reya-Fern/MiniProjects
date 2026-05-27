@@ -37,11 +37,6 @@
             "imageName": "pizza"
         },
         {
-            "title": "เบอร์เกอร์",
-            "price": "180",
-            "imageName": "burger"
-        },
-        {
             "title": "ราเมน",
             "price": "150",
             "imageName": "ramen"

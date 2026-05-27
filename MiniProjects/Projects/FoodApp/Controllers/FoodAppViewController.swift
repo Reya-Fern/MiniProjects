@@ -45,6 +45,7 @@ extension FoodAppViewController {
     private func registerCells() {
         collectionView.register(UINib(nibName: "FoodHeroCell", bundle: nil), forCellWithReuseIdentifier: "FoodHeroCell")
         collectionView.register(UINib(nibName: "FoodCategoryCell", bundle: nil), forCellWithReuseIdentifier: "FoodCategoryCell")
+        collectionView.register(UINib(nibName: "FoodRecommendedCell", bundle: nil), forCellWithReuseIdentifier: "FoodRecommendedCell")
     }
 }
 
@@ -64,8 +65,8 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             return data.heroItems.count
         case .categories:
             return data.categoryItems.count
-            //        case .recommended:
-            //            return data.recommendedItems.count
+        case .recommended:
+            return data.recommendedItems.count
             //        case .all:
             //            return data.allItems.count
         case .none:
@@ -95,6 +96,14 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
 
             return cell
 
+        case .recommended:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodRecommendedCell", for: indexPath) as! FoodRecommendedCell
+            let item = data.recommendedItems[indexPath.row]
+
+            cell.configure(with: item)
+
+            return cell
+
         case .none:
             return UICollectionViewCell()
         }
@@ -108,6 +117,8 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             return CGSize(width: 300, height: 150)
         case .categories:
             return CGSize(width: 80, height: 100)
+        case .recommended:
+            return CGSize(width: 115, height: 165)
         case .none:
             return .zero
         }
