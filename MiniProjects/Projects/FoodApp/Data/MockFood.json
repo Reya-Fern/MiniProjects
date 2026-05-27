@@ -1,93 +1,83 @@
 {
-  "heroItems": [
-    {
-      "title": "สลัดผัก",
-      "price": "80",
-      "imageName": "salad"
-    },
-    {
-      "title": "ผัดไทย",
-      "price": "100",
-      "imageName": "pad_thai"
-    },
-    {
-      "title": "ข้าวเหนียวมะม่วง",
-      "price": "120",
-      "imageName": "mango_sticky_rice"
-    }
-  ],
+    "heroItems": [
+        {
+            "title": "ผัดไทย",
+            "price": "100",
+            "imageName": "pad_thai"
+        },
+        {
+            "title": "ข้าวเหนียวมะม่วง",
+            "price": "120",
+            "imageName": "mango_sticky_rice"
+        }
+    ],
 
-  "categoryItems": [
-    {
-      "title": "ก๋วยเตี๋ยว",
-      "price": "",
-      "imageName": "noodles"
-    },
-    {
-      "title": "ข้าว",
-      "price": "",
-      "imageName": "rice"
-    },
-    {
-      "title": "ของหวาน",
-      "price": "",
-      "imageName": "cake"
-    },
-    {
-      "title": "เครื่องดื่ม",
-      "price": "",
-      "imageName": "bubble_tea"
-    },
-    {
-      "title": "ของทอด",
-      "price": "",
-      "imageName": "fries"
-    }
-  ],
+    "categoryItems": [
+        {
+            "title": "ก๋วยเตี๋ยว",
+            "price": "",
+            "imageName": "noodles"
+        },
+        {
+            "title": "ข้าว",
+            "price": "",
+            "imageName": "rice"
+        },
+        {
+            "title": "ของหวาน",
+            "price": "",
+            "imageName": "cake"
+        },
+        {
+            "title": "เครื่องดื่ม",
+            "price": "",
+            "imageName": "bubble_tea"
+        }
+    ],
 
-  "recommendedItems": [
-    {
-      "title": "พิซซ่า",
-      "price": "250",
-      "imageName": "pizza"
-    },
-    {
-      "title": "เบอร์เกอร์",
-      "price": "180",
-      "imageName": "burger"
-    },
-    {
-      "title": "ราเมน",
-      "price": "150",
-      "imageName": "ramen"
-    },
-    {
-      "title": "ซูชิ",
-      "price": "390",
-      "imageName": "sushi"
-    }
-  ],
+    "recommendedItems": [
+        {
+            "title": "พิซซ่า",
+            "price": "250",
+            "imageName": "pizza"
+        },
+        {
+            "title": "เบอร์เกอร์",
+            "price": "180",
+            "imageName": "burger"
+        },
+        {
+            "title": "ราเมน",
+            "price": "150",
+            "imageName": "ramen"
+        },
+        {
+            "title": "ซูชิ",
+            "price": "390",
+            "imageName": "sushi"
+        }
+    ],
 
-  "allItems": [
-    {
-      "title": "ผัดไทย",
-      "price": "100",
-      "imageName": "pad_thai"
-    },
-    {
-      "title": "ก๋วยเตี๋ยว",
-      "price": "120",
-      "imageName": "noodles"
-    },
-    {
-      "title": "ข้าวเปล่า",
-      "price": "20",
-      "imageName": "rice"
-    },
-    {
-      "title": "ข้าวผัดกะเพรา",
-      "price": "100",
-      "imageName": "pad_kaprao"
-    }
-  ]
+    "allItems": [
+        {
+            "title": "ผัดไทย",
+            "price": "100",
+            "imageName": "pad_thai"
+        },
+        {
+            "title": "ก๋วยเตี๋ยว",
+            "price": "120",
+            "imageName": "noodles"
+        },
+        {
+            "title": "ข้าวเปล่า",
+            "price": "20",
+            "imageName": "rice"
+        },
+        {
+            "title": "ข้าวผัดกะเพรา",
+            "price": "100",
+            "imageName": "pad_kaprao"
+        }
+    ]
 }
