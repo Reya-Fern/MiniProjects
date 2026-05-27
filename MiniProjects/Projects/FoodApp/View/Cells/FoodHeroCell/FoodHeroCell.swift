@@ -9,6 +9,7 @@ import UIKit
 
 final class FoodHeroCell: UICollectionViewCell {
 
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -22,8 +23,8 @@ final class FoodHeroCell: UICollectionViewCell {
 //MARK: - UI
 extension FoodHeroCell {
     private func style() {
-        contentView.backgroundColor = .calculatorPink
-        contentView.makeRounded(cornerRadius: 20)
+        containerView.backgroundColor = .calculatorPink
+        containerView.makeRounded(cornerRadius: 20)
     }
 
     func configure(with item: FoodList) {

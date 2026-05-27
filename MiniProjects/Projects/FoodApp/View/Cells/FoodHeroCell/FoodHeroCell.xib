@@ -24,16 +24,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="311" height="160"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-IV-cGL" userLabel="Food Image">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="130"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="100"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="130" id="GlC-1C-muE"/>
+                                            <constraint firstAttribute="height" constant="100" id="GlC-1C-muE"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oq-aZ-duA" userLabel="Label Container">
-                                        <rect key="frame" x="0.0" y="138" width="311" height="22"/>
+                                        <rect key="frame" x="0.0" y="108" width="311" height="52"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4J9-zb-Qqy">
-                                                <rect key="frame" x="16" y="-38.666666666666671" width="279" height="44.666666666666664"/>
+                                                <rect key="frame" x="16" y="-8.6666666666666714" width="279" height="44.666666666666657"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G61-E2-url" userLabel="Name Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="279" height="20.333333333333332"/>
@@ -78,6 +78,7 @@
             </constraints>
             <size key="customSize" width="311" height="160"/>
             <connections>
+                <outlet property="containerView" destination="ZhG-qr-tBS" id="oZB-6e-EiO"/>
                 <outlet property="foodImage" destination="N3b-IV-cGL" id="hja-Du-ZIV"/>
                 <outlet property="nameLabel" destination="G61-E2-url" id="qpM-48-3G8"/>
                 <outlet property="priceLabel" destination="EgR-K9-XSA" id="6CD-9p-gJE"/>

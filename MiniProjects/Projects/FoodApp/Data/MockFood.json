@@ -1,11 +1,6 @@
 {
     "heroItems": [
         {
-            "title": "ผัดไทย",
-            "price": "100",
-            "imageName": "pad_thai"
-        },
-        {
             "title": "ข้าวเหนียวมะม่วง",
             "price": "120",
             "imageName": "mango_sticky_rice"

@@ -105,7 +105,7 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
 
         switch section {
         case .hero:
-            return CGSize(width: 180, height: 180)
+            return CGSize(width: 300, height: 150)
         case .categories:
             return CGSize(width: 80, height: 100)
         case .none:
