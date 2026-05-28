@@ -68,6 +68,56 @@
             "title": "ข้าวผัดกะเพรา",
             "price": "100",
             "imageName": "pad_kaprao"
+        },
+        {
+            "title": "ราเมน",
+            "price": "150",
+            "imageName": "ramen"
+        },
+        {
+            "title": "พิซซ่า",
+            "price": "250",
+            "imageName": "pizza"
+        },
+        {
+            "title": "เบอร์เกอร์",
+            "price": "180",
+            "imageName": "burger"
+        },
+        {
+            "title": "มันฝรั่งทอด",
+            "price": "90",
+            "imageName": "fries"
+        },
+        {
+            "title": "เค้ก",
+            "price": "90",
+            "imageName": "cake"
+        },
+        {
+            "title": "ข้าวเหนียวมะม่วง",
+            "price": "120",
+            "imageName": "mango_sticky_rice"
+        },
+        {
+            "title": "ซูชิ",
+            "price": "390",
+            "imageName": "sushi"
+        },
+        {
+            "title": "ติ่มซำ",
+            "price": "150",
+            "imageName": "dimsum"
+        },
+        {
+            "title": "น้ำเปล่า",
+            "price": "10",
+            "imageName": "water"
+        },
+        {
+            "title": "ชานมไข่มุก",
+            "price": "90",
+            "imageName": "bubble_tea"
         }
     ]
 }
