@@ -33,7 +33,8 @@ extension FoodAppViewController {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        layout.headerReferenceSize = CGSize(width: collectionView.bounds.width, height: 40)
 
         collectionView.collectionViewLayout = layout
         collectionView.dataSource = self
@@ -43,6 +44,9 @@ extension FoodAppViewController {
     }
 
     private func registerCells() {
+        //Header
+        collectionView.register(FoodSectionHeaderView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,             withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier)
+        //Section Item
         collectionView.register(UINib(nibName: "FoodHeroCell", bundle: nil), forCellWithReuseIdentifier: "FoodHeroCell")
         collectionView.register(UINib(nibName: "FoodCategoryCell", bundle: nil), forCellWithReuseIdentifier: "FoodCategoryCell")
         collectionView.register(UINib(nibName: "FoodRecommendedCell", bundle: nil), forCellWithReuseIdentifier: "FoodRecommendedCell")
@@ -129,5 +133,17 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
         case .none:
             return .zero
         }
+    }
+
+    //Section Header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier, for: indexPath) as! FoodSectionHeaderView
+
+        let section = FoodSection(rawValue: indexPath.section)
+
+        header.configure(title: section?.title ?? "")
+
+        return header
     }
 }
