@@ -18,4 +18,13 @@ extension UIView {
         layer.borderWidth = width
         layer.borderColor = color.cgColor
     }
+
+    //Identifier
+    static var reuseIdentifier: String {
+        String(describing: self)
+    }
+
+    static var nib: UINib {
+        return UINib(nibName: reuseIdentifier, bundle: nil)
+    }
 }

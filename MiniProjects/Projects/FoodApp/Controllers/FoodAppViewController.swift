@@ -11,7 +11,7 @@ final class FoodAppViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    let data = MockFoodService.shared.fetchFoodData()
+    private let data = MockFoodService.shared.fetchFoodData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,49 +23,97 @@ final class FoodAppViewController: UIViewController {
 
 // MARK: - UI
 extension FoodAppViewController {
+
     private func configureUI() {
         view.backgroundColor = .systemGray5
         collectionView.backgroundColor = .clear
     }
 
     private func setupCollectionView() {
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+
+        registerCells()
+    }
+}
+
+// MARK: - Collection View
+extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return FoodSection.allCases.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let currentSection = FoodSection(rawValue: section) else { return 0 }
+
+        return items(for: currentSection)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let section = FoodSection(rawValue: indexPath.section) else { return UICollectionViewCell() }
+
+        switch section {
+        case .hero:
+            return makeHeroCell(for: indexPath)
+        case .categories:
+            return makeCategoryCell(for: indexPath)
+        case .recommended:
+            return makeRecommendedCell(for: indexPath)
+        case .all:
+            return makeAllCell(for: indexPath)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let section = FoodSection(rawValue: indexPath.section) else { return .zero }
+
+        return section.itemSize
+    }
+
+    //Section Header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier, for: indexPath) as! FoodSectionHeaderView
+
+        guard let section = FoodSection(rawValue: indexPath.section) else {
+            return UICollectionReusableView()
+        }
+
+        header.configure(title: section.title)
+
+        return header
+    }
+}
+
+// MARK: - Helper
+extension FoodAppViewController {
+    private func createLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
+
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         layout.headerReferenceSize = CGSize(width: collectionView.bounds.width, height: 40)
 
-        collectionView.collectionViewLayout = layout
-        collectionView.dataSource = self
-        collectionView.delegate = self
-
-        registerCells()
+        return layout
     }
 
     private func registerCells() {
         //Header
-        collectionView.register(FoodSectionHeaderView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,             withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier)
+        collectionView.register(FoodSectionHeaderView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier)
         //Section Item
-        collectionView.register(UINib(nibName: "FoodHeroCell", bundle: nil), forCellWithReuseIdentifier: "FoodHeroCell")
-        collectionView.register(UINib(nibName: "FoodCategoryCell", bundle: nil), forCellWithReuseIdentifier: "FoodCategoryCell")
-        collectionView.register(UINib(nibName: "FoodRecommendedCell", bundle: nil), forCellWithReuseIdentifier: "FoodRecommendedCell")
-        collectionView.register(UINib(nibName: "FoodAllCell", bundle: nil), forCellWithReuseIdentifier: "FoodAllCell")
-    }
-}
-
-// MARK: - Collection View
-extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return FoodSection.allCases.count
+        collectionView.register(FoodHeroCell.nib, forCellWithReuseIdentifier: FoodHeroCell.reuseIdentifier)
+        collectionView.register(FoodCategoryCell.nib, forCellWithReuseIdentifier: FoodCategoryCell.reuseIdentifier)
+        collectionView.register(FoodRecommendedCell.nib, forCellWithReuseIdentifier: FoodRecommendedCell.reuseIdentifier)
+        collectionView.register(FoodAllCell.nib, forCellWithReuseIdentifier: FoodAllCell.reuseIdentifier)
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    private func items(for section: FoodSection) -> Int {
         guard let data else { return 0 }
 
-        let currentSection = FoodSection(rawValue: section)
-
-        switch currentSection {
+        switch section {
         case .hero:
             return data.heroItems.count
         case .categories:
@@ -74,76 +122,54 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             return data.recommendedItems.count
         case .all:
             return data.allItems.count
-        case .none:
-            return 0
         }
     }
+}
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+// MARK: - Cell
+extension FoodAppViewController {
+
+    private func makeHeroCell(for indexPath: IndexPath) -> UICollectionViewCell {
         guard let data else { return UICollectionViewCell() }
 
-        let section = FoodSection(rawValue: indexPath.section)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodHeroCell.reuseIdentifier, for: indexPath) as! FoodHeroCell
 
-        switch section {
-        case .hero:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodHeroCell", for: indexPath) as! FoodHeroCell
-            let item = data.heroItems[indexPath.row]
+        let item = data.heroItems[indexPath.row]
+        cell.configure(with: item)
 
-            cell.configure(with: item)
-            return cell
-
-        case .categories:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCell", for: indexPath) as! FoodCategoryCell
-            let item = data.categoryItems[indexPath.row]
-
-            cell.configure(with: item)
-            return cell
-
-        case .recommended:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodRecommendedCell", for: indexPath) as! FoodRecommendedCell
-            let item = data.recommendedItems[indexPath.row]
-
-            cell.configure(with: item)
-            return cell
-
-        case .all:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAllCell", for: indexPath) as! FoodAllCell
-            let item = data.allItems[indexPath.row]
-
-            cell.configure(with: item)
-            return cell
-
-        case .none:
-            return UICollectionViewCell()
-        }
+        return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = FoodSection(rawValue: indexPath.section)
+    private func makeCategoryCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let data else { return UICollectionViewCell() }
 
-        switch section {
-        case .hero:
-            return CGSize(width: 300, height: 150)
-        case .categories:
-            return CGSize(width: 80, height: 100)
-        case .recommended:
-            return CGSize(width: 115, height: 165)
-        case .all:
-            return CGSize(width: 180, height: 90)
-        case .none:
-            return .zero
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodCategoryCell.reuseIdentifier, for: indexPath) as! FoodCategoryCell
+
+        let item = data.categoryItems[indexPath.row]
+        cell.configure(with: item)
+
+        return cell
     }
 
-    //Section Header
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    private func makeRecommendedCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let data else { return UICollectionViewCell() }
 
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: FoodSectionHeaderView.reuseIdentifier, for: indexPath) as! FoodSectionHeaderView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodRecommendedCell.reuseIdentifier, for: indexPath) as! FoodRecommendedCell
 
-        let section = FoodSection(rawValue: indexPath.section)
+        let item = data.recommendedItems[indexPath.row]
+        cell.configure(with: item)
 
-        header.configure(title: section?.title ?? "")
+        return cell
+    }
 
-        return header
+    private func makeAllCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let data else { return UICollectionViewCell() }
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodAllCell.reuseIdentifier, for: indexPath) as! FoodAllCell
+
+        let item = data.allItems[indexPath.row]
+        cell.configure(with: item)
+
+        return cell
     }
 }

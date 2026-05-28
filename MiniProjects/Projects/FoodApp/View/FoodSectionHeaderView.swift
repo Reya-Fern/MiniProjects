@@ -9,8 +9,6 @@ import UIKit
 
 final class FoodSectionHeaderView: UICollectionReusableView {
 
-    static let reuseIdentifier = "FoodSectionHeaderView"
-
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
