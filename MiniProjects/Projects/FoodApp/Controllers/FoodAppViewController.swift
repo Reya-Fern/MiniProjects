@@ -46,6 +46,7 @@ extension FoodAppViewController {
         collectionView.register(UINib(nibName: "FoodHeroCell", bundle: nil), forCellWithReuseIdentifier: "FoodHeroCell")
         collectionView.register(UINib(nibName: "FoodCategoryCell", bundle: nil), forCellWithReuseIdentifier: "FoodCategoryCell")
         collectionView.register(UINib(nibName: "FoodRecommendedCell", bundle: nil), forCellWithReuseIdentifier: "FoodRecommendedCell")
+        collectionView.register(UINib(nibName: "FoodAllCell", bundle: nil), forCellWithReuseIdentifier: "FoodAllCell")
     }
 }
 
@@ -67,8 +68,8 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             return data.categoryItems.count
         case .recommended:
             return data.recommendedItems.count
-            //        case .all:
-            //            return data.allItems.count
+        case .all:
+            return data.allItems.count
         case .none:
             return 0
         }
@@ -85,7 +86,6 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             let item = data.heroItems[indexPath.row]
 
             cell.configure(with: item)
-
             return cell
 
         case .categories:
@@ -93,7 +93,6 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             let item = data.categoryItems[indexPath.row]
 
             cell.configure(with: item)
-
             return cell
 
         case .recommended:
@@ -101,7 +100,13 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             let item = data.recommendedItems[indexPath.row]
 
             cell.configure(with: item)
+            return cell
 
+        case .all:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodAllCell", for: indexPath) as! FoodAllCell
+            let item = data.allItems[indexPath.row]
+
+            cell.configure(with: item)
             return cell
 
         case .none:
@@ -119,6 +124,8 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
             return CGSize(width: 80, height: 100)
         case .recommended:
             return CGSize(width: 115, height: 165)
+        case .all:
+            return CGSize(width: 180, height: 90)
         case .none:
             return .zero
         }
