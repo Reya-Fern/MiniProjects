@@ -11,7 +11,7 @@ extension UILabel {
     
     func styleLabel () {
         font = .systemFont(ofSize: 60, weight: .medium)
-        textColor = .black
+        textColor = .label
         backgroundColor = .background2
         layer.cornerRadius = 30
         clipsToBounds = true
