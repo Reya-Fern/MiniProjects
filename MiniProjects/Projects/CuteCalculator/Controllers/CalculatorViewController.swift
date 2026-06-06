@@ -15,7 +15,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var expressionLabel: UILabel!
     @IBOutlet var allButtons: [UIButton]!
 
-    private let calculate = CalculatorEngine()
+    private let calculatorEngine = CalculatorEngine()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,8 @@ extension CalculatorViewController {
         sender.accessibilityIdentifier ??
         ""
 
-        displayLabel.text = calculate.handleInput(value)
+        let state = calculatorEngine.handleInput(value)
+        expressionLabel.text = state.expression
+        displayLabel.text = state.display
     }
 }

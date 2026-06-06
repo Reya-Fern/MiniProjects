@@ -9,19 +9,25 @@ import Foundation
 
 final class CalculatorEngine {
 
+    struct CalculatorState {
+        let expression: String
+        let display: String
+    }
+
     private var currentInput = "0"
     private var previousValue: Double = 0
     private var currentOperation: String?
     private var shouldStartNewInput = false
     private var hasError = false
     private let maxDigits = 12
+    private var expression = ""
 
-    func handleInput(_ value: String) -> String {
+    func handleInput(_ value: String) -> CalculatorState {
 
         if hasError {
             clear()
             if value == CalButton.ac.rawValue {
-                return currentInput
+                return CalculatorState(expression: expression, display: currentInput)
             }
         }
 
@@ -46,7 +52,7 @@ final class CalculatorEngine {
             break
         }
 
-        return formattedDisplay
+        return CalculatorState(expression: expression, display: formattedDisplay)
     }
 }
 
@@ -70,6 +76,10 @@ extension CalculatorEngine {
         } else {
             currentInput += value
         }
+
+        if let operation = currentOperation {
+            expression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(currentInput)"
+        }
     }
 
     private func appendDecimal () {
@@ -86,6 +96,7 @@ extension CalculatorEngine {
 
     private func clear () {
         currentInput = "0"
+        expression = ""
         previousValue = 0
         currentOperation = nil
         shouldStartNewInput = false
@@ -102,10 +113,11 @@ extension CalculatorEngine {
         }
     }
 
-    private func setOperation(_ Operation: String) {
+    private func setOperation(_ operation: String) {
         previousValue = Double(currentInput) ?? 0
-        currentOperation = Operation
+        currentOperation = operation
         shouldStartNewInput = true
+        expression = "\(formattedDisplay)\(operatorSymbol(for: operation))"
     }
 
     private func calculate() {
@@ -134,6 +146,7 @@ extension CalculatorEngine {
             return
         }
 
+        expression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(currentInput)"
         currentInput = formatResult(result)
         currentOperation = nil
     }
@@ -141,6 +154,7 @@ extension CalculatorEngine {
     private func convertToPercent() {
         let value = (Double(currentInput) ?? 0) / 100
 
+        expression = "\(currentInput)%"
         currentInput = formatResult(value)
     }
 
@@ -187,5 +201,21 @@ extension CalculatorEngine {
 
         return formatter.string(from: NSNumber(value: value))
         ?? currentInput
+    }
+    
+    private func operatorSymbol(for operation: String) -> String {
+
+        switch operation {
+        case CalButton.divide.rawValue:
+            return "÷"
+        case CalButton.multiply.rawValue:
+            return "×"
+        case CalButton.minus.rawValue:
+            return "−"
+        case CalButton.plus.rawValue:
+            return "+"
+        default:
+            return operation
+        }
     }
 }
