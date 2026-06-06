@@ -9,15 +9,23 @@ import UIKit
 
 extension UILabel {
     
-    func styleLabel () {
+    func styleDisplayLabel() {
         font = .systemFont(ofSize: 60, weight: .medium)
         textColor = .label
-        backgroundColor = .background2
-        layer.cornerRadius = 30
-        clipsToBounds = true
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.3
         lineBreakMode = .byClipping
         numberOfLines = 1
+        textAlignment = .right
+    }
+    
+    func styleExpressionLabel() {
+        font = .systemFont(ofSize: 28, weight: .regular)
+        textColor = .secondaryLabel
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.3
+        lineBreakMode = .byClipping
+        numberOfLines = 1
+        textAlignment = .right
     }
 }

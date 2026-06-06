@@ -25,19 +25,30 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olp-Qo-gDu" userLabel="Display View">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="148"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HZ-1Q-osC" userLabel="Display Label">
-                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="148"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="dri-R6-DMJ">
+                                                        <rect key="frame" x="16" y="50" width="313" height="48"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-Sk-qBe" userLabel="Expression Label">
+                                                                <rect key="frame" x="0.0" y="0.0" width="313" height="20.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HZ-1Q-osC" userLabel="Display Label">
+                                                                <rect key="frame" x="0.0" y="27.666666666666657" width="313" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="3HZ-1Q-osC" secondAttribute="bottom" id="2R5-Bs-BI4"/>
-                                                    <constraint firstItem="3HZ-1Q-osC" firstAttribute="leading" secondItem="Olp-Qo-gDu" secondAttribute="leading" id="DYd-Zh-9Eh"/>
-                                                    <constraint firstItem="3HZ-1Q-osC" firstAttribute="top" secondItem="Olp-Qo-gDu" secondAttribute="top" id="oyP-Gb-MLz"/>
-                                                    <constraint firstAttribute="trailing" secondItem="3HZ-1Q-osC" secondAttribute="trailing" id="r9e-de-5lh"/>
+                                                    <constraint firstItem="dri-R6-DMJ" firstAttribute="leading" secondItem="Olp-Qo-gDu" secondAttribute="leading" constant="16" id="LRf-g3-AdU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dri-R6-DMJ" secondAttribute="bottom" constant="50" id="mAQ-BI-VIP"/>
+                                                    <constraint firstItem="dri-R6-DMJ" firstAttribute="top" secondItem="Olp-Qo-gDu" secondAttribute="top" constant="50" id="ryA-pW-HVi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dri-R6-DMJ" secondAttribute="trailing" constant="16" id="yHK-1e-LXm"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="euD-fl-WiW" userLabel="RowStack1">
@@ -273,6 +284,7 @@
                         <outlet property="containerView" destination="KRH-Lt-HpH" id="s0P-bY-dAu"/>
                         <outlet property="displayLabel" destination="3HZ-1Q-osC" id="sMZ-mu-3fW"/>
                         <outlet property="displayView" destination="Olp-Qo-gDu" id="5dQ-ks-HkW"/>
+                        <outlet property="expressionLabel" destination="ZwP-Sk-qBe" id="HFQ-rW-B1z"/>
                         <outletCollection property="allButtons" destination="TPW-cR-AjF" collectionClass="NSMutableArray" id="EZa-VK-iHs"/>
                         <outletCollection property="allButtons" destination="JBU-e1-Wgf" collectionClass="NSMutableArray" id="2Gi-F9-eYh"/>
                         <outletCollection property="allButtons" destination="Qvd-GI-hOb" collectionClass="NSMutableArray" id="EOR-Hm-K92"/>

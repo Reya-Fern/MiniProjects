@@ -12,20 +12,18 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var displayView: UIView!
     @IBOutlet weak var displayLabel: UILabel!
+    @IBOutlet weak var expressionLabel: UILabel!
     @IBOutlet var allButtons: [UIButton]!
 
     private let calculate = CalculatorEngine()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         style()
 
         allButtons.forEach {
             $0.styleButtons()
         }
-
-        displayLabel.styleLabel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -43,7 +41,10 @@ extension CalculatorViewController {
     private func style() {
         view.backgroundColor = .background
         containerView.backgroundColor = .background
-        displayView.backgroundColor = .clear
+
+        displayView.displayStyle()
+        displayLabel.styleDisplayLabel()
+        expressionLabel.styleExpressionLabel()
     }
 }
 
