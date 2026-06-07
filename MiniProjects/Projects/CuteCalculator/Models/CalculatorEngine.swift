@@ -227,27 +227,27 @@ extension CalculatorEngine {
         if value.truncatingRemainder(dividingBy: 1) == 0 {
             return String(format: "%.0f", value)
         }
-
-        return String(value)
+        return String(format: "%.10g", value)
     }
 
     private var formattedDisplay: String {
-        if currentInput.contains("."),
-           currentInput.last == "." {
+        if currentInput.contains(".") {
+            let parts = currentInput.components(separatedBy: ".")
+            let intPart = parts[0]
+            let decPart = parts[1]
 
-            let value = String(currentInput.dropLast())
+            let intDouble = Double(intPart) ?? 0
+            var formattedInt = formatted(intDouble)
 
-            guard let number = Double(value) else {
-                return currentInput
+            if intPart.hasPrefix("-"), !formattedInt.hasPrefix("-") {
+                formattedInt = "-" + formattedInt
             }
-
-            return formatted(number) + "."
+            return formattedInt + "." + decPart
         }
 
         guard let number = Double(currentInput) else {
             return currentInput
         }
-
         return formatted(number)
     }
 
