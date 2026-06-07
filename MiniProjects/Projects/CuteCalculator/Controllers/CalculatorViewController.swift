@@ -58,7 +58,7 @@ extension CalculatorViewController {
         ""
 
         let state = calculatorEngine.handleInput(value)
-        expressionLabel.text = state.expression
         displayLabel.text = state.display
+        expressionLabel.text = state.expression
     }
 }

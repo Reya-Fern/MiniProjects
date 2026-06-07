@@ -15,12 +15,13 @@ final class CalculatorEngine {
     }
 
     private var currentInput = "0"
+    private var expression = ""
+    private var displayExpression = "0"
     private var previousValue: Double = 0
     private var currentOperation: String?
     private var shouldStartNewInput = false
     private var hasError = false
     private let maxDigits = 12
-    private var expression = ""
 
     func handleInput(_ value: String) -> CalculatorState {
 
@@ -52,7 +53,7 @@ final class CalculatorEngine {
             break
         }
 
-        return CalculatorState(expression: expression, display: formattedDisplay)
+        return CalculatorState(expression: expression, display: displayExpression)
     }
 }
 
@@ -63,6 +64,11 @@ extension CalculatorEngine {
         if shouldStartNewInput {
             currentInput = value
             shouldStartNewInput = false
+
+            if let operation = currentOperation {
+                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+            }
+
             return
         }
 
@@ -73,12 +79,14 @@ extension CalculatorEngine {
 
         if currentInput == "0" {
             currentInput = value
+            displayExpression = formattedDisplay
         } else {
             currentInput += value
+            displayExpression = formattedDisplay
         }
 
         if let operation = currentOperation {
-            expression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(currentInput)"
+            displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
     }
 
@@ -86,17 +94,28 @@ extension CalculatorEngine {
         if shouldStartNewInput {
             currentInput = "0."
             shouldStartNewInput = false
+
+            if let operation = currentOperation {
+                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+            }
+
             return
         }
 
         if !currentInput.contains(".") {
             currentInput.append(".")
+            displayExpression = formattedDisplay
+        }
+
+        if let operation = currentOperation {
+            displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
     }
 
     private func clear () {
-        currentInput = "0"
         expression = ""
+        displayExpression = "0"
+        currentInput = "0"
         previousValue = 0
         currentOperation = nil
         shouldStartNewInput = false
@@ -111,13 +130,26 @@ extension CalculatorEngine {
         if currentInput.isEmpty || currentInput == "-" {
             currentInput = "0"
         }
+
+        if let operation = currentOperation {
+
+            if currentInput == "0" && shouldStartNewInput == false {
+                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))"
+            } else {
+                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+            }
+
+        } else {
+            displayExpression = formattedDisplay
+        }
     }
 
     private func setOperation(_ operation: String) {
         previousValue = Double(currentInput) ?? 0
         currentOperation = operation
         shouldStartNewInput = true
-        expression = "\(formattedDisplay)\(operatorSymbol(for: operation))"
+
+        displayExpression = "\(formattedDisplay)\(operatorSymbol(for: operation))"
     }
 
     private func calculate() {
@@ -130,6 +162,7 @@ extension CalculatorEngine {
         case CalButton.divide.rawValue:
             if currentValue == 0 {
                 currentInput = Constants.error.rawValue
+                displayExpression = formattedDisplay
                 hasError = true
                 return
             }
@@ -145,9 +178,9 @@ extension CalculatorEngine {
         default :
             return
         }
-
-        expression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(currentInput)"
+        expression = displayExpression
         currentInput = formatResult(result)
+        displayExpression = formattedDisplay
         currentOperation = nil
     }
 
@@ -156,12 +189,14 @@ extension CalculatorEngine {
 
         expression = "\(currentInput)%"
         currentInput = formatResult(value)
+        displayExpression = formattedDisplay
     }
 
     private func toggleSign() {
         let value = (Double(currentInput) ?? 0) * -1
 
         currentInput = formatResult(value)
+        displayExpression = formattedDisplay
     }
 
     private func formatResult(_ value: Double) -> String {
@@ -202,7 +237,7 @@ extension CalculatorEngine {
         return formatter.string(from: NSNumber(value: value))
         ?? currentInput
     }
-    
+
     private func operatorSymbol(for operation: String) -> String {
 
         switch operation {
