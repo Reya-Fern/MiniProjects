@@ -88,6 +88,7 @@ extension CalculatorEngine {
         if let operation = currentOperation {
             displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
+        expression = ""
     }
 
     private func appendDecimal () {
@@ -96,7 +97,7 @@ extension CalculatorEngine {
             shouldStartNewInput = false
 
             if let operation = currentOperation {
-                displayExpression = "\(formatted(previousValue)))\(operatorSymbol(for: operation))\(formattedDisplay)"
+                displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
             }
 
             return
@@ -110,6 +111,7 @@ extension CalculatorEngine {
         if let operation = currentOperation {
             displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
+        expression = ""
     }
 
     private func clear () {
@@ -123,7 +125,22 @@ extension CalculatorEngine {
     }
 
     private func deleteLast () {
-        guard currentInput != "0" else { return }
+        if shouldStartNewInput {
+            currentOperation = nil
+            shouldStartNewInput = false
+            displayExpression = formattedDisplay
+            return
+        }
+
+        guard currentInput != "0" else {
+            if currentOperation != nil {
+                currentInput = formatResult(previousValue)
+                currentOperation = nil
+                previousValue = 0
+                displayExpression = formattedDisplay
+            }
+            return
+        }
 
         currentInput.removeLast()
 
@@ -142,6 +159,7 @@ extension CalculatorEngine {
         } else {
             displayExpression = formattedDisplay
         }
+        expression = ""
     }
 
     private func setOperation(_ operation: String) {
@@ -150,6 +168,7 @@ extension CalculatorEngine {
         shouldStartNewInput = true
 
         displayExpression = "\(formattedDisplay)\(operatorSymbol(for: operation))"
+        expression = ""
     }
 
     private func calculate() {
@@ -199,6 +218,10 @@ extension CalculatorEngine {
         currentInput = formatResult(value)
         displayExpression = formattedDisplay
     }
+}
+
+// MARK: - Helper
+extension CalculatorEngine {
 
     private func formatResult(_ value: Double) -> String {
         if value.truncatingRemainder(dividingBy: 1) == 0 {
@@ -209,7 +232,6 @@ extension CalculatorEngine {
     }
 
     private var formattedDisplay: String {
-
         if currentInput.contains("."),
            currentInput.last == "." {
 
@@ -230,7 +252,6 @@ extension CalculatorEngine {
     }
 
     private func formatted(_ value: Double) -> String {
-
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 10
@@ -240,7 +261,6 @@ extension CalculatorEngine {
     }
 
     private func operatorSymbol(for operation: String) -> String {
-
         switch operation {
         case CalButton.divide.rawValue:
             return "÷"
