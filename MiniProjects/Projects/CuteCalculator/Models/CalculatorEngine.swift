@@ -163,6 +163,7 @@ extension CalculatorEngine {
             if currentValue == 0 {
                 currentInput = Constants.error.rawValue
                 displayExpression = formattedDisplay
+                expression = ""
                 hasError = true
                 return
             }
