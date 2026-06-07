@@ -66,7 +66,7 @@ extension CalculatorEngine {
             shouldStartNewInput = false
 
             if let operation = currentOperation {
-                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+                displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
             }
 
             return
@@ -86,7 +86,7 @@ extension CalculatorEngine {
         }
 
         if let operation = currentOperation {
-            displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+            displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
     }
 
@@ -96,7 +96,7 @@ extension CalculatorEngine {
             shouldStartNewInput = false
 
             if let operation = currentOperation {
-                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+                displayExpression = "\(formatted(previousValue)))\(operatorSymbol(for: operation))\(formattedDisplay)"
             }
 
             return
@@ -108,7 +108,7 @@ extension CalculatorEngine {
         }
 
         if let operation = currentOperation {
-            displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+            displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
         }
     }
 
@@ -134,9 +134,9 @@ extension CalculatorEngine {
         if let operation = currentOperation {
 
             if currentInput == "0" && shouldStartNewInput == false {
-                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))"
+                displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))"
             } else {
-                displayExpression = "\(formatResult(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
+                displayExpression = "\(formatted(previousValue))\(operatorSymbol(for: operation))\(formattedDisplay)"
             }
 
         } else {
