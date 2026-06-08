@@ -21,7 +21,10 @@ final class HeroCell: UICollectionViewCell, FoodPricable {
 //MARK: - UI
 extension HeroCell {
     private func style() {
-        contentView.backgroundColor = .calculatorPink
+        contentView.backgroundColor = .secoundPink
         contentView.makeRounded(cornerRadius: 20)
+        nameLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = .systemFont(ofSize: 16)
+        priceLabel.textColor = .secondaryLabel
     }
 }

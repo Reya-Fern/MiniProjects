@@ -27,5 +27,8 @@ extension AllCell {
         contentView.addBorder()
         imageContainer.backgroundColor = .calculatorGreen
         imageContainer.makeRounded(cornerRadius: 20)
+        nameLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = .systemFont(ofSize: 16)
+        priceLabel.textColor = .secondaryLabel
     }
 }

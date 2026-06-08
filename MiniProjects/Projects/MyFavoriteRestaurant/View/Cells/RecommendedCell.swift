@@ -26,5 +26,8 @@ extension RecommendedCell {
         contentView.makeRounded(cornerRadius: 20)
         contentView.addBorder()
         imageContentView.backgroundColor = .calculatorPurple
+        nameLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = .systemFont(ofSize: 16)
+        priceLabel.textColor = .secondaryLabel
     }
 }
