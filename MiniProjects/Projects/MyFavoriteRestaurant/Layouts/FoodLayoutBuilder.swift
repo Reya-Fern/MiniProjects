@@ -47,7 +47,7 @@ enum FoodLayoutBuilder {
         item.contentInsets = sectionInsets
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.9),
+            widthDimension: .fractionalWidth(0.85),
             heightDimension: .absolute(220)
         )
 
@@ -57,7 +57,7 @@ enum FoodLayoutBuilder {
         )
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
+        section.orthogonalScrollingBehavior = .groupPagingCentered
 
         section.boundarySupplementaryItems = [
             createSectionHeader()
