@@ -11,6 +11,12 @@ final class FoodAppViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
+    private enum Layout {
+        static let horizontalInset: CGFloat = 32
+        static let standardSpacing: CGFloat = 16
+        static let smallSpacing: CGFloat = 8
+    }
+
     private let data = MockFoodService.shared.fetchFoodData()
 
     override func viewDidLoad() {
@@ -69,7 +75,26 @@ extension FoodAppViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let section = FoodSection(rawValue: indexPath.section) else { return .zero }
 
-        return section.itemSize
+        switch section {
+        case .hero:
+            let width = collectionView.bounds.width - Layout.horizontalInset
+            let height = width * 0.45
+
+            return CGSize(width: width, height: height)
+        case .categories:
+            let columns: CGFloat = collectionView.bounds.width > 500 ? 5 : 4
+
+            let width = (collectionView.bounds.width - Layout.horizontalInset - ((columns - 1) * Layout.standardSpacing)) / columns
+            return CGSize(width: width, height: width + 30)
+        case .recommended:
+            let columns: CGFloat = 2
+
+            let width = (collectionView.bounds.width - Layout.horizontalInset - Layout.standardSpacing) / columns
+            return CGSize(width: width, height: width * 1.1)
+        case .all:
+            let width = (collectionView.bounds.width - Layout.horizontalInset - Layout.smallSpacing) / 2
+            return CGSize(width: width, height: 90)
+        }
     }
 
     //Section Header
@@ -158,7 +183,7 @@ extension FoodAppViewController {
 
         let item = data.recommendedItems[indexPath.row]
         cell.configure(with: item)
-
+        
         return cell
     }
 

@@ -26,18 +26,4 @@ enum FoodSection: Int, CaseIterable {
             return "เมนูทั้งหมด"
         }
     }
-
-    var itemSize: CGSize {
-
-        switch self {
-        case .hero:
-            return CGSize(width: 300, height: 150)
-        case .categories:
-            return CGSize(width: 80, height: 100)
-        case .recommended:
-            return CGSize(width: 115, height: 165)
-        case .all:
-            return CGSize(width: 180, height: 90)
-        }
-    }
 }
