@@ -23,8 +23,11 @@ final class FoodHeroCell: UICollectionViewCell {
 //MARK: - UI
 extension FoodHeroCell {
     private func style() {
-        containerView.backgroundColor = .calculatorPink
+        containerView.backgroundColor = .secoundPink
         containerView.makeRounded(cornerRadius: 20)
+        nameLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = .systemFont(ofSize: 16)
+        priceLabel.textColor = .secondaryLabel
     }
 
     func configure(with item: FoodList) {

@@ -28,6 +28,9 @@ extension FoodRecommendedCell {
         containerView.makeRounded(cornerRadius: 20)
         containerView.addBorder()
         imageContainer.backgroundColor = .calculatorPurple
+        nameLabel.font = .systemFont(ofSize: 18)
+        priceLabel.font = .systemFont(ofSize: 16)
+        priceLabel.textColor = .secondaryLabel
     }
 
     func configure(with item: FoodList) {
