@@ -16,6 +16,9 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var activityButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var pauseBotton: UIButton!
+    @IBOutlet weak var stopBotton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +41,7 @@ extension FocusPlantViewController {
         treeImageView.image = UIImage(named: "sample_tree")
 
         activityButton.setTitle("Study", for: .normal)
-        activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.18)
+        activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         activityButton.makeRounded(cornerRadius: 15)
 
         timerLabel.text = "90:00"
@@ -50,9 +53,20 @@ extension FocusPlantViewController {
         startButton.layer.shadowOffset = .init(width: 0, height: 4)
         startButton.layer.shadowOpacity = 1
         startButton.layer.shadowRadius = 0
-
-
         startButton.layer.masksToBounds = false
+
+        stopBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        stopBotton.makeCircular()
+        pauseBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        pauseBotton.makeCircular()
+
+//        startButton.isHidden = false
+//        pauseBotton.isHidden = true
+//        stopBotton.isHidden = true
+
+        startButton.isHidden = true
+        pauseBotton.isHidden = false
+        stopBotton.isHidden = false
 
     }
 }

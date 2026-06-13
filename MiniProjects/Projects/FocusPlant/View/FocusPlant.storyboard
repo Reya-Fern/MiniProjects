@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,6 +73,39 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="S8J-HS-0Gd" userLabel="Control Button Stack View">
+                                <rect key="frame" x="144" y="709" width="105" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhx-nG-4HG" userLabel="Stop Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Wi4-KO-Jva"/>
+                                            <constraint firstAttribute="width" secondItem="Lhx-nG-4HG" secondAttribute="height" multiplier="1:1" id="xXP-oO-i1U"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="image" image="stop" catalog="system" symbolScale="medium"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zue-tS-IuZ" userLabel="Puase Button">
+                                        <rect key="frame" x="60" y="0.0" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="gqZ-Zv-sHE"/>
+                                            <constraint firstAttribute="width" secondItem="zue-tS-IuZ" secondAttribute="height" multiplier="1:1" id="hdA-GZ-Rn3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="image" image="pause" catalog="system" symbolScale="medium"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44h-AO-pEY" userLabel="Start Button">
                                 <rect key="frame" x="137" y="714" width="119" height="40"/>
                                 <constraints>
@@ -91,7 +125,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9Vu-dU-9qG"/>
+                            <constraint firstItem="S8J-HS-0Gd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Cup-al-gha"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="top" secondItem="IvB-LB-gZA" secondAttribute="bottom" constant="32" id="M3U-Iz-L7U"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="S8J-HS-0Gd" secondAttribute="bottom" constant="30" id="TQI-9K-Qeb"/>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="top" secondItem="nRx-Ko-jnd" secondAttribute="bottom" constant="24" id="eAv-dI-OGC"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="eYd-JE-eg8"/>
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="top" secondItem="PBN-r7-zQI" secondAttribute="bottom" constant="40" id="fCa-Cv-ya1"/>
@@ -108,8 +144,10 @@
                     <connections>
                         <outlet property="activityButton" destination="nRx-Ko-jnd" id="10A-ZJ-n7p"/>
                         <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
+                        <outlet property="pauseBotton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
                         <outlet property="soundBotton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>
                         <outlet property="startButton" destination="44h-AO-pEY" id="Jwq-hE-aF1"/>
+                        <outlet property="stopBotton" destination="Lhx-nG-4HG" id="qOX-Jp-G42"/>
                         <outlet property="timerLabel" destination="JMV-aZ-FJ5" id="Ddy-JQ-Ie8"/>
                         <outlet property="treeContainerView" destination="IvB-LB-gZA" id="Llz-20-d8X"/>
                         <outlet property="treeImageView" destination="qnh-kc-2OL" id="QLI-2o-aJe"/>
@@ -122,6 +160,8 @@
     </scenes>
     <resources>
         <image name="headphones" catalog="system" width="128" height="121"/>
+        <image name="pause" catalog="system" width="88" height="128"/>
+        <image name="stop" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
