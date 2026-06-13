@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Focus Plant View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="FocusPlantVC" id="Y6W-OH-hqX" customClass="FocusPlantViewController" customModule="MiniProjects" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9D-c9-F2D" userLabel="Sound Button">
+                                <rect key="frame" x="319" y="118" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Kql-Xv-Z7w"/>
+                                    <constraint firstAttribute="width" secondItem="a9D-c9-F2D" secondAttribute="height" multiplier="1:1" id="ctT-fM-Nwd"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="headphones" catalog="system"/>
+                                <connections>
+                                    <action selector="soundBottonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sXV-fr-g6q"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-r7-zQI" userLabel="Motivation Label">
+                                <rect key="frame" x="196.66666666666666" y="208" width="0.0" height="79.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvB-LB-gZA" userLabel="Tree Container View">
+                                <rect key="frame" x="71.666666666666686" y="347.66666666666669" width="250" height="250.00000000000006"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qnh-kc-2OL" userLabel="Tree Image View">
+                                        <rect key="frame" x="25" y="25" width="200" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="qnh-kc-2OL" secondAttribute="height" multiplier="1:1" id="1L4-k9-IOz"/>
+                                            <constraint firstAttribute="height" constant="200" id="53M-RA-g4U"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="QEy-2d-7Ue"/>
+                                    <constraint firstAttribute="width" secondItem="IvB-LB-gZA" secondAttribute="height" multiplier="1:1" id="V3K-oP-Eec"/>
+                                    <constraint firstItem="qnh-kc-2OL" firstAttribute="centerY" secondItem="IvB-LB-gZA" secondAttribute="centerY" id="krO-Ec-ftj"/>
+                                    <constraint firstItem="qnh-kc-2OL" firstAttribute="centerX" secondItem="IvB-LB-gZA" secondAttribute="centerX" id="wXD-nH-4Sl"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRx-Ko-jnd" userLabel="Activity Button">
+                                <rect key="frame" x="156.66666666666666" y="629.66666666666663" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nRx-Ko-jnd" secondAttribute="height" multiplier="8:3" id="f93-mo-0eo"/>
+                                    <constraint firstAttribute="height" constant="30" id="knJ-Px-QJp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMV-aZ-FJ5" userLabel="Timer Label">
+                                <rect key="frame" x="176" y="683.66666666666663" width="41.333333333333343" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44h-AO-pEY" userLabel="Start Button">
+                                <rect key="frame" x="137" y="744" width="119" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="44h-AO-pEY" secondAttribute="height" multiplier="119:40" id="86A-Mz-4hH"/>
+                                    <constraint firstAttribute="height" constant="40" id="cUM-QB-8W4"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Plant">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="l0F-5X-MS7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JMV-aZ-FJ5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9Vu-dU-9qG"/>
+                            <constraint firstItem="nRx-Ko-jnd" firstAttribute="top" secondItem="IvB-LB-gZA" secondAttribute="bottom" constant="32" id="M3U-Iz-L7U"/>
+                            <constraint firstItem="JMV-aZ-FJ5" firstAttribute="top" secondItem="nRx-Ko-jnd" secondAttribute="bottom" constant="24" id="eAv-dI-OGC"/>
+                            <constraint firstItem="nRx-Ko-jnd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="eYd-JE-eg8"/>
+                            <constraint firstItem="IvB-LB-gZA" firstAttribute="top" secondItem="PBN-r7-zQI" secondAttribute="bottom" constant="60" id="fCa-Cv-ya1"/>
+                            <constraint firstItem="44h-AO-pEY" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fSQ-rh-bdI"/>
+                            <constraint firstItem="44h-AO-pEY" firstAttribute="top" secondItem="JMV-aZ-FJ5" secondAttribute="bottom" constant="40" id="ffe-Bw-bxE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="a9D-c9-F2D" secondAttribute="trailing" constant="24" id="jKi-0L-PcV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="44h-AO-pEY" secondAttribute="bottom" id="m9m-s1-iv7"/>
+                            <constraint firstItem="IvB-LB-gZA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="syr-lg-4r9"/>
+                            <constraint firstItem="PBN-r7-zQI" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="udR-E4-074"/>
+                            <constraint firstItem="a9D-c9-F2D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yb9-P5-PII"/>
+                            <constraint firstItem="PBN-r7-zQI" firstAttribute="top" secondItem="a9D-c9-F2D" secondAttribute="bottom" constant="40" id="yjE-Rq-zS4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityButton" destination="nRx-Ko-jnd" id="10A-ZJ-n7p"/>
+                        <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
+                        <outlet property="soundBotton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>
+                        <outlet property="startButton" destination="44h-AO-pEY" id="Jwq-hE-aF1"/>
+                        <outlet property="timerLabel" destination="JMV-aZ-FJ5" id="Ddy-JQ-Ie8"/>
+                        <outlet property="treeContainerView" destination="IvB-LB-gZA" id="Llz-20-d8X"/>
+                        <outlet property="treeImageView" destination="qnh-kc-2OL" id="QLI-2o-aJe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="-10"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="headphones" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
