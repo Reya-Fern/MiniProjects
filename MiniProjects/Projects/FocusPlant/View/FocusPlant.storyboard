@@ -89,6 +89,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="stop" catalog="system" symbolScale="medium"/>
                                         </state>
+                                        <connections>
+                                            <action selector="stopButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pTd-SG-TRM"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zue-tS-IuZ" userLabel="Puase Button">
                                         <rect key="frame" x="60" y="0.0" width="45" height="45"/>
@@ -103,6 +106,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <imageReference key="image" image="pause" catalog="system" symbolScale="medium"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pauseButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kJg-FA-ntO"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -143,6 +149,7 @@
                     </view>
                     <connections>
                         <outlet property="activityButton" destination="nRx-Ko-jnd" id="10A-ZJ-n7p"/>
+                        <outlet property="controllButtonStackView" destination="S8J-HS-0Gd" id="Gg9-ad-25f"/>
                         <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
                         <outlet property="pauseBotton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
                         <outlet property="soundBotton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>

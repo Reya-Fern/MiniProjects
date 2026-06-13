@@ -16,14 +16,17 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var activityButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var controllButtonStackView: UIStackView!
     @IBOutlet weak var pauseBotton: UIButton!
     @IBOutlet weak var stopBotton: UIButton!
-    
+
+    private var currentState: FocusState = .setup
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        updateUI(for: currentState)
     }
 }
 
@@ -59,15 +62,6 @@ extension FocusPlantViewController {
         stopBotton.makeCircular()
         pauseBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         pauseBotton.makeCircular()
-
-//        startButton.isHidden = false
-//        pauseBotton.isHidden = true
-//        stopBotton.isHidden = true
-
-        startButton.isHidden = true
-        pauseBotton.isHidden = false
-        stopBotton.isHidden = false
-
     }
 }
 
@@ -78,6 +72,41 @@ extension FocusPlantViewController {
     }
 
     @IBAction func startButtonPressed(_ sender: Any) {
+        currentState = .running
+        updateUI(for: currentState)
+    }
 
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        currentState = .setup
+        updateUI(for: currentState)
+    }
+
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+        currentState = .paused
+        updateUI(for: currentState)
+    }
+}
+
+// MARK: - Method
+extension FocusPlantViewController {
+    private func updateUI(for state: FocusState) {
+        switch state {
+        case .setup:
+            startButton.isHidden = false
+            controllButtonStackView.isHidden = true
+            motivationLabel.text = "Start planting today!"
+        case .running:
+            startButton.isHidden = true
+            controllButtonStackView.isHidden = false
+            motivationLabel.text = "Stay focused!"
+        case .paused:
+            startButton.isHidden = true
+            controllButtonStackView.isHidden = false
+            motivationLabel.text = "Take a short break"
+        case .completed:
+            startButton.isHidden = false
+            controllButtonStackView.isHidden = true
+            motivationLabel.text = "Great job!"
+        }
     }
 }
