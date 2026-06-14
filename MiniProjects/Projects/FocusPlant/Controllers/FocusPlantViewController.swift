@@ -22,7 +22,8 @@ final class FocusPlantViewController: UIViewController {
 
     private var currentState: FocusState = .setup
     private var timer: Timer?
-    private var remainingSeconds: Int = 90*60
+    private var remainingSeconds = 10
+    private var totalSeconds = 10
     private var isPaused = false
 
     override func viewDidLoad() {
@@ -43,15 +44,12 @@ extension FocusPlantViewController {
         treeContainerView.backgroundColor = .calculatorYellow
         treeContainerView.makeRounded(cornerRadius: 125)
 
-        motivationLabel.text = "Start planting today!"
-
-        treeImageView.image = UIImage(named: "tree_stage_4")
+        treeImageView.image = UIImage(named: "tree_stage_1")
 
         activityButton.setTitle("Study", for: .normal)
         activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         activityButton.makeRounded(cornerRadius: 15)
 
-        timerLabel.text = "90:00"
         timerLabel.font = .systemFont(ofSize: 72, weight: .ultraLight)
 
         startButton.backgroundColor = .greenButton
@@ -76,6 +74,7 @@ extension FocusPlantViewController {
     }
 
     @IBAction func startButtonPressed(_ sender: Any) {
+        totalSeconds = remainingSeconds
         currentState = .running
         updateUI(for: currentState)
         startTimer()
@@ -149,11 +148,26 @@ extension FocusPlantViewController {
             if self.remainingSeconds > 0 {
                 self.remainingSeconds -= 1
                 self.updateTimerLabel()
+                self.updateTree()
             } else {
                 self.timer?.invalidate()
                 self.currentState = .completed
                 self.updateUI(for: currentState)
             }
+        }
+    }
+
+    private func updateTree() {
+        let progress = Double(totalSeconds - remainingSeconds) / Double(totalSeconds)
+
+        if progress < 0.25 {
+            treeImageView.image = UIImage(named: "tree_stage_1")
+        } else if progress < 0.5 {
+            treeImageView.image = UIImage(named: "tree_stage_2")
+        } else if progress < 0.75 {
+            treeImageView.image = UIImage(named: "tree_stage_3")
+        } else {
+            treeImageView.image = UIImage(named: "tree_stage_4")
         }
     }
 }
