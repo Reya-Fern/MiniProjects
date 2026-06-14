@@ -21,12 +21,16 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var stopBotton: UIButton!
 
     private var currentState: FocusState = .setup
+    private var timer: Timer?
+    private var remainingSeconds: Int = 90*60
+    private var isPaused = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         updateUI(for: currentState)
+        updateTimerLabel()
     }
 }
 
@@ -41,7 +45,7 @@ extension FocusPlantViewController {
 
         motivationLabel.text = "Start planting today!"
 
-        treeImageView.image = UIImage(named: "sample_tree")
+        treeImageView.image = UIImage(named: "tree_stage_4")
 
         activityButton.setTitle("Study", for: .normal)
         activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
@@ -74,15 +78,31 @@ extension FocusPlantViewController {
     @IBAction func startButtonPressed(_ sender: Any) {
         currentState = .running
         updateUI(for: currentState)
+        startTimer()
     }
 
     @IBAction func stopButtonPressed(_ sender: Any) {
+        timer?.invalidate()
+        remainingSeconds = 90*60
+        updateTimerLabel()
         currentState = .setup
         updateUI(for: currentState)
+        isPaused = false
+        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
     }
 
     @IBAction func pauseButtonPressed(_ sender: Any) {
-        currentState = .paused
+        if isPaused {
+            startTimer()
+            isPaused = false
+            pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
+            currentState = .running
+        } else {
+            timer?.invalidate()
+            isPaused = true
+            pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
+            currentState = .paused
+        }
         updateUI(for: currentState)
     }
 }
@@ -107,6 +127,33 @@ extension FocusPlantViewController {
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = "Great job!"
+        }
+    }
+
+    private func updateTimerLabel() {
+        let minutes: Int = remainingSeconds / 60
+        let seconds: Int = remainingSeconds % 60
+
+        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    private func startTimer() {
+
+        timer?.invalidate()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1,repeats: true) {
+            [weak self] _ in
+
+            guard let self = self else { return }
+
+            if self.remainingSeconds > 0 {
+                self.remainingSeconds -= 1
+                self.updateTimerLabel()
+            } else {
+                self.timer?.invalidate()
+                self.currentState = .completed
+                self.updateUI(for: currentState)
+            }
         }
     }
 }

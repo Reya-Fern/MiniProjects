@@ -40,10 +40,10 @@
                                 <rect key="frame" x="71.666666666666686" y="317.66666666666669" width="250" height="250.00000000000006"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qnh-kc-2OL" userLabel="Tree Image View">
-                                        <rect key="frame" x="25" y="25" width="200" height="200"/>
+                                        <rect key="frame" x="-10" y="-10" width="270" height="270"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qnh-kc-2OL" secondAttribute="height" multiplier="1:1" id="1L4-k9-IOz"/>
-                                            <constraint firstAttribute="height" constant="200" id="53M-RA-g4U"/>
+                                            <constraint firstAttribute="height" constant="270" id="53M-RA-g4U"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
