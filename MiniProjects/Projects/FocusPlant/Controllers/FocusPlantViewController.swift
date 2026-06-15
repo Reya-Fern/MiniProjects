@@ -25,6 +25,7 @@ final class FocusPlantViewController: UIViewController {
     private var remainingSeconds = 10
     private var totalSeconds = 10
     private var isPaused = false
+    private var currentTreeStage: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +149,7 @@ extension FocusPlantViewController {
             if self.remainingSeconds > 0 {
                 self.remainingSeconds -= 1
                 self.updateTimerLabel()
-                self.updateTree()
+                self.updateTreeGrowth()
             } else {
                 self.timer?.invalidate()
                 self.currentState = .completed
@@ -157,17 +158,28 @@ extension FocusPlantViewController {
         }
     }
 
-    private func updateTree() {
+    private func updateTreeGrowth() {
         let progress = Double(totalSeconds - remainingSeconds) / Double(totalSeconds)
+        let newstage: Int
 
         if progress < 0.25 {
             treeImageView.image = UIImage(named: "tree_stage_1")
+            newstage = 1
         } else if progress < 0.5 {
             treeImageView.image = UIImage(named: "tree_stage_2")
+            newstage = 2
         } else if progress < 0.75 {
             treeImageView.image = UIImage(named: "tree_stage_3")
+            newstage = 3
         } else {
             treeImageView.image = UIImage(named: "tree_stage_4")
+            newstage = 4
+        }
+        guard newstage != currentTreeStage else { return }
+        currentTreeStage = newstage
+
+        UIView.transition(with: treeImageView, duration: 0.3, options: .transitionCrossDissolve) {
+            self.treeImageView.image = UIImage(named: "tree_stage_\(newstage)")
         }
     }
 }
