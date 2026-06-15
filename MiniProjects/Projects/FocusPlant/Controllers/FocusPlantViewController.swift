@@ -22,10 +22,22 @@ final class FocusPlantViewController: UIViewController {
 
     private var currentState: FocusState = .setup
     private var timer: Timer?
+    private var motivationTimer: Timer?
     private var remainingSeconds = 10
     private var totalSeconds = 10
     private var isPaused = false
     private var currentTreeStage: Int = 1
+
+    private let motivationQuotes = [
+        "Stay focused!",
+        "One step at a time.",
+        "Keep going!",
+        "Deep work wins.",
+        "Every minute counts.",
+        "You're doing great!",
+        "Progress over perfection.",
+        "Small steps matter."
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,10 +91,12 @@ extension FocusPlantViewController {
         currentState = .running
         updateUI(for: currentState)
         startTimer()
+        startMotivationTimer()
     }
 
     @IBAction func stopButtonPressed(_ sender: Any) {
         timer?.invalidate()
+        motivationTimer?.invalidate()
         remainingSeconds = 90*60
         updateTimerLabel()
         currentState = .setup
@@ -94,11 +108,13 @@ extension FocusPlantViewController {
     @IBAction func pauseButtonPressed(_ sender: Any) {
         if isPaused {
             startTimer()
+            startMotivationTimer()
             isPaused = false
             pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
             currentState = .running
         } else {
             timer?.invalidate()
+            motivationTimer?.invalidate()
             isPaused = true
             pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
             currentState = .paused
@@ -127,6 +143,7 @@ extension FocusPlantViewController {
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = "Great job!"
+            motivationTimer?.invalidate()
         }
     }
 
@@ -180,6 +197,22 @@ extension FocusPlantViewController {
 
         UIView.transition(with: treeImageView, duration: 0.3, options: .transitionCrossDissolve) {
             self.treeImageView.image = UIImage(named: "tree_stage_\(newstage)")
+        }
+    }
+
+    private func startMotivationTimer() {
+        motivationTimer?.invalidate()
+
+        motivationTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+            self?.showRandomMotivation()
+        }
+    }
+
+    private func showRandomMotivation() {
+        guard let randomQuote = motivationQuotes.randomElement() else { return }
+
+        UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
+            self.motivationLabel.text = randomQuote
         }
     }
 }
