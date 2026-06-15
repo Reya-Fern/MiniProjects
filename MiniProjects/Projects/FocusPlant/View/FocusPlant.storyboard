@@ -66,6 +66,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="activityButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="EIn-HH-aA5"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMV-aZ-FJ5" userLabel="Timer Label">
                                 <rect key="frame" x="176" y="653.66666666666663" width="41.333333333333343" height="20.333333333333371"/>

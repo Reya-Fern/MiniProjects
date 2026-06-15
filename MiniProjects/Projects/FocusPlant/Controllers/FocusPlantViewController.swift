@@ -19,7 +19,7 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var controllButtonStackView: UIStackView!
     @IBOutlet weak var pauseBotton: UIButton!
     @IBOutlet weak var stopBotton: UIButton!
-
+    
     private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?
@@ -27,6 +27,7 @@ final class FocusPlantViewController: UIViewController {
     private var totalSeconds = 10
     private var isPaused = false
     private var currentTreeStage: Int = 1
+    private var selectedActivity: Activity = .study
 
     private let motivationQuotes = [
         "Stay focused!",
@@ -59,7 +60,7 @@ extension FocusPlantViewController {
 
         treeImageView.image = UIImage(named: "tree_stage_1")
 
-        activityButton.setTitle("Study", for: .normal)
+        activityButton.setTitle(selectedActivity.rawValue, for: .normal)
         activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         activityButton.makeRounded(cornerRadius: 15)
 
@@ -84,6 +85,22 @@ extension FocusPlantViewController {
 extension FocusPlantViewController {
     @IBAction func soundBottonPressed(_ sender: Any) {
 
+    }
+
+    @IBAction func activityButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Select Activity", message: nil, preferredStyle: .actionSheet)
+
+        Activity.allCases.forEach {
+            activity in
+
+            let action = UIAlertAction(title: activity.rawValue, style: .default) { _ in
+                self.selectedActivity = activity
+                self.activityButton.setTitle(activity.rawValue, for: .normal)
+            }
+            alert.addAction(action)
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
 
     @IBAction func startButtonPressed(_ sender: Any) {
