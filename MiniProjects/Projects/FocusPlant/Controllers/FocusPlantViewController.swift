@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 final class FocusPlantViewController: UIViewController {
 
@@ -19,7 +20,7 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var controllButtonStackView: UIStackView!
     @IBOutlet weak var pauseBotton: UIButton!
     @IBOutlet weak var stopBotton: UIButton!
-    
+
     private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?
@@ -28,6 +29,9 @@ final class FocusPlantViewController: UIViewController {
     private var isPaused = false
     private var currentTreeStage: Int = 1
     private var selectedActivity: Activity = .study
+    private var selectedSound: AmbientSound = .forestRain
+    private var isSoundEnable = false
+    private var audioPlayer: AVAudioPlayer?
 
     private let motivationQuotes = [
         "Stay focused!",
@@ -83,8 +87,20 @@ extension FocusPlantViewController {
 
 // MARK: - Action
 extension FocusPlantViewController {
-    @IBAction func soundBottonPressed(_ sender: Any) {
+    @IBAction func soundButtonPressed(_ sender: Any) {
+        isSoundEnable.toggle()
 
+        if isSoundEnable {
+            playSelectedSound()
+            //show sound label
+        } else {
+            stopSound()
+            //hide sound label
+        }
+        updateSoundButton()
+
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
+        soundBotton.addGestureRecognizer(longPress)
     }
 
     @IBAction func activityButtonPressed(_ sender: Any) {
@@ -120,6 +136,9 @@ extension FocusPlantViewController {
         updateUI(for: currentState)
         isPaused = false
         pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
+        stopSound()
+        isSoundEnable = false
+        updateSoundButton()
     }
 
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -137,6 +156,10 @@ extension FocusPlantViewController {
             currentState = .paused
         }
         updateUI(for: currentState)
+
+        stopSound()
+        isSoundEnable = false
+        updateSoundButton()
     }
 }
 
@@ -231,5 +254,53 @@ extension FocusPlantViewController {
         UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
             self.motivationLabel.text = randomQuote
         }
+    }
+
+    @objc private func soundButtonLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+
+        showSoundPicker()
+    }
+
+    private func showSoundPicker() {
+        let alert = UIAlertController(title: "Slect Background Sound", message: nil, preferredStyle: .actionSheet)
+
+        AmbientSound.allCases.forEach { sound in
+
+            let action = UIAlertAction(title: sound.soundDisplayName, style: .default) { _ in
+
+                self.selectedSound = sound
+
+                if self.isSoundEnable {
+                    self.playSelectedSound()
+                }
+            }
+            alert.addAction(action)
+        }
+        alert.addAction(UIAlertAction(title: "Calcel", style: .cancel))
+
+        present(alert, animated: true)
+    }
+
+    private func updateSoundButton() {
+        let imageName = isSoundEnable ? "headphones" : "headphones.slash"
+
+        soundBotton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+
+    private func playSelectedSound() {
+        guard let url = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "mp3") else { return }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.play()
+        } catch {
+            print(error)
+        }
+    }
+
+    private func stopSound() {
+        audioPlayer?.stop()
     }
 }

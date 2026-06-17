@@ -25,9 +25,9 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="headphones" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="headphones.slash" catalog="system"/>
                                 <connections>
-                                    <action selector="soundBottonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sXV-fr-g6q"/>
+                                    <action selector="soundButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sXV-fr-g6q"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-r7-zQI" userLabel="Motivation Label">
@@ -169,7 +169,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="headphones" catalog="system" width="128" height="121"/>
+        <image name="headphones.slash" catalog="system" width="126" height="128"/>
         <image name="pause" catalog="system" width="88" height="128"/>
         <image name="stop" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
