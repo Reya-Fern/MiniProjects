@@ -8,4 +8,21 @@
 enum Constants: String {
     case error = "Undefined"
     case homeTitle = "Mini Projects"
+
+    enum fucusPlant {
+        static let allMotivationQuotes = [
+            "Stay focused!",
+            "One step at a time.",
+            "Keep going!",
+            "Deep work wins.",
+            "Every minute counts.",
+            "You're doing great!",
+            "Progress over perfection.",
+            "Small steps matter."
+        ]
+        static let setUpMotivationQuote = "Start planting today!"
+        static let runningMotivationQuote = "Stay focused!"
+        static let pausedMotivationQuote = "Take a short break"
+        static let completedMotivationQuote = "Great job!"
+    }
 }
