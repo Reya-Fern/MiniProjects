@@ -20,6 +20,8 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var controllButtonStackView: UIStackView!
     @IBOutlet weak var pauseBotton: UIButton!
     @IBOutlet weak var stopBotton: UIButton!
+    @IBOutlet weak var soundNameLabel: UILabel!
+    @IBOutlet weak var soundInstructionLabel: UILabel!
 
     private var currentState: FocusState = .setup
     private var timer: Timer?
@@ -33,23 +35,13 @@ final class FocusPlantViewController: UIViewController {
     private var isSoundEnable = false
     private var audioPlayer: AVAudioPlayer?
 
-    private let motivationQuotes = [
-        "Stay focused!",
-        "One step at a time.",
-        "Keep going!",
-        "Deep work wins.",
-        "Every minute counts.",
-        "You're doing great!",
-        "Progress over perfection.",
-        "Small steps matter."
-    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         updateUI(for: currentState)
         updateTimerLabel()
+        updateSoundLabel()
     }
 }
 
@@ -92,12 +84,11 @@ extension FocusPlantViewController {
 
         if isSoundEnable {
             playSelectedSound()
-            //show sound label
         } else {
             stopSound()
-            //hide sound label
         }
         updateSoundButton()
+        updateSoundLabel()
 
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
         soundBotton.addGestureRecognizer(longPress)
@@ -139,6 +130,7 @@ extension FocusPlantViewController {
         stopSound()
         isSoundEnable = false
         updateSoundButton()
+        updateSoundLabel()
     }
 
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -160,6 +152,7 @@ extension FocusPlantViewController {
         stopSound()
         isSoundEnable = false
         updateSoundButton()
+        updateSoundLabel()
     }
 }
 
@@ -170,19 +163,19 @@ extension FocusPlantViewController {
         case .setup:
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = "Start planting today!"
+            motivationLabel.text = Constants.fucusPlant.setUpMotivationQuote
         case .running:
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = "Stay focused!"
+            motivationLabel.text = Constants.fucusPlant.runningMotivationQuote
         case .paused:
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = "Take a short break"
+            motivationLabel.text = Constants.fucusPlant.pausedMotivationQuote
         case .completed:
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = "Great job!"
+            motivationLabel.text = Constants.fucusPlant.completedMotivationQuote
             motivationTimer?.invalidate()
         }
     }
@@ -249,7 +242,7 @@ extension FocusPlantViewController {
     }
 
     private func showRandomMotivation() {
-        guard let randomQuote = motivationQuotes.randomElement() else { return }
+        guard let randomQuote = Constants.fucusPlant.allMotivationQuotes.randomElement() else { return }
 
         UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
             self.motivationLabel.text = randomQuote
@@ -273,6 +266,7 @@ extension FocusPlantViewController {
 
                 if self.isSoundEnable {
                     self.playSelectedSound()
+                    self.updateSoundLabel()
                 }
             }
             alert.addAction(action)
@@ -299,8 +293,20 @@ extension FocusPlantViewController {
             print(error)
         }
     }
-
+    
     private func stopSound() {
         audioPlayer?.stop()
+    }
+
+    private func updateSoundLabel() {
+        if isSoundEnable {
+            soundNameLabel.isHidden = false
+            soundInstructionLabel.isHidden = false
+            soundNameLabel.text = "Playing: \"\(selectedSound.soundDisplayName)\""
+            soundInstructionLabel.text = "(Tap and hold the icon to change sounds)"
+        } else {
+            soundNameLabel.isHidden = true
+            soundInstructionLabel.isHidden = true
+        }
     }
 }

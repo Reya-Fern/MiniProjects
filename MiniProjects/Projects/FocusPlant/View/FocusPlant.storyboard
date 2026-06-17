@@ -17,19 +17,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9D-c9-F2D" userLabel="Sound Button">
-                                <rect key="frame" x="319" y="118" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Kql-Xv-Z7w"/>
-                                    <constraint firstAttribute="width" secondItem="a9D-c9-F2D" secondAttribute="height" multiplier="1:1" id="ctT-fM-Nwd"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="headphones.slash" catalog="system"/>
-                                <connections>
-                                    <action selector="soundButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sXV-fr-g6q"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4RZ-iy-QSM" userLabel="Sound Stack View">
+                                <rect key="frame" x="274.33333333333331" y="118" width="94.666666666666686" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4VQ-An-EDd" userLabel="Sound Label Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiF-ml-2wr" userLabel="Sound Name Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="25"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJT-Jq-WbV" userLabel="Soud Instruction Label">
+                                                <rect key="frame" x="0.0" y="25" width="39.666666666666664" height="25"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9D-c9-F2D" userLabel="Sound Button">
+                                        <rect key="frame" x="44.666666666666686" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Kql-Xv-Z7w"/>
+                                            <constraint firstAttribute="width" secondItem="a9D-c9-F2D" secondAttribute="height" multiplier="1:1" id="ctT-fM-Nwd"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="headphones.slash" catalog="system"/>
+                                        <connections>
+                                            <action selector="soundButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sXV-fr-g6q"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-r7-zQI" userLabel="Motivation Label">
                                 <rect key="frame" x="196.66666666666666" y="188" width="0.0" height="89.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -133,8 +155,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="PBN-r7-zQI" firstAttribute="top" secondItem="4RZ-iy-QSM" secondAttribute="bottom" constant="20" id="0Cc-ZW-tAJ"/>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9Vu-dU-9qG"/>
                             <constraint firstItem="S8J-HS-0Gd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Cup-al-gha"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4RZ-iy-QSM" secondAttribute="trailing" constant="24" id="FcF-cy-hui"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="top" secondItem="IvB-LB-gZA" secondAttribute="bottom" constant="32" id="M3U-Iz-L7U"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="S8J-HS-0Gd" secondAttribute="bottom" constant="30" id="TQI-9K-Qeb"/>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="top" secondItem="nRx-Ko-jnd" secondAttribute="bottom" constant="24" id="eAv-dI-OGC"/>
@@ -142,12 +166,10 @@
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="top" secondItem="PBN-r7-zQI" secondAttribute="bottom" constant="40" id="fCa-Cv-ya1"/>
                             <constraint firstItem="44h-AO-pEY" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fSQ-rh-bdI"/>
                             <constraint firstItem="44h-AO-pEY" firstAttribute="top" secondItem="JMV-aZ-FJ5" secondAttribute="bottom" constant="40" id="ffe-Bw-bxE"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="a9D-c9-F2D" secondAttribute="trailing" constant="24" id="jKi-0L-PcV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="44h-AO-pEY" secondAttribute="bottom" constant="30" id="m9m-s1-iv7"/>
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="syr-lg-4r9"/>
+                            <constraint firstItem="4RZ-iy-QSM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tnr-Gw-tdx"/>
                             <constraint firstItem="PBN-r7-zQI" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="udR-E4-074"/>
-                            <constraint firstItem="a9D-c9-F2D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="yb9-P5-PII"/>
-                            <constraint firstItem="PBN-r7-zQI" firstAttribute="top" secondItem="a9D-c9-F2D" secondAttribute="bottom" constant="20" id="yjE-Rq-zS4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -156,6 +178,8 @@
                         <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
                         <outlet property="pauseBotton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
                         <outlet property="soundBotton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>
+                        <outlet property="soundInstructionLabel" destination="bJT-Jq-WbV" id="b5v-02-FFV"/>
+                        <outlet property="soundNameLabel" destination="YiF-ml-2wr" id="ZDZ-MU-gjK"/>
                         <outlet property="startButton" destination="44h-AO-pEY" id="Jwq-hE-aF1"/>
                         <outlet property="stopBotton" destination="Lhx-nG-4HG" id="qOX-Jp-G42"/>
                         <outlet property="timerLabel" destination="JMV-aZ-FJ5" id="Ddy-JQ-Ie8"/>
