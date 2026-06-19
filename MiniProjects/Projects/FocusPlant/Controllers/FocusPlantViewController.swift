@@ -22,7 +22,8 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var stopBotton: UIButton!
     @IBOutlet weak var soundNameLabel: UILabel!
     @IBOutlet weak var soundInstructionLabel: UILabel!
-
+    @IBOutlet weak var circularSliderView: CircularSliderView!
+    
     private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?

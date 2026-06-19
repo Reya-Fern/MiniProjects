@@ -77,6 +77,13 @@
                                     <constraint firstItem="qnh-kc-2OL" firstAttribute="centerX" secondItem="IvB-LB-gZA" secondAttribute="centerX" id="wXD-nH-4Sl"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOJ-kD-cr4" userLabel="Circular Slider View" customClass="CircularSliderView" customModule="MiniProjects" customModuleProvider="target">
+                                <rect key="frame" x="51.666666666666657" y="297.66666666666669" width="290" height="290.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="Xf8-oi-3Bp"/>
+                                    <constraint firstAttribute="width" secondItem="NOJ-kD-cr4" secondAttribute="height" multiplier="1:1" id="iP5-gb-UIT" userLabel="aspect = 1:1"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRx-Ko-jnd" userLabel="Activity Button">
                                 <rect key="frame" x="156.66666666666666" y="599.66666666666663" width="80" height="30"/>
                                 <constraints>
@@ -160,6 +167,7 @@
                             <constraint firstItem="S8J-HS-0Gd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Cup-al-gha"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4RZ-iy-QSM" secondAttribute="trailing" constant="24" id="FcF-cy-hui"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="top" secondItem="IvB-LB-gZA" secondAttribute="bottom" constant="32" id="M3U-Iz-L7U"/>
+                            <constraint firstItem="NOJ-kD-cr4" firstAttribute="centerX" secondItem="IvB-LB-gZA" secondAttribute="centerX" id="MJk-l4-zeb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="S8J-HS-0Gd" secondAttribute="bottom" constant="30" id="TQI-9K-Qeb"/>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="top" secondItem="nRx-Ko-jnd" secondAttribute="bottom" constant="24" id="eAv-dI-OGC"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="eYd-JE-eg8"/>
@@ -170,10 +178,12 @@
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="syr-lg-4r9"/>
                             <constraint firstItem="4RZ-iy-QSM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tnr-Gw-tdx"/>
                             <constraint firstItem="PBN-r7-zQI" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="udR-E4-074"/>
+                            <constraint firstItem="NOJ-kD-cr4" firstAttribute="centerY" secondItem="IvB-LB-gZA" secondAttribute="centerY" id="yaG-J4-uvl"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityButton" destination="nRx-Ko-jnd" id="10A-ZJ-n7p"/>
+                        <outlet property="circularSliderView" destination="NOJ-kD-cr4" id="3kh-Ot-re7"/>
                         <outlet property="controllButtonStackView" destination="S8J-HS-0Gd" id="Gg9-ad-25f"/>
                         <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
                         <outlet property="pauseBotton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
