@@ -23,7 +23,7 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var soundNameLabel: UILabel!
     @IBOutlet weak var soundInstructionLabel: UILabel!
     @IBOutlet weak var circularSliderView: CircularSliderView!
-    
+
     private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?
@@ -43,6 +43,7 @@ final class FocusPlantViewController: UIViewController {
         updateUI(for: currentState)
         updateTimerLabel()
         updateSoundLabel()
+        circularSliderView.setProgress(1)
     }
 }
 
@@ -122,7 +123,7 @@ extension FocusPlantViewController {
     @IBAction func stopButtonPressed(_ sender: Any) {
         timer?.invalidate()
         motivationTimer?.invalidate()
-        remainingSeconds = 90*60
+        remainingSeconds = totalSeconds
         updateTimerLabel()
         currentState = .setup
         updateUI(for: currentState)
@@ -162,14 +163,17 @@ extension FocusPlantViewController {
     private func updateUI(for state: FocusState) {
         switch state {
         case .setup:
+            circularSliderView.isHidden = false
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = Constants.fucusPlant.setUpMotivationQuote
         case .running:
+            circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
             motivationLabel.text = Constants.fucusPlant.runningMotivationQuote
         case .paused:
+            circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
             motivationLabel.text = Constants.fucusPlant.pausedMotivationQuote
@@ -177,8 +181,7 @@ extension FocusPlantViewController {
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = Constants.fucusPlant.completedMotivationQuote
-            motivationTimer?.invalidate()
-        }
+            motivationTimer?.invalidate()        }
     }
 
     private func updateTimerLabel() {
@@ -294,7 +297,7 @@ extension FocusPlantViewController {
             print(error)
         }
     }
-    
+
     private func stopSound() {
         audioPlayer?.stop()
     }
@@ -309,5 +312,10 @@ extension FocusPlantViewController {
             soundNameLabel.isHidden = true
             soundInstructionLabel.isHidden = true
         }
+    }
+
+    private func updateProgressRing() {
+        let progress = CGFloat(remainingSeconds) / CGFloat(totalSeconds)
+        circularSliderView.setProgress(progress)
     }
 }

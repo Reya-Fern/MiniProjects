@@ -41,7 +41,6 @@ extension CircularSliderView {
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineWidth = 8
         progressLayer.lineCap = .round
-        progressLayer.strokeEnd = 0.75
 
         layer.addSublayer(trackLayer)
         layer.addSublayer(progressLayer)
