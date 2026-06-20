@@ -337,11 +337,11 @@ extension FocusPlantViewController {
         let popup = CompletePopupView.loadFromNib()
         popup.delegate = self
         popup.frame = view.bounds
-        popup.alpha = 0
+        popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0)
         popup.cardView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
 
         UIView.animate(withDuration: 0.25) {
-            popup.alpha = 1
+            popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.45)
             popup.cardView.transform = .identity
         }
         view.addSubview(popup)

@@ -11,7 +11,6 @@ enum Constants: String {
 
     enum fucusPlant {
         static let allMotivationQuotes = [
-            "Stay focused!",
             "One step at a time.",
             "Keep going!",
             "Deep work wins.",
@@ -23,6 +22,6 @@ enum Constants: String {
         static let setUpMotivationQuote = "Start planting today!"
         static let runningMotivationQuote = "Stay focused!"
         static let pausedMotivationQuote = "Take a short break"
-        static let completedMotivationQuote = "Great job!"
+        static let completedMotivationQuote = "Hooray! You've planted 1 healthy tree"
     }
 }

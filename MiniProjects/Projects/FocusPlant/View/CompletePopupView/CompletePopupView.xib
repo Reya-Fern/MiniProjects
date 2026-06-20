@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,11 +13,11 @@
             <rect key="frame" x="0.0" y="0.0" width="450" height="485"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPm-Xc-FAf" userLabel="Overlay View">
-                    <rect key="frame" x="0.0" y="118" width="450" height="299"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPm-Xc-FAf" userLabel="Overlay View">
+                    <rect key="frame" x="0.0" y="0.0" width="450" height="485"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdA-32-Y9Z" userLabel="Card View">
-                            <rect key="frame" x="85" y="-10.333333333333314" width="280" height="320"/>
+                            <rect key="frame" x="85" y="82.666666666666686" width="280" height="319.99999999999994"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="f41-em-EtN">
                                     <rect key="frame" x="24" y="24" width="232" height="272"/>
@@ -30,20 +29,20 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DGu-Mo-Ivu" userLabel="Tree Image View">
-                                            <rect key="frame" x="66" y="36.333333333333343" width="100" height="100"/>
+                                            <rect key="frame" x="71" y="36.333333333333329" width="90" height="90"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="DGu-Mo-Ivu" secondAttribute="height" multiplier="1:1" id="4Kh-D1-59p" userLabel="aspect = 1:1"/>
-                                                <constraint firstAttribute="height" constant="100" id="PRN-xU-RP2"/>
+                                                <constraint firstAttribute="height" constant="90" id="PRN-xU-RP2"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTj-YH-j7I" userLabel="Message Label">
-                                            <rect key="frame" x="95.333333333333343" y="152.33333333333334" width="41.333333333333343" height="53.666666666666657"/>
+                                            <rect key="frame" x="95.333333333333343" y="142.33333333333331" width="41.333333333333343" height="63.666666666666657"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zi1-Lm-ujL" userLabel="OK Button">
-                                            <rect key="frame" x="26" y="222.00000000000003" width="180" height="49.999999999999972"/>
+                                            <rect key="frame" x="26" y="222" width="180" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="180" id="jkI-ct-Fk5"/>
                                                 <constraint firstAttribute="height" constant="50" id="rmh-kt-PWa"/>
@@ -77,27 +76,22 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="wPm-Xc-FAf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="U7l-0D-bDw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wPm-Xc-FAf" secondAttribute="trailing" id="hPM-kk-fOS"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wPm-Xc-FAf" secondAttribute="bottom" id="jcA-Ty-c0g"/>
-                <constraint firstItem="wPm-Xc-FAf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="nM7-DD-UhK"/>
+                <constraint firstAttribute="bottom" secondItem="wPm-Xc-FAf" secondAttribute="bottom" id="jcA-Ty-c0g"/>
+                <constraint firstItem="wPm-Xc-FAf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nM7-DD-UhK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cardView" destination="LdA-32-Y9Z" id="S1J-tg-CHH"/>
                 <outlet property="messageLabel" destination="jTj-YH-j7I" id="oIV-eN-fdS"/>
                 <outlet property="okButton" destination="Zi1-Lm-ujL" id="F1n-kU-nKZ"/>
+                <outlet property="overlayView" destination="wPm-Xc-FAf" id="M5j-Dd-LgO"/>
                 <outlet property="titleLabel" destination="A2f-qm-xrN" id="XOa-yk-A4G"/>
                 <outlet property="treeImageView" destination="DGu-Mo-Ivu" id="3KD-E7-Zx5"/>
             </connections>
             <point key="canvasLocation" x="-161.83206106870227" y="2.4647887323943665"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

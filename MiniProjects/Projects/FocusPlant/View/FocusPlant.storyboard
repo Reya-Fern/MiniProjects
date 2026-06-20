@@ -52,8 +52,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-r7-zQI" userLabel="Motivation Label">
-                                <rect key="frame" x="196.66666666666666" y="188" width="0.0" height="89.666666666666686"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBN-r7-zQI" userLabel="Motivation Label">
+                                <rect key="frame" x="24" y="188" width="345" height="89.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -169,12 +169,14 @@
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="top" secondItem="IvB-LB-gZA" secondAttribute="bottom" constant="32" id="M3U-Iz-L7U"/>
                             <constraint firstItem="NOJ-kD-cr4" firstAttribute="centerX" secondItem="IvB-LB-gZA" secondAttribute="centerX" id="MJk-l4-zeb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="S8J-HS-0Gd" secondAttribute="bottom" constant="30" id="TQI-9K-Qeb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PBN-r7-zQI" secondAttribute="trailing" constant="24" id="aPk-dI-5UB"/>
                             <constraint firstItem="JMV-aZ-FJ5" firstAttribute="top" secondItem="nRx-Ko-jnd" secondAttribute="bottom" constant="24" id="eAv-dI-OGC"/>
                             <constraint firstItem="nRx-Ko-jnd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="eYd-JE-eg8"/>
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="top" secondItem="PBN-r7-zQI" secondAttribute="bottom" constant="40" id="fCa-Cv-ya1"/>
                             <constraint firstItem="44h-AO-pEY" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fSQ-rh-bdI"/>
                             <constraint firstItem="44h-AO-pEY" firstAttribute="top" secondItem="JMV-aZ-FJ5" secondAttribute="bottom" constant="40" id="ffe-Bw-bxE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="44h-AO-pEY" secondAttribute="bottom" constant="30" id="m9m-s1-iv7"/>
+                            <constraint firstItem="PBN-r7-zQI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="mHd-e3-tj4"/>
                             <constraint firstItem="IvB-LB-gZA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="syr-lg-4r9"/>
                             <constraint firstItem="4RZ-iy-QSM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tnr-Gw-tdx"/>
                             <constraint firstItem="PBN-r7-zQI" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="udR-E4-074"/>

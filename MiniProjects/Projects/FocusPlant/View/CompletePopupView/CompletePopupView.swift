@@ -8,6 +8,8 @@
 import UIKit
 
 final class CompletePopupView: UIView {
+
+    @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var treeImageView: UIImageView!
