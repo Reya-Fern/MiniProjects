@@ -150,11 +150,23 @@ extension FocusPlantViewController {
             currentState = .paused
         }
         updateUI(for: currentState)
-
         stopSound()
         isSoundEnable = false
         updateSoundButton()
         updateSoundLabel()
+    }
+}
+
+// MARK: - Delegate
+extension FocusPlantViewController: CompletePopupView.CompletePopupViewDelegate {
+    func completePopupViewDidTapOK(_ popup: CompletePopupView) {
+
+        popup.dismiss()
+
+        remainingSeconds = totalSeconds
+        updateTimerLabel()
+        currentState = .setup
+        updateUI(for: currentState)
     }
 }
 
@@ -181,7 +193,9 @@ extension FocusPlantViewController {
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = Constants.fucusPlant.completedMotivationQuote
-            motivationTimer?.invalidate()        }
+            motivationTimer?.invalidate()
+            showCompletePopup()
+        }
     }
 
     private func updateTimerLabel() {
@@ -321,13 +335,15 @@ extension FocusPlantViewController {
 
     private func showCompletePopup() {
         let popup = CompletePopupView.loadFromNib()
+        popup.delegate = self
         popup.frame = view.bounds
         popup.alpha = 0
+        popup.cardView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
 
         UIView.animate(withDuration: 0.25) {
             popup.alpha = 1
+            popup.cardView.transform = .identity
         }
-
         view.addSubview(popup)
     }
 }

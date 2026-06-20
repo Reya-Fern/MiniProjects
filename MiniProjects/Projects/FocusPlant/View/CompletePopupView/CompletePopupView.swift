@@ -13,7 +13,14 @@ final class CompletePopupView: UIView {
     @IBOutlet weak var treeImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var okButton: UIButton!
-    
+
+    protocol CompletePopupViewDelegate: AnyObject {
+        func completePopupViewDidTapOK(_ popup: CompletePopupView)
+
+    }
+
+    weak var delegate: CompletePopupViewDelegate?
+
     static func loadFromNib() -> CompletePopupView {
         let nib = UINib(nibName: "CompletePopupView", bundle: nil)
         
@@ -52,6 +59,16 @@ extension CompletePopupView {
 // MARK: - Action
 extension CompletePopupView {
     @IBAction func okButtonPressed(_ sender: Any) {
-        
+        delegate?.completePopupViewDidTapOK(self)
+    }
+
+    func dismiss() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.alpha = 0
+            self.cardView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+
+        }) { _ in
+            self.removeFromSuperview()
+        }
     }
 }
