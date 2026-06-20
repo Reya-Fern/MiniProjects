@@ -43,6 +43,7 @@ final class FocusPlantViewController: UIViewController {
         updateUI(for: currentState)
         updateTimerLabel()
         updateSoundLabel()
+        updateTreeGrowth()
         circularSliderView.setProgress(1)
     }
 }
@@ -55,8 +56,6 @@ extension FocusPlantViewController {
 
         treeContainerView.backgroundColor = .calculatorYellow
         treeContainerView.makeRounded(cornerRadius: 125)
-
-        treeImageView.image = UIImage(named: "tree_stage_1")
 
         activityButton.setTitle(selectedActivity.rawValue, for: .normal)
         activityButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
@@ -121,18 +120,7 @@ extension FocusPlantViewController {
     }
 
     @IBAction func stopButtonPressed(_ sender: Any) {
-        timer?.invalidate()
-        motivationTimer?.invalidate()
-        remainingSeconds = totalSeconds
-        updateTimerLabel()
-        currentState = .setup
-        updateUI(for: currentState)
-        isPaused = false
-        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
-        stopSound()
-        isSoundEnable = false
-        updateSoundButton()
-        updateSoundLabel()
+        resetToSetupStage()
     }
 
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -148,25 +136,20 @@ extension FocusPlantViewController {
             isPaused = true
             pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
             currentState = .paused
+            stopSound()
+            isSoundEnable = false
+            updateSoundButton()
+            updateSoundLabel()
         }
         updateUI(for: currentState)
-        stopSound()
-        isSoundEnable = false
-        updateSoundButton()
-        updateSoundLabel()
     }
 }
 
 // MARK: - Delegate
 extension FocusPlantViewController: CompletePopupView.CompletePopupViewDelegate {
     func completePopupViewDidTapOK(_ popup: CompletePopupView) {
-
         popup.dismiss()
-
-        remainingSeconds = totalSeconds
-        updateTimerLabel()
-        currentState = .setup
-        updateUI(for: currentState)
+        resetToSetupStage()
     }
 }
 
@@ -190,11 +173,10 @@ extension FocusPlantViewController {
             controllButtonStackView.isHidden = false
             motivationLabel.text = Constants.fucusPlant.pausedMotivationQuote
         case .completed:
+            circularSliderView.isHidden = true
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
             motivationLabel.text = Constants.fucusPlant.completedMotivationQuote
-            motivationTimer?.invalidate()
-            showCompletePopup()
         }
     }
 
@@ -220,8 +202,17 @@ extension FocusPlantViewController {
                 self.updateTreeGrowth()
             } else {
                 self.timer?.invalidate()
+                self.motivationTimer?.invalidate()
+
                 self.currentState = .completed
                 self.updateUI(for: currentState)
+
+                self.stopSound()
+                self.isSoundEnable = false
+                self.updateSoundButton()
+                self.updateSoundLabel()
+
+                self.showCompletePopup()
             }
         }
     }
@@ -345,5 +336,30 @@ extension FocusPlantViewController {
             popup.cardView.transform = .identity
         }
         view.addSubview(popup)
+    }
+
+    private func resetToSetupStage() {
+        timer?.invalidate()
+        motivationTimer?.invalidate()
+
+        remainingSeconds = totalSeconds
+        updateTimerLabel()
+
+        currentState = .setup
+        updateUI(for: currentState)
+
+        currentTreeStage = 4
+        updateTreeGrowth()
+
+        circularSliderView.setProgress(1)
+
+        isPaused = false
+        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
+
+
+        stopSound()
+        isSoundEnable = false
+        updateSoundButton()
+        updateSoundLabel()
     }
 }
