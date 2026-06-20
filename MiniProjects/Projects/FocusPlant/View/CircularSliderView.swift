@@ -14,6 +14,8 @@ final class CircularSliderView: UIView {
     private let thumpView = UIView()
     private var didSetupLayers = false
 
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -21,6 +23,7 @@ final class CircularSliderView: UIView {
 
             configureLayer()
             configureThump()
+            configureGesture()
 
             didSetupLayers = true
         }
@@ -68,7 +71,35 @@ extension CircularSliderView {
 
         addSubview(thumpView)
     }
+}
 
+// MARK: - Action
+extension CircularSliderView {
+    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: self)
+
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let dx = point.x - center.x
+        let dy = point.y - center.y
+
+        var angle = atan2(dy, dx)
+
+        if angle < 0 {
+            angle += 2 * .pi
+        }
+        angle += .pi / 2
+
+        if angle > 2 * .pi {
+            angle -= 2 * .pi
+        }
+
+        let progress = angle / (2 * .pi)
+        setProgress(progress)
+    }
+}
+
+// MARK: - Methods
+extension CircularSliderView {
     private func updateThumpPosition() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = min(bounds.width, bounds.height) / 2
@@ -85,5 +116,14 @@ extension CircularSliderView {
         progressLayer.strokeEnd = self.progress
 
         updateThumpPosition()
+    }
+
+    private func configureGesture() {
+        addGestureRecognizer(tapGesture)
+    }
+
+    private func angle(for point: CGFloat) -> CGFloat {
+
+        return 0
     }
 }

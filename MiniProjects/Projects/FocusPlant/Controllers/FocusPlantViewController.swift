@@ -44,7 +44,7 @@ final class FocusPlantViewController: UIViewController {
         updateTimerLabel()
         updateSoundLabel()
         updateTreeGrowth()
-        circularSliderView.setProgress(1)
+        circularSliderView.setProgress(0.25)
     }
 }
 
