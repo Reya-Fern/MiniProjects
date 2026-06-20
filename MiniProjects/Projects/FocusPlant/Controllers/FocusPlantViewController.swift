@@ -318,4 +318,16 @@ extension FocusPlantViewController {
         let progress = CGFloat(remainingSeconds) / CGFloat(totalSeconds)
         circularSliderView.setProgress(progress)
     }
+
+    private func showCompletePopup() {
+        let popup = CompletePopupView.loadFromNib()
+        popup.frame = view.bounds
+        popup.alpha = 0
+
+        UIView.animate(withDuration: 0.25) {
+            popup.alpha = 1
+        }
+
+        view.addSubview(popup)
+    }
 }
