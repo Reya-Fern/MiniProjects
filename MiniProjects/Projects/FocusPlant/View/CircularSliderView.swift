@@ -13,14 +13,17 @@ protocol CircularSliderViewDelegate: AnyObject {
 }
 
 final class CircularSliderView: UIView {
-    
+
     weak var delegate: CircularSliderViewDelegate?
 
-    private var progress:CGFloat = 0.75
+    private var currentProgress:CGFloat = 0.75
+    private var draggingProgress: CGFloat = 0.75
     private let trackLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
-    private let thumpView = UIView()
+    private let thumbView = UIView()
     private var didSetupLayers = false
+    private var lastAngle: CGFloat = 0
+    private var isDragging = false
 
     private(set) var selectedMinutes = 10
 
@@ -36,12 +39,12 @@ final class CircularSliderView: UIView {
         if !didSetupLayers {
 
             configureLayer()
-            configureThump()
+            configureThumb()
             configureGesture()
 
             didSetupLayers = true
         }
-        updateThumbPosition()
+        setProgress(currentProgress)
     }
 }
 
@@ -69,26 +72,65 @@ extension CircularSliderView {
         layer.addSublayer(progressLayer)
     }
 
-    private func configureThump() {
-        thumpView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        thumpView.layer.cornerRadius = thumpView.bounds.width / 2
-        thumpView.backgroundColor = .white
+    private func configureThumb() {
+        thumbView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        thumbView.layer.cornerRadius = thumbView.bounds.width / 2
+        thumbView.backgroundColor = .white
 
-        thumpView.layer.shadowColor = UIColor.black.cgColor
-        thumpView.layer.shadowOpacity = 0.15
-        thumpView.layer.shadowRadius = 6
-        thumpView.layer.shadowOffset = .init(width: 0, height: 2)
+        thumbView.layer.shadowColor = UIColor.black.cgColor
+        thumbView.layer.shadowOpacity = 0.15
+        thumbView.layer.shadowRadius = 6
+        thumbView.layer.shadowOffset = .init(width: 0, height: 2)
 
-        addSubview(thumpView)
+        addSubview(thumbView)
     }
 }
 
 // MARK: - Action
 extension CircularSliderView {
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let point = gesture.location(in: self)
 
-        updateProgress(from: point)
+        switch gesture.state {
+
+        case .began:
+            UIView.animate(withDuration: 0.15) {
+                self.thumbView.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+            }
+
+            draggingProgress = currentProgress
+
+            let point = gesture.location(in: self)
+            lastAngle = angle(from: point)
+
+        case .changed:
+            let point = gesture.location(in: self)
+            let currentAngle = angle(from: point)
+            var delta = currentAngle - lastAngle
+
+            if delta > .pi {
+                delta -= 2 * .pi
+            }
+
+            if delta < -.pi {
+                delta += 2 * .pi
+            }
+
+            lastAngle = currentAngle
+
+            draggingProgress += delta / (2 * .pi)
+            draggingProgress = min(max(draggingProgress, 0), 1)
+
+            let minutes = snappedMinutes(from: draggingProgress)
+            setSelectedMinutes(minutes)
+
+        case .ended, .cancelled, .failed:
+            UIView.animate(withDuration: 0.15) {
+                self.thumbView.transform = .identity
+            }
+
+        default:
+            break
+        }
     }
 }
 
@@ -96,28 +138,33 @@ extension CircularSliderView {
 extension CircularSliderView {
     private func updateThumbPosition() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let angle = (-CGFloat.pi / 2) + (progress * 2 * .pi)
+        let angle = (-CGFloat.pi / 2) + (currentProgress * 2 * .pi)
         let x = center.x + radius * cos(angle)
         let y = center.y + radius * sin(angle)
 
-        thumpView.center = CGPoint(x: x, y: y)
+        thumbView.center = CGPoint(x: x, y: y)
     }
 
     func setProgress(_ progress: CGFloat) {
-        self.progress = max(0, min(progress, 1))
+        self.currentProgress = max(0, min(progress, 1))
 
-        progressLayer.strokeEnd = self.progress
+        progressLayer.strokeEnd = self.currentProgress
 
         updateThumbPosition()
     }
 
     private func configureGesture() {
-        thumpView.addGestureRecognizer(panGesture)
-        thumpView.isUserInteractionEnabled = true
+        thumbView.addGestureRecognizer(panGesture)
+        thumbView.isUserInteractionEnabled = true
     }
 
-    private func updateProgress(from point: CGPoint) {
+    private func progress(from point: CGPoint) -> CGFloat {
+        angle(from: point) / (2 * .pi)
+    }
+
+    private func angle(from point: CGPoint) -> CGFloat {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
+
         let dx = point.x - center.x
         let dy = point.y - center.y
 
@@ -132,21 +179,23 @@ extension CircularSliderView {
             angle -= 2 * .pi
         }
 
-        let progress = angle / (2 * .pi)
-
-        updateMinutes(from: progress)
+        return angle
     }
 
-    private func updateMinutes(from progress: CGFloat) {
+    private func setSelectedMinutes(_ minutes: Int) {
+        selectedMinutes = minutes
+
+        delegate?.circularSliderView(self, didChangeMinutes: minutes)
+
+        let progress = CGFloat(minutes - 10) / 110
+
+        setProgress(progress)
+    }
+
+    private func snappedMinutes(from progress: CGFloat) -> Int {
         let minute = 10 + (progress * 110)
-        let snapMinute = (round(minute / 5) * 5)
+        let snapMinute = Int(round(minute / 5) * 5)
 
-        selectedMinutes = Int(min(max(snapMinute, 10), 120))
-
-        delegate?.circularSliderView(self, didChangeMinutes: selectedMinutes)
-
-        let snapProgress = CGFloat(selectedMinutes - 10) / 110
-
-        setProgress(snapProgress)
+        return Int(min(max(snapMinute, 10), 120))
     }
 }
