@@ -8,6 +8,14 @@
 import UIKit
 
 final class CircularSliderView: UIView {
+
+    protocol CircularSliderViewDelegate: AnyObject {
+        func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int)
+
+    }
+
+    weak var delegate: CircularSliderViewDelegate?
+
     private var progress:CGFloat = 0.75
     private let trackLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
@@ -139,6 +147,8 @@ extension CircularSliderView {
         let snapMinute = (round(minute / 5) * 5)
 
         selectedMinutes = Int(min(max(snapMinute, 10), 120))
+
+        delegate?.circularSliderView(self, didChangeMinutes: selectedMinutes)
 
         let snapProgress = CGFloat(selectedMinutes - 10) / 110
 

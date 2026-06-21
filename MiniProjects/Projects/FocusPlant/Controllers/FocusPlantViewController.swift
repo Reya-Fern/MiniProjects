@@ -39,6 +39,8 @@ final class FocusPlantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        circularSliderView.delegate = self
+
         setupUI()
         updateUI(for: currentState)
         updateTimerLabel()
@@ -146,7 +148,14 @@ extension FocusPlantViewController {
 }
 
 // MARK: - Delegate
-extension FocusPlantViewController: CompletePopupView.CompletePopupViewDelegate {
+extension FocusPlantViewController: CompletePopupView.CompletePopupViewDelegate, CircularSliderView.CircularSliderViewDelegate {
+
+    func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int) {
+        remainingSeconds = minutes * 60
+
+        updateTimerLabel()
+    }
+    
     func completePopupViewDidTapOK(_ popup: CompletePopupView) {
         popup.dismiss()
         resetToSetupStage()
