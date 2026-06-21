@@ -14,6 +14,8 @@ final class CircularSliderView: UIView {
     private let thumpView = UIView()
     private var didSetupLayers = false
 
+    private(set) var selectedMinutes = 10
+
     private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
 
     override func layoutSubviews() {
@@ -78,23 +80,7 @@ extension CircularSliderView {
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: self)
 
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let dx = point.x - center.x
-        let dy = point.y - center.y
-
-        var angle = atan2(dy, dx)
-
-        if angle < 0 {
-            angle += 2 * .pi
-        }
-        angle += .pi / 2
-
-        if angle > 2 * .pi {
-            angle -= 2 * .pi
-        }
-
-        let progress = angle / (2 * .pi)
-        setProgress(progress)
+        updateProgress(from: point)
     }
 }
 
@@ -125,5 +111,37 @@ extension CircularSliderView {
     private func angle(for point: CGFloat) -> CGFloat {
 
         return 0
+    }
+
+    private func updateProgress(from point: CGPoint) {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let dx = point.x - center.x
+        let dy = point.y - center.y
+
+        var angle = atan2(dy, dx)
+
+        if angle < 0 {
+            angle += 2 * .pi
+        }
+        angle += .pi / 2
+
+        if angle > 2 * .pi {
+            angle -= 2 * .pi
+        }
+
+        let progress = angle / (2 * .pi)
+
+        updateMinutes(from: progress)
+    }
+
+    private func updateMinutes(from progress: CGFloat) {
+        let minute = 10 + (progress * 110)
+        let snapMinute = (round(minute / 5) * 5)
+
+        selectedMinutes = Int(min(max(snapMinute, 10), 120))
+
+        let snapProgress = CGFloat(selectedMinutes - 10) / 110
+
+        setProgress(snapProgress)
     }
 }
