@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol CompletePopupViewDelegate: AnyObject {
+    func completePopupViewDidTapOK(_ popup: CompletePopupView)
+
+}
+
 final class CompletePopupView: UIView {
 
     @IBOutlet weak var overlayView: UIView!
@@ -15,11 +20,6 @@ final class CompletePopupView: UIView {
     @IBOutlet weak var treeImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var okButton: UIButton!
-
-    protocol CompletePopupViewDelegate: AnyObject {
-        func completePopupViewDidTapOK(_ popup: CompletePopupView)
-
-    }
 
     weak var delegate: CompletePopupViewDelegate?
 

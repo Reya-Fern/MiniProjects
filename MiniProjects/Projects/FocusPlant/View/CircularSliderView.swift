@@ -7,13 +7,13 @@
 
 import UIKit
 
+protocol CircularSliderViewDelegate: AnyObject {
+    func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int)
+
+}
+
 final class CircularSliderView: UIView {
-
-    protocol CircularSliderViewDelegate: AnyObject {
-        func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int)
-
-    }
-
+    
     weak var delegate: CircularSliderViewDelegate?
 
     private var progress:CGFloat = 0.75
@@ -23,6 +23,10 @@ final class CircularSliderView: UIView {
     private var didSetupLayers = false
 
     private(set) var selectedMinutes = 10
+
+    private var radius: CGFloat {
+        min(bounds.width, bounds.height) / 2
+    }
 
     private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
 
@@ -37,18 +41,14 @@ final class CircularSliderView: UIView {
 
             didSetupLayers = true
         }
-        updateThumpPosition()
+        updateThumbPosition()
     }
 }
 
 // MARK: - UI
 extension CircularSliderView {
     private func configureLayer() {
-        trackLayer.removeFromSuperlayer()
-        progressLayer.removeFromSuperlayer()
-
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = min(bounds.width, bounds.height) / 2
 
         let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: -.pi / 2, endAngle: .pi * 3 / 2, clockwise: true)
 
@@ -94,9 +94,8 @@ extension CircularSliderView {
 
 // MARK: - Methods
 extension CircularSliderView {
-    private func updateThumpPosition() {
+    private func updateThumbPosition() {
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        let radius = min(bounds.width, bounds.height) / 2
         let angle = (-CGFloat.pi / 2) + (progress * 2 * .pi)
         let x = center.x + radius * cos(angle)
         let y = center.y + radius * sin(angle)
@@ -109,17 +108,12 @@ extension CircularSliderView {
 
         progressLayer.strokeEnd = self.progress
 
-        updateThumpPosition()
+        updateThumbPosition()
     }
 
     private func configureGesture() {
         thumpView.addGestureRecognizer(panGesture)
         thumpView.isUserInteractionEnabled = true
-    }
-
-    private func angle(for point: CGFloat) -> CGFloat {
-
-        return 0
     }
 
     private func updateProgress(from point: CGPoint) {

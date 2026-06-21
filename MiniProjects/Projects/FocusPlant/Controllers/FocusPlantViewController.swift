@@ -148,7 +148,7 @@ extension FocusPlantViewController {
 }
 
 // MARK: - Delegate
-extension FocusPlantViewController: CompletePopupView.CompletePopupViewDelegate, CircularSliderView.CircularSliderViewDelegate {
+extension FocusPlantViewController: CompletePopupViewDelegate, CircularSliderViewDelegate {
 
     func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int) {
         remainingSeconds = minutes * 60
