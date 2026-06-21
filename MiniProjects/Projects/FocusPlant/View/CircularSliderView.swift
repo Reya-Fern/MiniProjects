@@ -24,7 +24,7 @@ final class CircularSliderView: UIView {
 
     private(set) var selectedMinutes = 10
 
-    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+    private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -85,7 +85,7 @@ extension CircularSliderView {
 
 // MARK: - Action
 extension CircularSliderView {
-    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
         let point = gesture.location(in: self)
 
         updateProgress(from: point)
@@ -113,7 +113,8 @@ extension CircularSliderView {
     }
 
     private func configureGesture() {
-        addGestureRecognizer(tapGesture)
+        thumpView.addGestureRecognizer(panGesture)
+        thumpView.isUserInteractionEnabled = true
     }
 
     private func angle(for point: CGFloat) -> CGFloat {
