@@ -27,10 +27,10 @@ final class FocusPlantViewController: UIViewController {
     private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?
-    private var remainingSeconds = 10
-    private var totalSeconds = 10
+    private var remainingSeconds = 7200
+    private var totalSeconds = 0
     private var isPaused = false
-    private var currentTreeStage: Int = 1
+    private var currentTreeStage: TreeStage?
     private var selectedActivity: Activity = .study
     private var selectedSound: AmbientSound = .forestRain
     private var isSoundEnable = false
@@ -42,11 +42,12 @@ final class FocusPlantViewController: UIViewController {
         circularSliderView.delegate = self
 
         setupUI()
+        setUpGesture()
         updateUI(for: currentState)
         updateTimerLabel()
         updateSoundLabel()
-        updateTreeGrowth()
-        circularSliderView.setProgress(0.25)
+        updateTreePreview(minutes: 120)
+        circularSliderView.setProgress(1)
     }
 }
 
@@ -78,6 +79,12 @@ extension FocusPlantViewController {
         pauseBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         pauseBotton.makeCircular()
     }
+
+    private func setUpGesture() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
+
+        soundBotton.addGestureRecognizer(longPress)
+    }
 }
 
 // MARK: - Action
@@ -92,9 +99,6 @@ extension FocusPlantViewController {
         }
         updateSoundButton()
         updateSoundLabel()
-
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
-        soundBotton.addGestureRecognizer(longPress)
     }
 
     @IBAction func activityButtonPressed(_ sender: Any) {
@@ -154,6 +158,8 @@ extension FocusPlantViewController: CompletePopupViewDelegate, CircularSliderVie
         remainingSeconds = minutes * 60
 
         updateTimerLabel()
+
+        updateTreePreview(minutes: minutes)
     }
     
     func completePopupViewDidTapOK(_ popup: CompletePopupView) {
@@ -223,31 +229,6 @@ extension FocusPlantViewController {
 
                 self.showCompletePopup()
             }
-        }
-    }
-
-    private func updateTreeGrowth() {
-        let progress = Double(totalSeconds - remainingSeconds) / Double(totalSeconds)
-        let newstage: Int
-
-        if progress < 0.25 {
-            treeImageView.image = UIImage(named: "tree_stage_1")
-            newstage = 1
-        } else if progress < 0.5 {
-            treeImageView.image = UIImage(named: "tree_stage_2")
-            newstage = 2
-        } else if progress < 0.75 {
-            treeImageView.image = UIImage(named: "tree_stage_3")
-            newstage = 3
-        } else {
-            treeImageView.image = UIImage(named: "tree_stage_4")
-            newstage = 4
-        }
-        guard newstage != currentTreeStage else { return }
-        currentTreeStage = newstage
-
-        UIView.transition(with: treeImageView, duration: 0.3, options: .transitionCrossDissolve) {
-            self.treeImageView.image = UIImage(named: "tree_stage_\(newstage)")
         }
     }
 
@@ -351,14 +332,14 @@ extension FocusPlantViewController {
         timer?.invalidate()
         motivationTimer?.invalidate()
 
+        totalSeconds = 7200
         remainingSeconds = totalSeconds
         updateTimerLabel()
 
         currentState = .setup
         updateUI(for: currentState)
 
-        currentTreeStage = 4
-        updateTreeGrowth()
+        updateTreePreview(minutes: totalSeconds / 60)
 
         circularSliderView.setProgress(1)
 
@@ -370,5 +351,118 @@ extension FocusPlantViewController {
         isSoundEnable = false
         updateSoundButton()
         updateSoundLabel()
+    }
+
+    private func updateTreePreview(minutes: Int) {
+        let stage: TreeStage
+
+        switch minutes {
+
+        case 0..<10:
+            stage = .stage1
+
+        case 10..<60:
+            stage = .stage2
+
+        case 60..<90:
+            stage = .stage3
+
+        case 90..<120:
+            stage = .stage4
+
+        default:
+            stage = .stage5
+
+        }
+
+        updateTreeImage(stage: stage,animated: false)
+    }
+
+    private func updateTreeGrowth() {
+        guard totalSeconds > 0 else { return }
+
+        let targetStage = targetTreeStage(for: totalSeconds / 60)
+
+        let progress = Double(totalSeconds - remainingSeconds) / Double(totalSeconds)
+
+        let stage: TreeStage
+
+        switch targetStage {
+
+        case .stage2:
+            if progress < 0.25 {
+                stage = .stage1
+            } else {
+                stage = .stage2
+            }
+
+        case .stage3:
+            if progress < 0.33 {
+                stage = .stage1
+            } else if progress < 0.66 {
+                stage = .stage2
+            } else {
+                stage = .stage3
+            }
+        case .stage4:
+            if progress < 0.25 {
+                stage = .stage1
+            } else if progress < 0.5 {
+                stage = .stage2
+            } else if progress < 0.75 {
+                stage = .stage3
+            } else {
+                stage = .stage4
+            }
+        case .stage5:
+            if progress < 0.2 {
+                stage = .stage1
+            } else if progress < 0.4 {
+                stage = .stage2
+            } else if progress < 0.6 {
+                stage = .stage3
+            } else if progress < 0.8 {
+                stage = .stage4
+            } else {
+                stage = .stage5
+            }
+        default:
+            stage = .stage1
+        }
+
+        updateTreeImage(stage: stage, animated: true)
+    }
+
+    private func updateTreeImage(stage: TreeStage, animated: Bool) {
+        guard stage != currentTreeStage else { return }
+
+        currentTreeStage = stage
+
+        let image = UIImage(named: stage.imageName)
+
+        if animated {
+            UIView.transition(with: treeImageView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.treeImageView.image = image
+            }
+        } else {
+            treeImageView.image = image
+        }
+    }
+
+    private func targetTreeStage(for minutes: Int) -> TreeStage {
+        switch minutes {
+
+        case 10..<60:
+            return .stage2
+
+        case 60..<90:
+            return .stage3
+
+        case 90..<120:
+            return .stage4
+
+        default:
+            return .stage5
+        }
     }
 }
