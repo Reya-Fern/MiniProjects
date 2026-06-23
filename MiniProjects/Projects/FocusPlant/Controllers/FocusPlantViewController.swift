@@ -24,7 +24,6 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var soundInstructionLabel: UILabel!
     @IBOutlet weak var circularSliderView: CircularSliderView!
 
-    private var currentState: FocusState = .setup
     private var timer: Timer?
     private var motivationTimer: Timer?
     private var remainingSeconds = 7200
@@ -35,6 +34,13 @@ final class FocusPlantViewController: UIViewController {
     private var selectedSound: AmbientSound = .forestRain
     private var isSoundEnable = false
     private var audioPlayer: AVAudioPlayer?
+    private var wasSoundEnable = false
+
+    private var currentState: FocusState = .setup {
+        didSet {
+            updateUI(for: currentState)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +49,7 @@ final class FocusPlantViewController: UIViewController {
 
         setupUI()
         setUpGesture()
-        updateUI(for: currentState)
         updateTimerLabel()
-        updateSoundLabel()
         updateTreePreview(minutes: 120)
         circularSliderView.setProgress(1)
     }
@@ -80,96 +84,6 @@ extension FocusPlantViewController {
         pauseBotton.makeCircular()
     }
 
-    private func setUpGesture() {
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
-
-        soundBotton.addGestureRecognizer(longPress)
-    }
-}
-
-// MARK: - Action
-extension FocusPlantViewController {
-    @IBAction func soundButtonPressed(_ sender: Any) {
-        isSoundEnable.toggle()
-
-        if isSoundEnable {
-            playSelectedSound()
-        } else {
-            stopSound()
-        }
-        updateSoundButton()
-        updateSoundLabel()
-    }
-
-    @IBAction func activityButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Select Activity", message: nil, preferredStyle: .actionSheet)
-
-        Activity.allCases.forEach {
-            activity in
-
-            let action = UIAlertAction(title: activity.rawValue, style: .default) { _ in
-                self.selectedActivity = activity
-                self.activityButton.setTitle(activity.rawValue, for: .normal)
-            }
-            alert.addAction(action)
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true)
-    }
-
-    @IBAction func startButtonPressed(_ sender: Any) {
-        totalSeconds = remainingSeconds
-        currentState = .running
-        updateUI(for: currentState)
-        startTimer()
-        startMotivationTimer()
-    }
-
-    @IBAction func stopButtonPressed(_ sender: Any) {
-        resetToSetupStage()
-    }
-
-    @IBAction func pauseButtonPressed(_ sender: Any) {
-        if isPaused {
-            startTimer()
-            startMotivationTimer()
-            isPaused = false
-            pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
-            currentState = .running
-        } else {
-            timer?.invalidate()
-            motivationTimer?.invalidate()
-            isPaused = true
-            pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
-            currentState = .paused
-            stopSound()
-            isSoundEnable = false
-            updateSoundButton()
-            updateSoundLabel()
-        }
-        updateUI(for: currentState)
-    }
-}
-
-// MARK: - Delegate
-extension FocusPlantViewController: CompletePopupViewDelegate, CircularSliderViewDelegate {
-
-    func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int) {
-        remainingSeconds = minutes * 60
-
-        updateTimerLabel()
-
-        updateTreePreview(minutes: minutes)
-    }
-    
-    func completePopupViewDidTapOK(_ popup: CompletePopupView) {
-        popup.dismiss()
-        resetToSetupStage()
-    }
-}
-
-// MARK: - Method
-extension FocusPlantViewController {
     private func updateUI(for state: FocusState) {
         switch state {
         case .setup:
@@ -195,15 +109,90 @@ extension FocusPlantViewController {
         }
     }
 
-    private func updateTimerLabel() {
-        let minutes: Int = remainingSeconds / 60
-        let seconds: Int = remainingSeconds % 60
+    private func setUpGesture() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
 
-        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        soundBotton.addGestureRecognizer(longPress)
+    }
+}
+
+// MARK: - Action
+extension FocusPlantViewController {
+    @IBAction func soundButtonPressed(_ sender: Any) {
+        isSoundEnable.toggle()
+
+        if isSoundEnable {
+            playSelectedSound()
+        } else {
+            stopSound()
+        }
     }
 
-    private func startTimer() {
+    @IBAction func activityButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Select Activity", message: nil, preferredStyle: .actionSheet)
 
+        Activity.allCases.forEach {
+            activity in
+
+            let action = UIAlertAction(title: activity.rawValue, style: .default) { _ in
+                self.selectedActivity = activity
+                self.activityButton.setTitle(activity.rawValue, for: .normal)
+            }
+            alert.addAction(action)
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+
+    @IBAction func startButtonPressed(_ sender: Any) {
+        guard currentState == .setup else { return }
+
+        totalSeconds = remainingSeconds
+        currentState = .running
+        startTimer()
+        startMotivationTimer()
+    }
+
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        resetToSetupStage()
+    }
+
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+
+        if isPaused {
+            resumeSession()
+        } else {
+            pauseSession()
+        }
+    }
+
+    @objc private func soundButtonLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+
+        showSoundPicker()
+    }
+}
+
+// MARK: - Delegate
+extension FocusPlantViewController: CompletePopupViewDelegate, CircularSliderViewDelegate {
+
+    func circularSliderView(_ slider: CircularSliderView, didChangeMinutes minutes: Int) {
+        remainingSeconds = minutes * 60
+
+        updateTimerLabel()
+
+        updateTreePreview(minutes: minutes)
+    }
+
+    func completePopupViewDidTapOK(_ popup: CompletePopupView) {
+        popup.dismiss()
+        resetToSetupStage()
+    }
+}
+
+// MARK: - Timer
+extension FocusPlantViewController {
+    private func startTimer() {
         timer?.invalidate()
 
         timer = Timer.scheduledTimer(withTimeInterval: 1,repeats: true) {
@@ -220,38 +209,69 @@ extension FocusPlantViewController {
                 self.motivationTimer?.invalidate()
 
                 self.currentState = .completed
-                self.updateUI(for: currentState)
-
                 self.stopSound()
-                self.isSoundEnable = false
-                self.updateSoundButton()
-                self.updateSoundLabel()
-
                 self.showCompletePopup()
             }
         }
     }
 
+    private func updateTimerLabel() {
+        let minutes: Int = remainingSeconds / 60
+        let seconds: Int = remainingSeconds % 60
+
+        timerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+
     private func startMotivationTimer() {
         motivationTimer?.invalidate()
 
-        motivationTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+        motivationTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { [weak self] _ in
             self?.showRandomMotivation()
         }
     }
+}
 
-    private func showRandomMotivation() {
-        guard let randomQuote = Constants.fucusPlant.allMotivationQuotes.randomElement() else { return }
+// MARK: - Sound
+extension FocusPlantViewController {
+    private func updateSoundButton() {
+        let imageName = isSoundEnable ? "headphones" : "headphones.slash"
 
-        UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
-            self.motivationLabel.text = randomQuote
-        }
+        soundBotton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
-    @objc private func soundButtonLongPressed(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .began else { return }
+    private func playSelectedSound() {
+        guard let url = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "mp3") else { return }
 
-        showSoundPicker()
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = -1
+            audioPlayer?.play()
+        } catch {
+            print(error)
+        }
+
+        isSoundEnable = true
+        updateSoundButton()
+        updateSoundLabel()
+    }
+
+    private func stopSound() {
+        audioPlayer?.stop()
+        isSoundEnable = false
+        updateSoundButton()
+        updateSoundLabel()
+    }
+
+    private func updateSoundLabel() {
+        if isSoundEnable {
+            soundNameLabel.isHidden = false
+            soundInstructionLabel.isHidden = false
+            soundNameLabel.text = "Playing: \"\(selectedSound.soundDisplayName)\""
+            soundInstructionLabel.text = "(Tap and hold the icon to change sounds)"
+        } else {
+            soundNameLabel.isHidden = true
+            soundInstructionLabel.isHidden = true
+        }
     }
 
     private func showSoundPicker() {
@@ -274,85 +294,10 @@ extension FocusPlantViewController {
 
         present(alert, animated: true)
     }
+}
 
-    private func updateSoundButton() {
-        let imageName = isSoundEnable ? "headphones" : "headphones.slash"
-
-        soundBotton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-
-    private func playSelectedSound() {
-        guard let url = Bundle.main.url(forResource: selectedSound.rawValue, withExtension: "mp3") else { return }
-
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.numberOfLoops = -1
-            audioPlayer?.play()
-        } catch {
-            print(error)
-        }
-    }
-
-    private func stopSound() {
-        audioPlayer?.stop()
-    }
-
-    private func updateSoundLabel() {
-        if isSoundEnable {
-            soundNameLabel.isHidden = false
-            soundInstructionLabel.isHidden = false
-            soundNameLabel.text = "Playing: \"\(selectedSound.soundDisplayName)\""
-            soundInstructionLabel.text = "(Tap and hold the icon to change sounds)"
-        } else {
-            soundNameLabel.isHidden = true
-            soundInstructionLabel.isHidden = true
-        }
-    }
-
-    private func updateProgressRing() {
-        let progress = CGFloat(remainingSeconds) / CGFloat(totalSeconds)
-        circularSliderView.setProgress(progress)
-    }
-
-    private func showCompletePopup() {
-        let popup = CompletePopupView.loadFromNib()
-        popup.delegate = self
-        popup.frame = view.bounds
-        popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        popup.cardView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-
-        UIView.animate(withDuration: 0.25) {
-            popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.45)
-            popup.cardView.transform = .identity
-        }
-        view.addSubview(popup)
-    }
-
-    private func resetToSetupStage() {
-        timer?.invalidate()
-        motivationTimer?.invalidate()
-
-        totalSeconds = 7200
-        remainingSeconds = totalSeconds
-        updateTimerLabel()
-
-        currentState = .setup
-        updateUI(for: currentState)
-
-        updateTreePreview(minutes: totalSeconds / 60)
-
-        circularSliderView.setProgress(1)
-
-        isPaused = false
-        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
-
-
-        stopSound()
-        isSoundEnable = false
-        updateSoundButton()
-        updateSoundLabel()
-    }
-
+// MARK: - Tree Progress
+extension FocusPlantViewController {
     private func updateTreePreview(minutes: Int) {
         let stage: TreeStage
 
@@ -463,6 +408,83 @@ extension FocusPlantViewController {
 
         default:
             return .stage5
+        }
+    }
+}
+
+// MARK: - Hepler
+extension FocusPlantViewController {
+    private func updateProgressRing() {
+        let progress = CGFloat(remainingSeconds) / CGFloat(totalSeconds)
+        circularSliderView.setProgress(progress)
+    }
+
+    private func showRandomMotivation() {
+        guard let randomQuote = Constants.fucusPlant.allMotivationQuotes.randomElement() else { return }
+
+        UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
+            self.motivationLabel.text = randomQuote
+        }
+    }
+
+    private func showCompletePopup() {
+        let popup = CompletePopupView.loadFromNib()
+        popup.delegate = self
+        popup.frame = view.bounds
+        popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0)
+        popup.cardView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+
+        UIView.animate(withDuration: 0.25) {
+            popup.overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.45)
+            popup.cardView.transform = .identity
+        }
+        view.addSubview(popup)
+    }
+
+    private func resetToSetupStage() {
+        timer?.invalidate()
+        motivationTimer?.invalidate()
+
+        totalSeconds = 7200
+        remainingSeconds = totalSeconds
+        updateTimerLabel()
+
+        currentState = .setup
+
+        updateTreePreview(minutes: totalSeconds / 60)
+
+        circularSliderView.setProgress(1)
+
+        isPaused = false
+        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
+
+
+        stopSound()
+    }
+
+    private func pauseSession() {
+        timer?.invalidate()
+        motivationTimer?.invalidate()
+        isPaused = true
+        pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
+        currentState = .paused
+
+        wasSoundEnable = isSoundEnable
+
+        if isSoundEnable {
+            stopSound()
+        }
+    }
+
+    private func resumeSession() {
+        startTimer()
+        startMotivationTimer()
+        isPaused = false
+        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
+        currentState = .running
+
+        if wasSoundEnable {
+            playSelectedSound()
         }
     }
 }
