@@ -52,6 +52,7 @@ final class FocusPlantViewController: UIViewController {
         updateTimerLabel()
         updateTreePreview(minutes: 120)
         circularSliderView.setProgress(1)
+        updateUI(for: currentState)
     }
 }
 
