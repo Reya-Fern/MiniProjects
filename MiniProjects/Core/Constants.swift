@@ -4,12 +4,13 @@
 //
 //  Created by Wannipa Reya on 13/5/2569 BE.
 //
+import Foundation
 
 enum Constants: String {
     case error = "Undefined"
     case homeTitle = "Mini Projects"
 
-    enum fucusPlant {
+    enum focusPlant {
         static let allMotivationQuotes = [
             "One step at a time.",
             "Keep going!",
@@ -23,5 +24,10 @@ enum Constants: String {
         static let runningMotivationQuote = "Stay focused!"
         static let pausedMotivationQuote = "Take a short break"
         static let completedMotivationQuote = "Hooray! You've planted 1 healthy tree"
+
+        // Circular Slider View
+        static let minimumMinutes: CGFloat = 10
+        static let maximumMinutes: CGFloat = 120
+        static let minuteStep: CGFloat = 5
     }
 }

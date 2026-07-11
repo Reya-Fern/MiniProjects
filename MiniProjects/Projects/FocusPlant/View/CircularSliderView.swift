@@ -16,17 +16,16 @@ final class CircularSliderView: UIView {
 
     weak var delegate: CircularSliderViewDelegate?
 
-    private var currentProgress:CGFloat = 0.75
-    private var draggingProgress: CGFloat = 0.75
+    private var currentProgress:CGFloat = 0
+    private var draggingProgress: CGFloat = 0
     private let trackLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
     private let thumbView = UIView()
     private var didSetupLayers = false
     private var lastAngle: CGFloat = 0
-    private var isDragging = false
     private let selectionFeedback = UISelectionFeedbackGenerator()
 
-    private(set) var selectedMinutes = 10
+    private(set) var selectedMinutes = 0
 
     private var radius: CGFloat {
         min(bounds.width, bounds.height) / 2
@@ -194,15 +193,19 @@ extension CircularSliderView {
 
         delegate?.circularSliderView(self, didChangeMinutes: minutes)
 
-        let progress = CGFloat(minutes - 10) / 110
+        let minuteRange = Constants.focusPlant.maximumMinutes - Constants.focusPlant.minimumMinutes
+
+        let progress = (CGFloat(minutes) - Constants.focusPlant.minimumMinutes) / minuteRange
 
         setProgress(progress)
     }
 
     private func snappedMinutes(from progress: CGFloat) -> Int {
-        let minute = 10 + (progress * 110)
-        let snapMinute = Int(round(minute / 5) * 5)
+        let minuteRange = Constants.focusPlant.maximumMinutes - Constants.focusPlant.minimumMinutes
 
-        return Int(min(max(snapMinute, 10), 120))
+        let minute = Constants.focusPlant.minimumMinutes + (progress * minuteRange)
+        let snapMinute = Int(round(minute / Constants.focusPlant.minuteStep) * Constants.focusPlant.minuteStep)
+
+        return Int(min(max(snapMinute, Int(Constants.focusPlant.minimumMinutes)), Int(Constants.focusPlant.maximumMinutes)))
     }
 }

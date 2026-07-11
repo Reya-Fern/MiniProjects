@@ -94,22 +94,22 @@ extension FocusPlantViewController {
             circularSliderView.isHidden = false
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = Constants.fucusPlant.setUpMotivationQuote
+            motivationLabel.text = Constants.focusPlant.setUpMotivationQuote
         case .running:
             circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = Constants.fucusPlant.runningMotivationQuote
+            motivationLabel.text = Constants.focusPlant.runningMotivationQuote
         case .paused:
             circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = Constants.fucusPlant.pausedMotivationQuote
+            motivationLabel.text = Constants.focusPlant.pausedMotivationQuote
         case .completed:
             circularSliderView.isHidden = true
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = Constants.fucusPlant.completedMotivationQuote
+            motivationLabel.text = Constants.focusPlant.completedMotivationQuote
         }
     }
 
@@ -426,7 +426,7 @@ extension FocusPlantViewController {
     }
 
     private func showRandomMotivation() {
-        guard let randomQuote = Constants.fucusPlant.allMotivationQuotes.randomElement() else { return }
+        guard let randomQuote = Constants.focusPlant.allMotivationQuotes.randomElement() else { return }
 
         UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
             self.motivationLabel.text = randomQuote
