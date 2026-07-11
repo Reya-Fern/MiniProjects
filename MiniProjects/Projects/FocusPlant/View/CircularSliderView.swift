@@ -193,19 +193,19 @@ extension CircularSliderView {
 
         delegate?.circularSliderView(self, didChangeMinutes: minutes)
 
-        let minuteRange = Constants.focusPlant.maximumMinutes - Constants.focusPlant.minimumMinutes
+        let minuteRange = Constants.FocusPlant.maximumMinutes - Constants.FocusPlant.minimumMinutes
 
-        let progress = (CGFloat(minutes) - Constants.focusPlant.minimumMinutes) / minuteRange
+        let progress = (CGFloat(minutes) - Constants.FocusPlant.minimumMinutes) / minuteRange
 
         setProgress(progress)
     }
 
     private func snappedMinutes(from progress: CGFloat) -> Int {
-        let minuteRange = Constants.focusPlant.maximumMinutes - Constants.focusPlant.minimumMinutes
+        let minuteRange = Constants.FocusPlant.maximumMinutes - Constants.FocusPlant.minimumMinutes
 
-        let minute = Constants.focusPlant.minimumMinutes + (progress * minuteRange)
-        let snapMinute = Int(round(minute / Constants.focusPlant.minuteStep) * Constants.focusPlant.minuteStep)
+        let minute = Constants.FocusPlant.minimumMinutes + (progress * minuteRange)
+        let snapMinute = Int(round(minute / Constants.FocusPlant.minuteStep) * Constants.FocusPlant.minuteStep)
 
-        return Int(min(max(snapMinute, Int(Constants.focusPlant.minimumMinutes)), Int(Constants.focusPlant.maximumMinutes)))
+        return Int(min(max(snapMinute, Int(Constants.FocusPlant.minimumMinutes)), Int(Constants.FocusPlant.maximumMinutes)))
     }
 }

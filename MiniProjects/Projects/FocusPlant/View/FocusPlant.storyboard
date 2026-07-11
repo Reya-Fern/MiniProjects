@@ -188,12 +188,12 @@
                         <outlet property="circularSliderView" destination="NOJ-kD-cr4" id="3kh-Ot-re7"/>
                         <outlet property="controllButtonStackView" destination="S8J-HS-0Gd" id="Gg9-ad-25f"/>
                         <outlet property="motivationLabel" destination="PBN-r7-zQI" id="bG9-LR-dJw"/>
-                        <outlet property="pauseBotton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
-                        <outlet property="soundBotton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>
+                        <outlet property="pauseButton" destination="zue-tS-IuZ" id="Uu5-f7-jXs"/>
+                        <outlet property="soundButton" destination="a9D-c9-F2D" id="1Ey-Ck-dEo"/>
                         <outlet property="soundInstructionLabel" destination="bJT-Jq-WbV" id="b5v-02-FFV"/>
                         <outlet property="soundNameLabel" destination="YiF-ml-2wr" id="ZDZ-MU-gjK"/>
                         <outlet property="startButton" destination="44h-AO-pEY" id="Jwq-hE-aF1"/>
-                        <outlet property="stopBotton" destination="Lhx-nG-4HG" id="qOX-Jp-G42"/>
+                        <outlet property="stopButton" destination="Lhx-nG-4HG" id="qOX-Jp-G42"/>
                         <outlet property="timerLabel" destination="JMV-aZ-FJ5" id="Ddy-JQ-Ie8"/>
                         <outlet property="treeContainerView" destination="IvB-LB-gZA" id="Llz-20-d8X"/>
                         <outlet property="treeImageView" destination="qnh-kc-2OL" id="QLI-2o-aJe"/>

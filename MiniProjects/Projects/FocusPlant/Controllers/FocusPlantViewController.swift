@@ -10,7 +10,7 @@ import AVFoundation
 
 final class FocusPlantViewController: UIViewController {
 
-    @IBOutlet weak var soundBotton: UIButton!
+    @IBOutlet weak var soundButton: UIButton!
     @IBOutlet weak var motivationLabel: UILabel!
     @IBOutlet weak var treeContainerView: UIView!
     @IBOutlet weak var treeImageView: UIImageView!
@@ -18,15 +18,15 @@ final class FocusPlantViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var controllButtonStackView: UIStackView!
-    @IBOutlet weak var pauseBotton: UIButton!
-    @IBOutlet weak var stopBotton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var soundNameLabel: UILabel!
     @IBOutlet weak var soundInstructionLabel: UILabel!
     @IBOutlet weak var circularSliderView: CircularSliderView!
 
     private var timer: Timer?
     private var motivationTimer: Timer?
-    private var remainingSeconds = 7200
+    private var remainingSeconds = Constants.FocusPlant.startingRemainingSeconds
     private var totalSeconds = 0
     private var isPaused = false
     private var currentTreeStage: TreeStage?
@@ -53,7 +53,7 @@ final class FocusPlantViewController: UIViewController {
         setupUI()
         setUpGesture()
         updateTimerLabel()
-        updateTreePreview(minutes: 120)
+        updateTreePreview(minutes: Int(Constants.FocusPlant.maximumMinutes))
         circularSliderView.setProgress(1)
         updateUI(for: currentState)
     }
@@ -82,10 +82,10 @@ extension FocusPlantViewController {
         startButton.layer.shadowRadius = 0
         startButton.layer.masksToBounds = false
 
-        stopBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
-        stopBotton.makeCircular()
-        pauseBotton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
-        pauseBotton.makeCircular()
+        stopButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        stopButton.makeCircular()
+        pauseButton.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        pauseButton.makeCircular()
     }
 
     private func updateUI(for state: FocusState) {
@@ -94,29 +94,29 @@ extension FocusPlantViewController {
             circularSliderView.isHidden = false
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = Constants.focusPlant.setUpMotivationQuote
+            motivationLabel.text = Constants.FocusPlant.setUpMotivationQuote
         case .running:
             circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = Constants.focusPlant.runningMotivationQuote
+            motivationLabel.text = Constants.FocusPlant.runningMotivationQuote
         case .paused:
             circularSliderView.isHidden = true
             startButton.isHidden = true
             controllButtonStackView.isHidden = false
-            motivationLabel.text = Constants.focusPlant.pausedMotivationQuote
+            motivationLabel.text = Constants.FocusPlant.pausedMotivationQuote
         case .completed:
             circularSliderView.isHidden = true
             startButton.isHidden = false
             controllButtonStackView.isHidden = true
-            motivationLabel.text = Constants.focusPlant.completedMotivationQuote
+            motivationLabel.text = Constants.FocusPlant.completedMotivationQuote
         }
     }
 
     private func setUpGesture() {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(soundButtonLongPressed))
 
-        soundBotton.addGestureRecognizer(longPress)
+        soundButton.addGestureRecognizer(longPress)
     }
 }
 
@@ -133,7 +133,7 @@ extension FocusPlantViewController {
     }
 
     @IBAction func activityButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Select Activity", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: Constants.Alert.Title.selectActivity, message: nil, preferredStyle: .actionSheet)
 
         Activity.allCases.forEach {
             activity in
@@ -144,7 +144,7 @@ extension FocusPlantViewController {
             }
             alert.addAction(action)
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: Constants.Alert.ButtonTitle.cancel, style: .cancel))
         present(alert, animated: true)
     }
 
@@ -242,7 +242,7 @@ extension FocusPlantViewController {
     private func updateSoundButton() {
         let imageName = isSoundEnable ? "headphones" : "headphones.slash"
 
-        soundBotton.setImage(UIImage(systemName: imageName), for: .normal)
+        soundButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
     private func playSelectedSound() {
@@ -272,8 +272,8 @@ extension FocusPlantViewController {
         if isSoundEnable {
             soundNameLabel.isHidden = false
             soundInstructionLabel.isHidden = false
-            soundNameLabel.text = "Playing: \"\(selectedSound.soundDisplayName)\""
-            soundInstructionLabel.text = "(Tap and hold the icon to change sounds)"
+            soundNameLabel.text = Constants.FocusPlant.soundFirstLabel + " \"\(selectedSound.soundDisplayName)\""
+            soundInstructionLabel.text = Constants.FocusPlant.soundSecondLabel
         } else {
             soundNameLabel.isHidden = true
             soundInstructionLabel.isHidden = true
@@ -281,7 +281,7 @@ extension FocusPlantViewController {
     }
 
     private func showSoundPicker() {
-        let alert = UIAlertController(title: "Slect Background Sound", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: Constants.Alert.Title.selectBackgroundSound, message: nil, preferredStyle: .actionSheet)
 
         AmbientSound.allCases.forEach { sound in
 
@@ -296,7 +296,7 @@ extension FocusPlantViewController {
             }
             alert.addAction(action)
         }
-        alert.addAction(UIAlertAction(title: "Calcel", style: .cancel))
+        alert.addAction(UIAlertAction(title: Constants.Alert.ButtonTitle.cancel, style: .cancel))
 
         present(alert, animated: true)
     }
@@ -418,6 +418,55 @@ extension FocusPlantViewController {
     }
 }
 
+// MARK: - Session Flow
+extension FocusPlantViewController {
+    private func pauseSession() {
+        timer?.invalidate()
+        motivationTimer?.invalidate()
+        isPaused = true
+        pauseButton.setImage(UIImage(systemName: "play"), for: .normal)
+        currentState = .paused
+
+        wasSoundEnable = isSoundEnable
+
+        if isSoundEnable {
+            stopSound()
+        }
+    }
+
+    private func resumeSession() {
+        startTimer()
+        startMotivationTimer()
+        isPaused = false
+        pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+        currentState = .running
+
+        if wasSoundEnable {
+            playSelectedSound()
+        }
+    }
+
+    private func resetToSetupStage() {
+        timer?.invalidate()
+        motivationTimer?.invalidate()
+
+        totalSeconds = Constants.FocusPlant.startingRemainingSeconds
+        remainingSeconds = totalSeconds
+        updateTimerLabel()
+
+        currentState = .setup
+
+        updateTreePreview(minutes: totalSeconds / 60)
+
+        circularSliderView.setProgress(1)
+
+        isPaused = false
+        pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+
+        stopSound()
+    }
+}
+
 // MARK: - Hepler
 extension FocusPlantViewController {
     private func updateProgressRing() {
@@ -426,7 +475,7 @@ extension FocusPlantViewController {
     }
 
     private func showRandomMotivation() {
-        guard let randomQuote = Constants.focusPlant.allMotivationQuotes.randomElement() else { return }
+        guard let randomQuote = Constants.FocusPlant.allMotivationQuotes.randomElement() else { return }
 
         UIView.transition(with: motivationLabel, duration: 0.4, options: .transitionCrossDissolve) {
             self.motivationLabel.text = randomQuote
@@ -447,58 +496,12 @@ extension FocusPlantViewController {
         view.addSubview(popup)
     }
 
-    private func resetToSetupStage() {
-        timer?.invalidate()
-        motivationTimer?.invalidate()
-
-        totalSeconds = 7200
-        remainingSeconds = totalSeconds
-        updateTimerLabel()
-
-        currentState = .setup
-
-        updateTreePreview(minutes: totalSeconds / 60)
-
-        circularSliderView.setProgress(1)
-
-        isPaused = false
-        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
-
-        stopSound()
-    }
-
-    private func pauseSession() {
-        timer?.invalidate()
-        motivationTimer?.invalidate()
-        isPaused = true
-        pauseBotton.setImage(UIImage(systemName: "play"), for: .normal)
-        currentState = .paused
-
-        wasSoundEnable = isSoundEnable
-
-        if isSoundEnable {
-            stopSound()
-        }
-    }
-
-    private func resumeSession() {
-        startTimer()
-        startMotivationTimer()
-        isPaused = false
-        pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
-        currentState = .running
-
-        if wasSoundEnable {
-            playSelectedSound()
-        }
-    }
-
     private func showStopConfirmation() {
-        let alert = UIAlertController(title: "Stop planting?", message: "Your current focus session will be lost.", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.Alert.Title.stopPlanting, message: Constants.Alert.Message.lostSession, preferredStyle: .alert)
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: Constants.Alert.ButtonTitle.cancel, style: .cancel)
 
-        let stopAction = UIAlertAction(title: "Stop", style: .destructive) { [weak self] _ in
+        let stopAction = UIAlertAction(title: Constants.Alert.ButtonTitle.stop, style: .destructive) { [weak self] _ in
             self?.notificationFeedack.notificationOccurred(.warning)
             self?.resetToSetupStage()
         }

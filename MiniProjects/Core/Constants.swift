@@ -10,7 +10,24 @@ enum Constants: String {
     case error = "Undefined"
     case homeTitle = "Mini Projects"
 
-    enum focusPlant {
+    enum Alert {
+        enum Title {
+            static let selectActivity = "Select Activity"
+            static let selectBackgroundSound = "Slect Background Sound"
+            static let stopPlanting = "Stop planting?"
+        }
+
+        enum Message {
+            static let lostSession = "Your current focus session will be lost."
+        }
+
+        enum ButtonTitle {
+            static let cancel = "Cancel"
+            static let stop = "Stop"
+        }
+    }
+
+    enum FocusPlant {
         static let allMotivationQuotes = [
             "One step at a time.",
             "Keep going!",
@@ -24,6 +41,11 @@ enum Constants: String {
         static let runningMotivationQuote = "Stay focused!"
         static let pausedMotivationQuote = "Take a short break"
         static let completedMotivationQuote = "Hooray! You've planted 1 healthy tree"
+
+        static let soundFirstLabel = "Playing:"
+        static let soundSecondLabel = "(Tap and hold the icon to change sounds)"
+
+        static let startingRemainingSeconds = 7200
 
         // Circular Slider View
         static let minimumMinutes: CGFloat = 10
