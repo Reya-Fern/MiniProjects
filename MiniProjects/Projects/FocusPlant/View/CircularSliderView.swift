@@ -24,6 +24,7 @@ final class CircularSliderView: UIView {
     private var didSetupLayers = false
     private var lastAngle: CGFloat = 0
     private var isDragging = false
+    private let selectionFeedback = UISelectionFeedbackGenerator()
 
     private(set) var selectedMinutes = 10
 
@@ -101,6 +102,8 @@ extension CircularSliderView {
 
             let point = gesture.location(in: self)
             lastAngle = angle(from: point)
+
+            selectionFeedback.prepare()
 
         case .changed:
             let point = gesture.location(in: self)
@@ -183,6 +186,10 @@ extension CircularSliderView {
     }
 
     private func setSelectedMinutes(_ minutes: Int) {
+        guard selectedMinutes != minutes else { return }
+
+        selectionFeedback.selectionChanged()
+
         selectedMinutes = minutes
 
         delegate?.circularSliderView(self, didChangeMinutes: minutes)

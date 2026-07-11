@@ -36,6 +36,9 @@ final class FocusPlantViewController: UIViewController {
     private var audioPlayer: AVAudioPlayer?
     private var wasSoundEnable = false
 
+    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+    let notificationFeedack = UINotificationFeedbackGenerator()
+
     private var currentState: FocusState = .setup {
         didSet {
             updateUI(for: currentState)
@@ -148,6 +151,7 @@ extension FocusPlantViewController {
     @IBAction func startButtonPressed(_ sender: Any) {
         guard currentState == .setup else { return }
 
+        impactFeedback.impactOccurred()
         totalSeconds = remainingSeconds
         currentState = .running
         startTimer()
@@ -210,6 +214,7 @@ extension FocusPlantViewController {
                 self.motivationTimer?.invalidate()
 
                 self.currentState = .completed
+                notificationFeedack.notificationOccurred(.success)
                 self.stopSound()
                 self.showCompletePopup()
             }
@@ -493,7 +498,9 @@ extension FocusPlantViewController {
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
 
-        let stopAction = UIAlertAction(title: "Stop", style: .destructive) { [weak self] _ in self?.resetToSetupStage()
+        let stopAction = UIAlertAction(title: "Stop", style: .destructive) { [weak self] _ in
+            self?.notificationFeedack.notificationOccurred(.warning)
+            self?.resetToSetupStage()
         }
 
         alert.addAction(cancelAction)
