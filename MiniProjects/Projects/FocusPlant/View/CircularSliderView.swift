@@ -74,7 +74,7 @@ extension CircularSliderView {
     }
 
     private func configureThumb() {
-        thumbView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        thumbView.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
         thumbView.layer.cornerRadius = thumbView.bounds.width / 2
         thumbView.backgroundColor = .white
 
