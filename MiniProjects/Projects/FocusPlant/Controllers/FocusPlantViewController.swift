@@ -155,7 +155,7 @@ extension FocusPlantViewController {
     }
 
     @IBAction func stopButtonPressed(_ sender: Any) {
-        resetToSetupStage()
+        showStopConfirmation()
     }
 
     @IBAction func pauseButtonPressed(_ sender: Any) {
@@ -459,7 +459,6 @@ extension FocusPlantViewController {
         isPaused = false
         pauseBotton.setImage(UIImage(systemName: "pause"), for: .normal)
 
-
         stopSound()
     }
 
@@ -487,5 +486,19 @@ extension FocusPlantViewController {
         if wasSoundEnable {
             playSelectedSound()
         }
+    }
+
+    private func showStopConfirmation() {
+        let alert = UIAlertController(title: "Stop planting?", message: "Your current focus session will be lost.", preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        let stopAction = UIAlertAction(title: "Stop", style: .destructive) { [weak self] _ in self?.resetToSetupStage()
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(stopAction)
+
+        present(alert, animated: true)
     }
 }
